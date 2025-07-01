@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -18,20 +17,76 @@ const queryClient = new QueryClient();
 
 const App = () => {
   useEffect(() => {
-    // Initialize smooth scrolling and other animations
+    // Initialize smooth scrolling and premium scroll animations
     const handleScroll = () => {
       const scrolled = window.pageYOffset;
       const parallaxElements = document.querySelectorAll('.parallax-bg');
       
+      // Premium parallax effect
       parallaxElements.forEach((element, index) => {
-        const speed = 0.5 + (index * 0.1);
+        const speed = 0.3 + (index * 0.1);
         const yPos = -(scrolled * speed);
         (element as HTMLElement).style.transform = `translateY(${yPos}px)`;
       });
+
+      // Premium scroll-triggered animations
+      const animateElements = document.querySelectorAll('.animate-on-scroll');
+      animateElements.forEach((element) => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+          element.classList.add('smooth-fade', 'visible');
+        }
+      });
+
+      // Premium navbar background on scroll
+      const navbar = document.querySelector('nav');
+      if (navbar) {
+        if (scrolled > 100) {
+          navbar.style.background = 'rgba(11, 20, 38, 0.95)';
+          navbar.style.backdropFilter = 'blur(20px)';
+        } else {
+          navbar.style.background = 'transparent';
+          navbar.style.backdropFilter = 'none';
+        }
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Smooth scroll behavior
+    const smoothScrollTo = (target: HTMLElement, duration: number = 1000) => {
+      const targetPosition = target.offsetTop;
+      const startPosition = window.pageYOffset;
+      const distance = targetPosition - startPosition;
+      let startTime: number | null = null;
+
+      const animation = (currentTime: number) => {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
+        window.scrollTo(0, run);
+        if (timeElapsed < duration) requestAnimationFrame(animation);
+      };
+
+      const easeInOutQuad = (t: number, b: number, c: number, d: number) => {
+        t /= d / 2;
+        if (t < 1) return c / 2 * t * t + b;
+        t--;
+        return -c / 2 * (t * (t - 2) - 1) + b;
+      };
+
+      requestAnimationFrame(animation);
+    };
+
+    // Add premium scroll listeners
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Initialize animations on load
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (

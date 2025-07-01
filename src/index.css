@@ -7,34 +7,24 @@
   :root {
     --background: 11 20% 8%;
     --foreground: 0 0% 100%;
-
     --card: 11 20% 10%;
     --card-foreground: 0 0% 100%;
-
     --popover: 11 20% 10%;
     --popover-foreground: 0 0% 100%;
-
     --primary: 45 100% 51%;
     --primary-foreground: 11 20% 8%;
-
     --secondary: 11 20% 15%;
     --secondary-foreground: 0 0% 100%;
-
     --muted: 11 20% 15%;
     --muted-foreground: 0 0% 90%;
-
     --accent: 45 100% 51%;
     --accent-foreground: 11 20% 8%;
-
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
-
     --border: 11 20% 20%;
     --input: 11 20% 20%;
     --ring: 45 100% 51%;
-
     --radius: 0.5rem;
-
     --sidebar-background: 11 20% 8%;
     --sidebar-foreground: 0 0% 100%;
     --sidebar-primary: 45 100% 51%;
@@ -63,6 +53,92 @@
 }
 
 @layer components {
+  /* Premium Animation Classes */
+  .premium-fade-in {
+    opacity: 0;
+    animation: premiumFadeIn 0.8s ease-out forwards;
+  }
+
+  .premium-slide-in {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: premiumSlideIn 0.8s ease-out forwards;
+  }
+
+  .premium-slide-in-right {
+    opacity: 0;
+    transform: translateX(30px);
+    animation: premiumSlideInRight 0.8s ease-out forwards;
+  }
+
+  .premium-slide-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: premiumSlideUp 0.6s ease-out forwards;
+  }
+
+  .premium-scale-in {
+    opacity: 0;
+    transform: scale(0.95);
+    animation: premiumScaleIn 0.8s ease-out forwards;
+  }
+
+  .premium-button-hover {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateY(0);
+  }
+  
+  .premium-button-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+  }
+
+  .premium-card-hover {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateY(0);
+  }
+
+  .premium-card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
+    border-color: rgba(212, 175, 55, 0.4);
+  }
+
+  .premium-image-hover {
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .premium-image-hover:hover {
+    transform: scale(1.02);
+    filter: brightness(1.05);
+  }
+
+  .premium-glow {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+    transition: box-shadow 0.4s ease;
+  }
+
+  .premium-glow:hover {
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+  }
+
+  .premium-pulse-glow {
+    animation: premiumPulseGlow 3s ease-in-out infinite;
+  }
+
+  .premium-shadow {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  }
+
+  .premium-badge {
+    animation: premiumBadgeFloat 4s ease-in-out infinite;
+  }
+
+  .premium-gradient-overlay {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, transparent 50%, rgba(212, 175, 55, 0.05) 100%);
+  }
+
+  /* Existing styles */
   .professional-hover {
     transition: all 0.3s ease-out;
   }
@@ -118,6 +194,78 @@
   }
 }
 
+/* Premium Keyframes */
+@keyframes premiumFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes premiumSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes premiumSlideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes premiumSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes premiumScaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes premiumPulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.6);
+  }
+}
+
+@keyframes premiumBadgeFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -136,7 +284,7 @@
   background: #F4E68B;
 }
 
-/* Professional keyframes */
+/* Existing keyframes */
 @keyframes smooth-fade-in {
   0% {
     opacity: 0;

@@ -15,38 +15,38 @@ const HeroSection = () => {
           <img 
             src="/lovable-uploads/9d0b6c88-a75a-4ea9-9b78-179fd103e9f9.png" 
             alt="Octavia Pais Logo" 
-            className="h-24 md:h-32 lg:h-40 w-auto mx-auto mb-6 filter drop-shadow-2xl animate-gentle-float"
+            className="h-32 md:h-40 lg:h-48 w-auto mx-auto mb-6 filter drop-shadow-2xl animate-gentle-float premium-glow"
           />
         </div>
 
         {/* Main Headlines */}
         <div className="space-y-4 mb-12">
           <h1 className="font-playfair font-bold text-responsive-xl leading-tight">
-            <span className="gradient-text text-shadow-gold">
+            <span className="gradient-text text-shadow-gold premium-slide-in">
               Break Free from Doubt.
             </span>
             <br />
-            <span className="text-white professional-animation" style={{ animationDelay: '0.3s' }}>
+            <span className="text-white premium-slide-in" style={{ animationDelay: '0.3s' }}>
               Speak Up.
             </span>
             <br />
-            <span className="gradient-text professional-animation" style={{ animationDelay: '0.6s' }}>
+            <span className="gradient-text premium-slide-in" style={{ animationDelay: '0.6s' }}>
               Transform Your Life.
             </span>
           </h1>
           
-          <p className="text-responsive-lg text-gold font-medium professional-animation" style={{ animationDelay: '0.9s' }}>
+          <p className="text-responsive-lg text-gold font-medium premium-fade-in" style={{ animationDelay: '0.9s' }}>
             Mindset & Public Speaking Coach — Bangalore
           </p>
         </div>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mobile-stack professional-animation" style={{ animationDelay: '1.2s' }}>
-          <Button size="lg" className="bg-gold hover:bg-gold-dark text-navy font-bold px-6 py-3 rounded-full text-base professional-hover subtle-glow">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mobile-stack premium-fade-in" style={{ animationDelay: '1.2s' }}>
+          <Button size="lg" className="bg-gold hover:bg-gold-dark text-navy font-bold px-6 py-3 rounded-full text-base premium-button-hover premium-glow">
             Book Your Free Clarity Call
           </Button>
           <a href="tel:+919008808808">
-            <Button size="lg" variant="outline" className="border-gold text-gold hover:bg-gold hover:text-navy font-bold px-6 py-3 rounded-full text-base professional-hover">
+            <Button size="lg" variant="outline" className="border-gold text-gold hover:bg-gold hover:text-navy font-bold px-6 py-3 rounded-full text-base premium-button-hover">
               Call Octavia Now → +91 90088 08808
             </Button>
           </a>

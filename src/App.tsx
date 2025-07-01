@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,6 +8,8 @@ import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ParticleBackground from "./components/ParticleBackground";
+import AnimatedBackground from "./components/AnimatedBackground";
+import PerformanceMonitor from "./components/PerformanceMonitor";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Services from "./pages/Services";
@@ -17,14 +20,32 @@ const queryClient = new QueryClient();
 
 const App = () => {
   useEffect(() => {
-    // Initialize smooth scrolling and premium scroll animations
+    // Skip link for accessibility
+    const skipLink = document.createElement('a');
+    skipLink.href = '#main-content';
+    skipLink.className = 'skip-link';
+    skipLink.textContent = 'Skip to main content';
+    document.body.insertBefore(skipLink, document.body.firstChild);
+
+    // Feature detection
+    const supportsBackdropFilter = CSS.supports('backdrop-filter', 'blur(10px)');
+    const supportsGrid = CSS.supports('display', 'grid');
+    
+    if (!supportsBackdropFilter) {
+      document.documentElement.classList.add('no-backdrop-filter');
+    }
+    if (!supportsGrid) {
+      document.documentElement.classList.add('no-grid');
+    }
+
+    // Premium scroll animations and parallax
     const handleScroll = () => {
       const scrolled = window.pageYOffset;
       const parallaxElements = document.querySelectorAll('.parallax-bg');
       
-      // Premium parallax effect
+      // Enhanced parallax effect
       parallaxElements.forEach((element, index) => {
-        const speed = 0.3 + (index * 0.1);
+        const speed = 0.2 + (index * 0.05);
         const yPos = -(scrolled * speed);
         (element as HTMLElement).style.transform = `translateY(${yPos}px)`;
       });
@@ -33,7 +54,7 @@ const App = () => {
       const animateElements = document.querySelectorAll('.animate-on-scroll');
       animateElements.forEach((element) => {
         const elementTop = element.getBoundingClientRect().top;
-        const elementVisible = 150;
+        const elementVisible = 100;
         
         if (elementTop < window.innerHeight - elementVisible) {
           element.classList.add('smooth-fade', 'visible');
@@ -43,19 +64,33 @@ const App = () => {
       // Premium navbar background on scroll
       const navbar = document.querySelector('nav');
       if (navbar) {
-        if (scrolled > 100) {
+        if (scrolled > 50) {
           navbar.style.background = 'rgba(11, 20, 38, 0.95)';
           navbar.style.backdropFilter = 'blur(20px)';
+          navbar.style.borderBottom = '1px solid rgba(212, 175, 55, 0.2)';
         } else {
           navbar.style.background = 'transparent';
           navbar.style.backdropFilter = 'none';
+          navbar.style.borderBottom = 'none';
         }
       }
     };
 
-    // Smooth scroll behavior
-    const smoothScrollTo = (target: HTMLElement, duration: number = 1000) => {
-      const targetPosition = target.offsetTop;
+    // Throttled scroll handler for better performance
+    let ticking = false;
+    const throttledScrollHandler = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    // Enhanced smooth scroll behavior
+    const smoothScrollTo = (target: HTMLElement, duration: number = 1200) => {
+      const targetPosition = target.offsetTop - 80; // Account for navbar
       const startPosition = window.pageYOffset;
       const distance = targetPosition - startPosition;
       let startTime: number | null = null;
@@ -63,29 +98,55 @@ const App = () => {
       const animation = (currentTime: number) => {
         if (startTime === null) startTime = currentTime;
         const timeElapsed = currentTime - startTime;
-        const run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
+        const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
         window.scrollTo(0, run);
         if (timeElapsed < duration) requestAnimationFrame(animation);
       };
 
-      const easeInOutQuad = (t: number, b: number, c: number, d: number) => {
+      const easeInOutCubic = (t: number, b: number, c: number, d: number) => {
         t /= d / 2;
-        if (t < 1) return c / 2 * t * t + b;
-        t--;
-        return -c / 2 * (t * (t - 2) - 1) + b;
+        if (t < 1) return c / 2 * t * t * t + b;
+        t -= 2;
+        return c / 2 * (t * t * t + 2) + b;
       };
 
       requestAnimationFrame(animation);
     };
 
     // Add premium scroll listeners
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', throttledScrollHandler, { passive: true });
     
     // Initialize animations on load
-    handleScroll();
+    setTimeout(handleScroll, 100);
+
+    // Intersection Observer for animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('smooth-fade', 'visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all animate-on-scroll elements
+    setTimeout(() => {
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      elements.forEach((el) => observer.observe(el));
+    }, 100);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', throttledScrollHandler);
+      observer.disconnect();
+      // Cleanup skip link
+      const existingSkipLink = document.querySelector('.skip-link');
+      if (existingSkipLink) {
+        existingSkipLink.remove();
+      }
     };
   }, []);
 
@@ -94,11 +155,13 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <Sonner />
+        <PerformanceMonitor />
         <BrowserRouter>
           <div className="min-h-screen bg-background text-foreground relative overflow-x-hidden">
+            <AnimatedBackground />
             <ParticleBackground />
             <Navbar />
-            <main className="relative z-10">
+            <main id="main-content" className="relative z-10">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />

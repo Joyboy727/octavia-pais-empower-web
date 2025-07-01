@@ -76,7 +76,12 @@ export default {
 					DEFAULT: '#0B1426',
 					light: '#1A2332',
 					dark: '#070D1A'
-				}
+				},
+				// Social media brand colors
+				instagram: '#E4405F',
+				facebook: '#1877F2',
+				linkedin: '#0A66C2',
+				twitter: '#1DA1F2'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -135,7 +140,31 @@ export default {
 						transform: 'translateY(0px)'
 					},
 					'50%': {
-						transform: 'translateY(-5px)'
+						transform: 'translateY(-8px)'
+					}
+				},
+				'premium-bounce': {
+					'0%, 20%, 53%, 80%, 100%': {
+						transform: 'translate3d(0,0,0)'
+					},
+					'40%, 43%': {
+						transform: 'translate3d(0, -15px, 0)'
+					},
+					'70%': {
+						transform: 'translate3d(0, -7px, 0)'
+					},
+					'90%': {
+						transform: 'translate3d(0, -2px, 0)'
+					}
+				},
+				'animate-pulse-subtle': {
+					'0%, 100%': {
+						opacity: '1',
+						transform: 'scale(1)'
+					},
+					'50%': {
+						opacity: '0.9',
+						transform: 'scale(1.02)'
 					}
 				}
 			},
@@ -145,17 +174,29 @@ export default {
 				'smooth-fade-in': 'smooth-fade-in 0.6s ease-out',
 				'elegant-scale': 'elegant-scale 0.5s ease-out',
 				'subtle-slide-up': 'subtle-slide-up 0.4s ease-out',
-				'gentle-float': 'gentle-float 4s ease-in-out infinite'
+				'gentle-float': 'gentle-float 4s ease-in-out infinite',
+				'premium-bounce': 'premium-bounce 1s ease-in-out',
+				'pulse-subtle': 'animate-pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 				'gold-gradient': 'linear-gradient(135deg, #D4AF37 0%, #F4E68B 100%)',
-				'navy-gradient': 'linear-gradient(135deg, #0B1426 0%, #1A2332 100%)'
+				'navy-gradient': 'linear-gradient(135deg, #0B1426 0%, #1A2332 100%)',
+				'premium-gradient': 'linear-gradient(135deg, #D4AF37 0%, #F4E68B 50%, #FFD700 100%)'
 			},
 			spacing: {
 				'18': '4.5rem',
 				'88': '22rem',
 				'128': '32rem'
+			},
+			backdropBlur: {
+				xs: '2px',
+			},
+			boxShadow: {
+				'premium': '0 25px 50px -12px rgba(212, 175, 55, 0.25)',
+				'premium-lg': '0 35px 60px -12px rgba(212, 175, 55, 0.35)',
+				'glow': '0 0 20px rgba(212, 175, 55, 0.5)',
+				'glow-lg': '0 0 40px rgba(212, 175, 55, 0.6)'
 			}
 		}
 	},

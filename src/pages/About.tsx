@@ -8,7 +8,7 @@ const About = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in-up');
+            entry.target.classList.add('smooth-fade', 'visible');
           }
         });
       },
@@ -35,21 +35,21 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen pt-24">
+    <div className="min-h-screen pt-24 bg-navy">
       {/* Hero Section */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black parallax-bg" />
+      <section className="py-16 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy-light to-navy parallax-bg" />
         
-        <div className="relative z-10 container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="relative z-10 container mx-auto px-4 mobile-padding">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Text Content */}
             <div className="animate-on-scroll">
-              <h1 className="font-playfair text-5xl md:text-7xl font-bold mb-8">
+              <h1 className="font-playfair text-responsive-xl font-bold mb-6">
                 <span className="gradient-text">Meet</span>
                 <br />
                 <span className="text-white">Octavia Pais</span>
               </h1>
-              <div className="space-y-6 text-lg leading-relaxed text-muted-foreground">
+              <div className="space-y-4 text-responsive-base leading-relaxed text-muted-foreground">
                 <p>
                   After years of climbing the corporate ladder in banking and making a mark in education, 
                   I discovered my true calling: <span className="text-gold font-semibold">helping people break through their mental barriers</span> 
@@ -68,12 +68,12 @@ const About = () => {
 
             {/* Portrait */}
             <div className="animate-on-scroll" style={{ animationDelay: '0.3s' }}>
-              <div className="relative">
-                <div className="absolute inset-0 bg-gold/20 rounded-3xl transform rotate-6 animate-pulse" />
+              <div className="relative max-w-md mx-auto">
+                <div className="absolute inset-0 bg-gold/20 rounded-3xl transform rotate-3 animate-gentle-float" />
                 <img 
                   src="/lovable-uploads/3deeb80c-cb3c-424c-8a59-ed530ead07fd.png"
                   alt="Octavia Pais"
-                  className="relative w-full max-w-md mx-auto rounded-3xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
+                  className="relative w-full rounded-3xl shadow-2xl professional-hover"
                 />
               </div>
             </div>
@@ -82,29 +82,29 @@ const About = () => {
       </section>
 
       {/* Story Timeline */}
-      <section className="py-24 bg-black/30">
-        <div className="container mx-auto px-4">
-          <h2 className="font-playfair text-4xl md:text-6xl font-bold text-center mb-16 gradient-text animate-on-scroll">
+      <section className="py-16 bg-navy-light/30">
+        <div className="container mx-auto px-4 mobile-padding">
+          <h2 className="font-playfair text-2xl md:text-4xl font-bold text-center mb-12 gradient-text animate-on-scroll">
             My Journey
           </h2>
           
           <div className="max-w-4xl mx-auto">
             <div className="relative">
               {/* Timeline Line */}
-              <div className="absolute left-1/2 transform -translate-x-0.5 h-full w-0.5 bg-gold" />
+              <div className="absolute left-1/2 transform -translate-x-0.5 h-full w-0.5 bg-gold/50 hidden md:block" />
               
               {timeline.map((item, index) => (
                 <div 
                   key={item.place}
-                  className={`flex items-center mb-16 animate-on-scroll ${
-                    index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
-                  }`}
-                  style={{ animationDelay: `${index * 0.3}s` }}
+                  className={`flex items-center mb-12 animate-on-scroll ${
+                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                  } flex-col md:gap-0 gap-4`}
+                  style={{ animationDelay: `${index * 0.2}s` }}
                 >
-                  <div className={`w-1/2 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8'}`}>
-                    <Card className="bg-card/50 border-gold/20 hover:border-gold/50 transition-all duration-300">
+                  <div className={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:pr-8 md:text-right' : 'md:pl-8'} text-center md:text-left`}>
+                    <Card className="bg-card/50 border-gold/20 hover:border-gold/40 transition-all duration-300 card-elegant">
                       <CardContent className="p-6">
-                        <h3 className="font-playfair text-2xl font-bold text-gold mb-2">
+                        <h3 className="font-playfair text-xl font-bold text-gold mb-2">
                           {item.place}
                         </h3>
                         <p className="text-muted-foreground mb-2">{item.description}</p>
@@ -114,9 +114,9 @@ const About = () => {
                   </div>
                   
                   {/* Timeline Dot */}
-                  <div className="w-4 h-4 bg-gold rounded-full border-4 border-background z-10 animate-pulse-glow" />
+                  <div className="hidden md:block w-4 h-4 bg-gold rounded-full border-4 border-navy z-10 subtle-pulse-glow" />
                   
-                  <div className="w-1/2" />
+                  <div className="hidden md:block w-1/2" />
                 </div>
               ))}
             </div>
@@ -125,22 +125,22 @@ const About = () => {
       </section>
 
       {/* Certifications */}
-      <section className="py-24">
-        <div className="container mx-auto px-4">
-          <h2 className="font-playfair text-4xl md:text-6xl font-bold text-center mb-16 gradient-text animate-on-scroll">
+      <section className="py-16">
+        <div className="container mx-auto px-4 mobile-padding">
+          <h2 className="font-playfair text-2xl md:text-4xl font-bold text-center mb-12 gradient-text animate-on-scroll">
             Credentials & Expertise
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {certifications.map((cert, index) => (
               <Card 
                 key={cert}
-                className="bg-card/50 border-gold/20 hover:border-gold/50 transition-all duration-300 card-3d animate-on-scroll group"
+                className="bg-card/50 border-gold/20 hover:border-gold/40 transition-all duration-300 card-elegant animate-on-scroll text-center"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <CardContent className="p-6 text-center">
-                  <div className="text-3xl mb-4 group-hover:animate-bounce">🏆</div>
-                  <h3 className="font-semibold text-lg text-gold">
+                <CardContent className="p-6">
+                  <div className="text-2xl mb-3 professional-hover">🏆</div>
+                  <h3 className="font-semibold text-base text-gold">
                     {cert}
                   </h3>
                 </CardContent>
@@ -151,26 +151,26 @@ const About = () => {
       </section>
 
       {/* Coaching Style */}
-      <section className="py-24 bg-black/30">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="font-playfair text-4xl md:text-6xl font-bold mb-16 gradient-text animate-on-scroll">
+      <section className="py-16 bg-navy-light/30">
+        <div className="container mx-auto px-4 mobile-padding text-center">
+          <h2 className="font-playfair text-2xl md:text-4xl font-bold mb-12 gradient-text animate-on-scroll">
             My Coaching Style
           </h2>
           
           <div className="max-w-4xl mx-auto animate-on-scroll">
-            <div className="flex flex-wrap justify-center gap-6 mb-12">
+            <div className="flex flex-wrap justify-center gap-4 mb-8">
               {['Direct', 'Empowering', 'Energetic', 'Honest', 'Empathetic'].map((word, index) => (
                 <span 
                   key={word}
-                  className="bg-gold text-black px-6 py-3 rounded-full text-xl font-bold hover:scale-110 transition-transform duration-300 cursor-default animate-float"
-                  style={{ animationDelay: `${index * 0.2}s` }}
+                  className="bg-gold text-navy px-4 py-2 rounded-full text-base font-bold professional-hover cursor-default professional-animation"
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   {word}
                 </span>
               ))}
             </div>
             
-            <p className="text-xl leading-relaxed text-muted-foreground">
+            <p className="text-responsive-lg leading-relaxed text-muted-foreground">
               I believe in cutting through the noise and getting to the heart of what's holding you back. 
               My approach combines <span className="text-gold font-semibold">compassionate understanding</span> with 
               <span className="text-gold font-semibold"> practical action steps</span> that create real, lasting change.
@@ -180,25 +180,25 @@ const About = () => {
       </section>
 
       {/* Personal Touch */}
-      <section className="py-24">
-        <div className="container mx-auto px-4">
-          <h2 className="font-playfair text-4xl md:text-6xl font-bold text-center mb-16 gradient-text animate-on-scroll">
+      <section className="py-16">
+        <div className="container mx-auto px-4 mobile-padding">
+          <h2 className="font-playfair text-2xl md:text-4xl font-bold text-center mb-12 gradient-text animate-on-scroll">
             Beyond Coaching
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
             <div className="animate-on-scroll">
               <img 
                 src="/lovable-uploads/ac02951f-79a7-4a33-ae14-7e22133f5d82.png"
                 alt="Octavia Pais Personal"
-                className="w-full rounded-3xl shadow-2xl"
+                className="w-full rounded-3xl shadow-2xl professional-hover"
               />
             </div>
             
-            <div className="space-y-8 animate-on-scroll" style={{ animationDelay: '0.3s' }}>
+            <div className="space-y-6 animate-on-scroll" style={{ animationDelay: '0.3s' }}>
               <div>
-                <h3 className="font-playfair text-2xl font-bold text-gold mb-4">When I'm Not Coaching</h3>
-                <div className="grid grid-cols-2 gap-4">
+                <h3 className="font-playfair text-xl font-bold text-gold mb-4">When I'm Not Coaching</h3>
+                <div className="grid grid-cols-2 gap-3">
                   {[
                     { icon: '📚', activity: 'Reading' },
                     { icon: '🌱', activity: 'Gardening' },
@@ -207,10 +207,10 @@ const About = () => {
                   ].map((hobby, index) => (
                     <div 
                       key={hobby.activity}
-                      className="bg-card/50 border-gold/20 rounded-lg p-4 text-center hover:scale-105 transition-transform duration-300 animate-float"
-                      style={{ animationDelay: `${index * 0.2}s` }}
+                      className="bg-card/50 border-gold/20 rounded-lg p-4 text-center professional-hover card-elegant professional-animation"
+                      style={{ animationDelay: `${index * 0.1}s` }}
                     >
-                      <div className="text-2xl mb-2">{hobby.icon}</div>
+                      <div className="text-xl mb-2">{hobby.icon}</div>
                       <div className="text-sm text-muted-foreground">{hobby.activity}</div>
                     </div>
                   ))}
@@ -218,7 +218,7 @@ const About = () => {
               </div>
               
               <div className="bg-card/30 rounded-2xl p-6 border border-gold/20">
-                <p className="text-lg leading-relaxed text-muted-foreground italic">
+                <p className="text-base leading-relaxed text-muted-foreground italic">
                   "When you arise in the morning, think of what a precious privilege it is to be alive - 
                   to breathe, to think, to enjoy, to love."
                 </p>

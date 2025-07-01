@@ -11,7 +11,7 @@ const Home = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in-up');
+            entry.target.classList.add('smooth-fade', 'visible');
           }
         });
       },
@@ -29,28 +29,32 @@ const Home = () => {
       name: "The Breakthrough Blueprint",
       price: "₹5,000",
       duration: "3 Days",
-      gradient: "from-blue-600 to-blue-800",
+      gradient: "from-blue-600/20 to-blue-800/20",
+      borderGradient: "border-blue-500/30",
       icon: "🌟"
     },
     {
       name: "Unstoppable Momentum Bootcamp",
       price: "₹4,999",
       duration: "Intensive",
-      gradient: "from-purple-600 to-purple-800",
+      gradient: "from-purple-600/20 to-purple-800/20",
+      borderGradient: "border-purple-500/30",
       icon: "🚀"
     },
     {
       name: "The Evolution Experience",
       price: "₹49,999",
       duration: "6 Months",
-      gradient: "from-gold to-yellow-600",
+      gradient: "from-gold/20 to-yellow-600/20",
+      borderGradient: "border-gold/50",
       icon: "💫"
     },
     {
       name: "Speak With Impact",
       price: "₹9,999",
       duration: "5 Sessions",
-      gradient: "from-red-600 to-red-800",
+      gradient: "from-red-600/20 to-red-800/20",
+      borderGradient: "border-red-500/30",
       icon: "🎤"
     }
   ];
@@ -79,69 +83,62 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-navy">
       {/* Hero Section */}
-      <section ref={heroRef} className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black parallax-bg" />
+      <section ref={heroRef} className="relative min-h-screen flex items-center justify-center px-4 mobile-padding overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy-light to-navy parallax-bg" />
         
         <div className="relative z-10 text-center max-w-6xl mx-auto">
           {/* Logo */}
-          <div className="mb-8 animate-scale-in">
+          <div className="mb-8 elegant-entrance">
             <img 
               src="/lovable-uploads/9d0b6c88-a75a-4ea9-9b78-179fd103e9f9.png" 
               alt="Octavia Pais Logo" 
-              className="h-32 md:h-48 w-auto mx-auto mb-6 filter drop-shadow-2xl animate-float"
+              className="h-24 md:h-32 lg:h-40 w-auto mx-auto mb-6 filter drop-shadow-2xl animate-gentle-float"
             />
           </div>
 
           {/* Main Headlines */}
-          <div className="space-y-6 mb-12">
-            <h1 className="font-playfair font-bold text-4xl md:text-7xl lg:text-8xl leading-tight">
-              <span className="gradient-text text-shadow-gold typewriter">
+          <div className="space-y-4 mb-12">
+            <h1 className="font-playfair font-bold text-responsive-xl leading-tight">
+              <span className="gradient-text text-shadow-gold">
                 Break Free from Doubt.
               </span>
               <br />
-              <span className="text-white animate-fade-in" style={{ animationDelay: '3s' }}>
+              <span className="text-white professional-animation" style={{ animationDelay: '0.3s' }}>
                 Speak Up.
               </span>
               <br />
-              <span className="gradient-text animate-fade-in" style={{ animationDelay: '4s' }}>
+              <span className="gradient-text professional-animation" style={{ animationDelay: '0.6s' }}>
                 Transform Your Life.
               </span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-gold font-medium animate-fade-in" style={{ animationDelay: '5s' }}>
+            <p className="text-responsive-lg text-gold font-medium professional-animation" style={{ animationDelay: '0.9s' }}>
               Mindset & Public Speaking Coach — Bangalore
             </p>
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in" style={{ animationDelay: '6s' }}>
-            <Button size="lg" className="bg-gold hover:bg-gold-dark text-black font-bold px-8 py-4 rounded-full text-lg magnetic-hover glow-effect">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mobile-stack professional-animation" style={{ animationDelay: '1.2s' }}>
+            <Button size="lg" className="bg-gold hover:bg-gold-dark text-navy font-bold px-6 py-3 rounded-full text-base professional-hover subtle-glow">
               Book Your Free Clarity Call
             </Button>
             <a href="tel:+919008808808">
-              <Button size="lg" variant="outline" className="border-gold text-gold hover:bg-gold hover:text-black font-bold px-8 py-4 rounded-full text-lg magnetic-hover">
+              <Button size="lg" variant="outline" className="border-gold text-gold hover:bg-gold hover:text-navy font-bold px-6 py-3 rounded-full text-base professional-hover">
                 Call Octavia Now → +91 90088 08808
               </Button>
             </a>
-          </div>
-
-          {/* Scroll Indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce-slow">
-            <div className="w-6 h-10 border-2 border-gold rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-gold rounded-full mt-2 animate-pulse" />
-            </div>
           </div>
         </div>
       </section>
 
       {/* Parallax About Snapshot */}
-      <section className="py-24 relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-900 to-black parallax-bg" style={{ transform: 'translateY(-50px)' }} />
-        <div className="relative z-10 container mx-auto px-4 text-center">
+      <section className="py-16 relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-navy to-navy-light parallax-bg" />
+        <div className="relative z-10 container mx-auto px-4 mobile-padding text-center">
           <div className="max-w-4xl mx-auto animate-on-scroll">
-            <p className="text-xl md:text-2xl leading-relaxed font-light text-muted-foreground">
+            <p className="text-responsive-lg leading-relaxed font-light text-muted-foreground">
               After years in <span className="text-gold font-medium">banking, education & leadership</span>, 
               I now help people break mental barriers, build true self-belief, and 
               <span className="text-gold font-medium"> show up powerfully</span> in life and work.
@@ -151,21 +148,21 @@ const Home = () => {
       </section>
 
       {/* Who I Help Section */}
-      <section className="py-24 bg-black/30">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16 animate-on-scroll">
-            <div className="inline-block bg-gold text-black font-bold text-6xl md:text-8xl rounded-full w-32 h-32 md:w-40 md:h-40 flex items-center justify-center mb-8 animate-pulse-glow">
+      <section className="py-16 bg-navy-light/30">
+        <div className="container mx-auto px-4 mobile-padding">
+          <div className="text-center mb-12 animate-on-scroll">
+            <div className="inline-block bg-gold text-navy font-bold text-4xl md:text-6xl rounded-full w-20 h-20 md:w-28 md:h-28 flex items-center justify-center mb-6 subtle-pulse-glow">
               16+
             </div>
-            <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-6 gradient-text">
+            <h2 className="font-playfair text-2xl md:text-4xl font-bold mb-6 gradient-text">
               Years Helping People Transform
             </h2>
-            <div className="flex flex-wrap justify-center gap-4 max-w-3xl mx-auto">
+            <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
               {['stuck', 'overwhelmed', 'overthinking', 'ready for action'].map((word, index) => (
                 <span 
                   key={word}
-                  className="bg-gold/20 text-gold px-4 py-2 rounded-full text-lg font-medium animate-float"
-                  style={{ animationDelay: `${index * 0.5}s` }}
+                  className="bg-gold/20 text-gold px-4 py-2 rounded-full text-sm md:text-base font-medium professional-animation"
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   {word}
                 </span>
@@ -176,27 +173,27 @@ const Home = () => {
       </section>
 
       {/* What You Get Section */}
-      <section className="py-24">
-        <div className="container mx-auto px-4">
-          <h2 className="font-playfair text-4xl md:text-6xl font-bold text-center mb-16 gradient-text animate-on-scroll">
+      <section className="py-16">
+        <div className="container mx-auto px-4 mobile-padding">
+          <h2 className="font-playfair text-2xl md:text-4xl font-bold text-center mb-12 gradient-text animate-on-scroll">
             What You Get
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {benefits.map((benefit, index) => (
               <Card 
                 key={benefit.title}
-                className="bg-card/50 border-gold/20 hover:border-gold/50 transition-all duration-300 card-3d animate-on-scroll group"
+                className="bg-card/50 border-gold/20 hover:border-gold/40 transition-all duration-400 card-elegant animate-on-scroll"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <CardContent className="p-8 text-center">
-                  <div className="text-4xl mb-4 group-hover:animate-bounce">
+                <CardContent className="p-6 text-center">
+                  <div className="text-3xl mb-3 professional-hover">
                     {benefit.icon}
                   </div>
-                  <h3 className="font-semibold text-xl mb-3 text-gold">
+                  <h3 className="font-semibold text-lg mb-2 text-gold">
                     {benefit.title}
                   </h3>
-                  <p className="text-muted-foreground">
+                  <p className="text-responsive-base text-muted-foreground">
                     {benefit.description}
                   </p>
                 </CardContent>
@@ -207,31 +204,31 @@ const Home = () => {
       </section>
 
       {/* Programs Preview */}
-      <section className="py-24 bg-black/30">
-        <div className="container mx-auto px-4">
-          <h2 className="font-playfair text-4xl md:text-6xl font-bold text-center mb-16 gradient-text animate-on-scroll">
+      <section className="py-16 bg-navy-light/30">
+        <div className="container mx-auto px-4 mobile-padding">
+          <h2 className="font-playfair text-2xl md:text-4xl font-bold text-center mb-12 gradient-text animate-on-scroll">
             Transform Your Life
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
             {programs.map((program, index) => (
               <Card 
                 key={program.name}
-                className={`bg-gradient-to-br ${program.gradient} border-0 text-white hover:scale-105 transition-all duration-300 cursor-pointer card-3d animate-on-scroll`}
+                className={`bg-gradient-to-br ${program.gradient} ${program.borderGradient} border-2 text-white professional-hover cursor-pointer card-elegant animate-on-scroll`}
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
-                <CardContent className="p-8">
+                <CardContent className="p-6">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-4xl">{program.icon}</span>
+                    <span className="text-3xl">{program.icon}</span>
                     <div className="text-right">
-                      <div className="text-2xl font-bold">{program.price}</div>
+                      <div className="text-xl font-bold">{program.price}</div>
                       <div className="text-sm opacity-80">{program.duration}</div>
                     </div>
                   </div>
-                  <h3 className="font-playfair text-2xl font-bold mb-4">
+                  <h3 className="font-playfair text-xl font-bold mb-4">
                     {program.name}
                   </h3>
-                  <Button className="w-full bg-white/20 hover:bg-white/30 text-white border-white/30">
+                  <Button className="w-full bg-white/20 hover:bg-white/30 text-white border-white/30 professional-hover">
                     Learn More
                   </Button>
                 </CardContent>
@@ -242,17 +239,17 @@ const Home = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-24 relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-gold/20 to-transparent" />
-        <div className="relative z-10 container mx-auto px-4 text-center">
+      <section className="py-16 relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-gold/10 to-transparent" />
+        <div className="relative z-10 container mx-auto px-4 mobile-padding text-center">
           <div className="max-w-4xl mx-auto animate-on-scroll">
-            <h2 className="font-playfair text-4xl md:text-6xl font-bold mb-8 gradient-text">
+            <h2 className="font-playfair text-2xl md:text-4xl font-bold mb-6 gradient-text">
               Ready to rewrite your story?
             </h2>
-            <p className="text-xl mb-12 text-muted-foreground">
+            <p className="text-responsive-lg mb-8 text-muted-foreground">
               Let's begin your transformation journey today.
             </p>
-            <Button size="lg" className="bg-gold hover:bg-gold-dark text-black font-bold px-12 py-6 rounded-full text-xl magnetic-hover glow-effect">
+            <Button size="lg" className="bg-gold hover:bg-gold-dark text-navy font-bold px-8 py-4 rounded-full text-lg professional-hover subtle-glow">
               Start Now
             </Button>
           </div>

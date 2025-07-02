@@ -11,12 +11,12 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy-light to-navy parallax-bg" />
       
       <div className="relative z-10 text-center max-w-6xl mx-auto">
-        {/* Logo - Clean without borders */}
+        {/* Logo - New PNG with seamless integration */}
         <div className="mb-12 premium-scale-in">
           <img 
-            src="/lovable-uploads/10c64aa3-4a08-47fd-b71f-a056e7fb11ba.png" 
-            alt="Octavia Pais Logo" 
-            className="h-32 sm:h-40 md:h-56 lg:h-64 w-auto mx-auto mb-8 clean-logo animate-gentle-float premium-image-hover"
+            src="/lovable-uploads/e762880d-c3aa-4d83-a05d-ff106ac7e818.png" 
+            alt="Octavia Pais - Life & Speaking Coach" 
+            className="h-32 sm:h-40 md:h-56 lg:h-64 w-auto mx-auto mb-8 seamless-logo animate-gentle-float premium-image-hover"
           />
         </div>
 

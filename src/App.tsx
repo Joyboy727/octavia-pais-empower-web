@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ParticleBackground from "./components/ParticleBackground";
+import EnhancedParticleBackground from "./components/EnhancedParticleBackground";
 import AnimatedBackground from "./components/AnimatedBackground";
 import PerformanceMonitor from "./components/PerformanceMonitor";
 import Home from "./pages/Home";
@@ -88,31 +89,6 @@ const App = () => {
       }
     };
 
-    // Enhanced smooth scroll behavior
-    const smoothScrollTo = (target: HTMLElement, duration: number = 1200) => {
-      const targetPosition = target.offsetTop - 80; // Account for navbar
-      const startPosition = window.pageYOffset;
-      const distance = targetPosition - startPosition;
-      let startTime: number | null = null;
-
-      const animation = (currentTime: number) => {
-        if (startTime === null) startTime = currentTime;
-        const timeElapsed = currentTime - startTime;
-        const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
-        window.scrollTo(0, run);
-        if (timeElapsed < duration) requestAnimationFrame(animation);
-      };
-
-      const easeInOutCubic = (t: number, b: number, c: number, d: number) => {
-        t /= d / 2;
-        if (t < 1) return c / 2 * t * t * t + b;
-        t -= 2;
-        return c / 2 * (t * t * t + 2) + b;
-      };
-
-      requestAnimationFrame(animation);
-    };
-
     // Add premium scroll listeners
     window.addEventListener('scroll', throttledScrollHandler, { passive: true });
     
@@ -159,7 +135,7 @@ const App = () => {
         <BrowserRouter>
           <div className="min-h-screen bg-background text-foreground relative overflow-x-hidden">
             <AnimatedBackground />
-            <ParticleBackground />
+            <EnhancedParticleBackground />
             <Navbar />
             <main id="main-content" className="relative z-10">
               <Routes>

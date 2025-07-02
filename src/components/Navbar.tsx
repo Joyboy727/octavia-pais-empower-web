@@ -33,12 +33,12 @@ const Navbar = () => {
     }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
-          {/* Logo */}
+          {/* Logo - Updated with new PNG */}
           <Link to="/" className="flex items-center space-x-2 sm:space-x-3 group">
             <img 
-              src="/lovable-uploads/10c64aa3-4a08-47fd-b71f-a056e7fb11ba.png" 
-              alt="Octavia Pais Logo" 
-              className="h-8 sm:h-12 w-auto transition-transform duration-300 group-hover:scale-110 clean-logo"
+              src="/lovable-uploads/e762880d-c3aa-4d83-a05d-ff106ac7e818.png" 
+              alt="Octavia Pais - Life & Speaking Coach" 
+              className="h-8 sm:h-12 w-auto transition-transform duration-300 group-hover:scale-110 seamless-logo"
             />
             <div className="hidden sm:block">
               <h1 className="font-playfair font-bold text-lg sm:text-xl text-gold gradient-text">

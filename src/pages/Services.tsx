@@ -22,6 +22,17 @@ const Services = () => {
     return () => observer.disconnect();
   }, []);
 
+  const handleButtonClick = (buttonText: string) => {
+    const bookingButtons = ["Join The Bootcamp", "Apply Now", "Book Your Spot", "Book Free Clarity Call", "Start Your Transformation", "Send Message"];
+    const callButtons = ["Call Now", "Call Now (desktop)", "Call Now (mobile)", "Call Octavia Now"];
+    
+    if (bookingButtons.includes(buttonText)) {
+      window.open("https://calendly.com/octaviathelifecoach/30min", "_blank");
+    } else if (callButtons.includes(buttonText)) {
+      window.location.href = "tel:+917975163696";
+    }
+  };
+
   const programs = [
     {
       name: "The Breakthrough Blueprint",
@@ -36,7 +47,7 @@ const Services = () => {
         "Create a personalized action plan",
         "Access to exclusive resources"
       ],
-      cta: "Join The Blueprint"
+      cta: "Join The Bootcamp"
     },
     {
       name: "Unstoppable Momentum Bootcamp", 
@@ -157,6 +168,7 @@ const Services = () => {
                         ? 'bg-gold hover:bg-gold-dark text-black' 
                         : 'bg-white/20 hover:bg-white/30 text-white border-white/30'
                     }`}
+                    onClick={() => handleButtonClick(program.cta)}
                   >
                     {program.cta}
                   </Button>
@@ -232,14 +244,21 @@ const Services = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Button size="lg" className="bg-gold hover:bg-gold-dark text-black font-bold px-8 py-4 rounded-full text-lg magnetic-hover glow-effect">
+              <Button 
+                size="lg" 
+                className="bg-gold hover:bg-gold-dark text-black font-bold px-8 py-4 rounded-full text-lg magnetic-hover glow-effect"
+                onClick={() => handleButtonClick("Book Free Clarity Call")}
+              >
                 Book Free Clarity Call
               </Button>
-              <a href="tel:+917975163696">
-                <Button size="lg" variant="outline" className="border-gold text-gold hover:bg-gold hover:text-black font-bold px-8 py-4 rounded-full text-lg magnetic-hover">
-                  Call Now
-                </Button>
-              </a>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-gold text-gold hover:bg-gold hover:text-black font-bold px-8 py-4 rounded-full text-lg magnetic-hover"
+                onClick={() => handleButtonClick("Call Now")}
+              >
+                Call Now
+              </Button>
             </div>
           </div>
         </div>

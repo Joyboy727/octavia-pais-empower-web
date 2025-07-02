@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -35,6 +34,17 @@ const Contact = () => {
     return () => observer.disconnect();
   }, []);
 
+  const handleButtonClick = (buttonText: string) => {
+    const bookingButtons = ["Join The Bootcamp", "Apply Now", "Book Your Spot", "Book Free Clarity Call", "Start Your Transformation", "Send Message"];
+    const callButtons = ["Call Now", "Call Now (desktop)", "Call Now (mobile)", "Call Octavia Now"];
+    
+    if (bookingButtons.includes(buttonText)) {
+      window.open("https://calendly.com/octaviathelifecoach/30min", "_blank");
+    } else if (callButtons.includes(buttonText)) {
+      window.location.href = "tel:+917975163696";
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -47,11 +57,8 @@ const Contact = () => {
       return;
     }
 
-    // Simulate form submission
-    toast({
-      title: "Message sent successfully!",
-      description: "I'll get back to you within 24 hours."
-    });
+    // Redirect to Calendly instead of just showing success toast
+    window.open("https://calendly.com/octaviathelifecoach/30min", "_blank");
 
     // Reset form
     setFormData({
@@ -346,11 +353,12 @@ const Contact = () => {
                   <p className="mb-6 text-muted-foreground">
                     Don't wait. Your breakthrough conversation is just one call away.
                   </p>
-                  <a href="tel:+917975163696">
-                    <Button className="bg-gold hover:bg-gold-dark text-black font-bold px-8 py-3 rounded-full magnetic-hover glow-effect">
-                      Call Octavia Now
-                    </Button>
-                  </a>
+                  <Button 
+                    className="bg-gold hover:bg-gold-dark text-black font-bold px-8 py-3 rounded-full magnetic-hover glow-effect"
+                    onClick={() => handleButtonClick("Call Octavia Now")}
+                  >
+                    Call Octavia Now
+                  </Button>
                 </CardContent>
               </Card>
             </div>

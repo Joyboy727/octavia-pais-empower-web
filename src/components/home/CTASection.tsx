@@ -1,9 +1,19 @@
-
 import PremiumButton from "@/components/PremiumButton";
 import PremiumCard from "@/components/PremiumCard";
 import SocialMediaIcons from "@/components/SocialMediaIcons";
 
 const CTASection = () => {
+  const handleButtonClick = (buttonText: string) => {
+    const bookingButtons = ["Join The Bootcamp", "Apply Now", "Book Your Spot", "Book Free Clarity Call", "Start Your Transformation", "Send Message"];
+    const callButtons = ["Call Now", "Call Now (desktop)", "Call Now (mobile)", "Call Octavia Now"];
+    
+    if (bookingButtons.includes(buttonText)) {
+      window.open("https://calendly.com/octaviathelifecoach/30min", "_blank");
+    } else if (callButtons.includes(buttonText)) {
+      window.location.href = "tel:+917975163696";
+    }
+  };
+
   return (
     <section className="py-12 sm:py-20 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-gold/10 via-transparent to-gold/5" />
@@ -41,37 +51,27 @@ const CTASection = () => {
               </div>
             </div>
 
-            {/* CTA Buttons - Mobile Optimized */}
+            {/* CTA Buttons - Updated with click handlers */}
             <div className="flex flex-col gap-4 sm:gap-6 justify-center items-center mb-6 sm:mb-8 premium-fade-in px-4" style={{ animationDelay: '0.7s' }}>
-              <a 
-                href="https://calendly.com/octaviathelifecoach/30min" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto"
+              <PremiumButton 
+                variant="cta" 
+                size="lg" 
+                withGlow 
+                withShimmer
+                className="font-bold px-6 sm:px-10 py-4 sm:py-5 text-lg sm:text-xl w-full sm:w-auto"
+                onClick={() => handleButtonClick("Book Free Clarity Call")}
               >
-                <PremiumButton 
-                  variant="cta" 
-                  size="lg" 
-                  withGlow 
-                  withShimmer
-                  className="font-bold px-6 sm:px-10 py-4 sm:py-5 text-lg sm:text-xl w-full sm:w-auto"
-                >
-                  Book Your Free Clarity Call
-                </PremiumButton>
-              </a>
+                Book Free Clarity Call
+              </PremiumButton>
               
-              <a 
-                href="tel:+917975163696" 
-                className="transform hover:scale-105 transition-transform duration-300 w-full sm:w-auto"
+              <PremiumButton 
+                variant="outline" 
+                size="lg"
+                className="font-bold px-6 sm:px-10 py-4 sm:py-5 text-lg sm:text-xl border-2 w-full sm:w-auto"
+                onClick={() => handleButtonClick("Call Now")}
               >
-                <PremiumButton 
-                  variant="outline" 
-                  size="lg"
-                  className="font-bold px-6 sm:px-10 py-4 sm:py-5 text-lg sm:text-xl border-2 w-full sm:w-auto"
-                >
-                  Call Now: 7975163696
-                </PremiumButton>
-              </a>
+                Call Now: 7975163696
+              </PremiumButton>
             </div>
 
             {/* Trust Indicators - Mobile Responsive */}

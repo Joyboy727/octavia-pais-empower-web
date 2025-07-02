@@ -6,6 +6,17 @@ import CounterAnimation from "@/components/CounterAnimation";
 const HeroSection = () => {
   const heroRef = useRef<HTMLDivElement>(null);
 
+  const handleButtonClick = (buttonText: string) => {
+    const bookingButtons = ["Join The Bootcamp", "Apply Now", "Book Your Spot", "Book Free Clarity Call", "Start Your Transformation", "Send Message"];
+    const callButtons = ["Call Now", "Call Now (desktop)", "Call Now (mobile)", "Call Octavia Now"];
+    
+    if (bookingButtons.includes(buttonText)) {
+      window.open("https://calendly.com/octaviathelifecoach/30min", "_blank");
+    } else if (callButtons.includes(buttonText)) {
+      window.location.href = "tel:+917975163696";
+    }
+  };
+
   return (
     <section ref={heroRef} className="relative min-h-screen flex items-center justify-center px-4 mobile-padding overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy-light to-navy" />
@@ -53,7 +64,6 @@ const HeroSection = () => {
             Mindset & Public Speaking Coach — Bangalore
           </p>
 
-          {/* Success Stats - Premium styling */}
           <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-8 mt-8 premium-fade-in px-4" style={{ animationDelay: '1.2s' }}>
             <div className="text-center premium-stat-card">
               <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gold">
@@ -76,37 +86,27 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Premium CTA Buttons */}
+        {/* Premium CTA Buttons - Updated with click handlers */}
         <div className="flex flex-col gap-4 sm:gap-6 justify-center items-center mb-12 premium-fade-in px-4" style={{ animationDelay: '1.5s' }}>
-          <a 
-            href="https://calendly.com/octaviathelifecoach/30min" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="w-full sm:w-auto premium-cta-hover"
+          <PremiumButton 
+            variant="cta" 
+            size="lg" 
+            withGlow 
+            withShimmer
+            className="font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg w-full sm:w-auto premium-button-luxury"
+            onClick={() => handleButtonClick("Book Free Clarity Call")}
           >
-            <PremiumButton 
-              variant="cta" 
-              size="lg" 
-              withGlow 
-              withShimmer
-              className="font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg w-full sm:w-auto premium-button-luxury"
-            >
-              Book Your Free Clarity Call
-            </PremiumButton>
-          </a>
+            Book Your Free Clarity Call
+          </PremiumButton>
           
-          <a 
-            href="tel:+917975163696" 
-            className="transform hover:scale-105 transition-all duration-500 w-full sm:w-auto premium-cta-hover"
+          <PremiumButton 
+            variant="outline" 
+            size="lg"
+            className="font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg border-2 hover:border-gold-light w-full sm:w-auto premium-button-luxury"
+            onClick={() => handleButtonClick("Call Octavia Now")}
           >
-            <PremiumButton 
-              variant="outline" 
-              size="lg"
-              className="font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg border-2 hover:border-gold-light w-full sm:w-auto premium-button-luxury"
-            >
-              Call Octavia Now → 7975163696
-            </PremiumButton>
-          </a>
+            Call Octavia Now → 7975163696
+          </PremiumButton>
         </div>
 
         {/* Premium Scroll Indicator */}

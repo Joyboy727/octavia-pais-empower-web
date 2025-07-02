@@ -3,6 +3,17 @@ import PremiumCard from "@/components/PremiumCard";
 import PremiumButton from "@/components/PremiumButton";
 
 const ProgramsSection = () => {
+  const handleButtonClick = (buttonText: string) => {
+    const bookingButtons = ["Join The Bootcamp", "Apply Now", "Book Your Spot", "Book Free Clarity Call", "Start Your Transformation", "Send Message"];
+    const callButtons = ["Call Now", "Call Now (desktop)", "Call Now (mobile)", "Call Octavia Now"];
+    
+    if (bookingButtons.includes(buttonText)) {
+      window.open("https://calendly.com/octaviathelifecoach/30min", "_blank");
+    } else if (callButtons.includes(buttonText)) {
+      window.location.href = "tel:+917975163696";
+    }
+  };
+
   const programs = [
     {
       name: "The Breakthrough Blueprint",
@@ -13,7 +24,8 @@ const ProgramsSection = () => {
       icon: "🌟",
       description: "Intensive mindset rewiring program",
       features: ["20+ Hours Live Coaching", "Breakthrough Exercises", "Hot Seat Coaching", "7-Day Action Plan"],
-      badge: "Most Popular"
+      badge: "Most Popular",
+      cta: "Join The Bootcamp"
     },
     {
       name: "Unstoppable Momentum Bootcamp",
@@ -24,7 +36,8 @@ const ProgramsSection = () => {
       icon: "🚀",
       description: "Build habits that create lasting change",
       features: ["Daily Live Sessions", "Habit Tracking Tools", "Accountability System", "Neuroscience Methods"],
-      badge: "Best Value"
+      badge: "Best Value",
+      cta: "Join The Bootcamp"
     },
     {
       name: "The Evolution Experience",
@@ -37,7 +50,8 @@ const ProgramsSection = () => {
       description: "Complete life transformation journey",
       features: ["12 Private Sessions", "Public Speaking Mastery", "WhatsApp Support", "Business Networking"],
       badge: "Premium",
-      isPremium: true
+      isPremium: true,
+      cta: "Apply Now"
     },
     {
       name: "Speak With Impact",
@@ -48,7 +62,8 @@ const ProgramsSection = () => {
       icon: "🎤",
       description: "Master confident communication",
       features: ["1-on-1 Coaching", "Voice Training", "Presentation Skills", "Real Practice"],
-      badge: "Specialist"
+      badge: "Specialist",
+      cta: "Book Your Spot"
     }
   ];
 
@@ -142,8 +157,9 @@ const ProgramsSection = () => {
                   withGlow={program.isPremium}
                   withShimmer={program.isPremium}
                   className="w-full font-bold text-lg py-4"
+                  onClick={() => handleButtonClick(program.cta)}
                 >
-                  {program.isPremium ? "Apply Now" : "Learn More"}
+                  {program.cta}
                 </PremiumButton>
 
                 {/* Urgency Indicator */}

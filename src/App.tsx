@@ -7,7 +7,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import ParticleBackground from "./components/ParticleBackground";
 import EnhancedParticleBackground from "./components/EnhancedParticleBackground";
 import AnimatedBackground from "./components/AnimatedBackground";
 import PerformanceMonitor from "./components/PerformanceMonitor";
@@ -21,7 +20,7 @@ const queryClient = new QueryClient();
 
 const App = () => {
   useEffect(() => {
-    // Feature detection
+    // Premium performance optimizations
     const supportsBackdropFilter = CSS.supports('backdrop-filter', 'blur(10px)');
     const supportsGrid = CSS.supports('display', 'grid');
     
@@ -32,45 +31,47 @@ const App = () => {
       document.documentElement.classList.add('no-grid');
     }
 
-    // Premium scroll animations and parallax
+    // Premium scroll handler with optimized performance
     const handleScroll = () => {
       const scrolled = window.pageYOffset;
-      const parallaxElements = document.querySelectorAll('.parallax-bg');
       
-      // Enhanced parallax effect
+      // Smooth parallax for performance
+      const parallaxElements = document.querySelectorAll('.parallax-bg');
       parallaxElements.forEach((element, index) => {
-        const speed = 0.2 + (index * 0.05);
+        const speed = 0.15 + (index * 0.03);
         const yPos = -(scrolled * speed);
         (element as HTMLElement).style.transform = `translateY(${yPos}px)`;
       });
 
-      // Premium scroll-triggered animations
+      // Premium scroll animations
       const animateElements = document.querySelectorAll('.animate-on-scroll');
       animateElements.forEach((element) => {
         const elementTop = element.getBoundingClientRect().top;
-        const elementVisible = 100;
+        const elementVisible = 80;
         
         if (elementTop < window.innerHeight - elementVisible) {
-          element.classList.add('smooth-fade', 'visible');
+          element.classList.add('premium-fade-in', 'visible');
         }
       });
 
-      // Premium navbar background on scroll
+      // Premium navbar transformation
       const navbar = document.querySelector('nav');
       if (navbar) {
-        if (scrolled > 50) {
+        if (scrolled > 30) {
           navbar.style.background = 'rgba(11, 20, 38, 0.95)';
           navbar.style.backdropFilter = 'blur(20px)';
-          navbar.style.borderBottom = '1px solid rgba(212, 175, 55, 0.2)';
+          navbar.style.borderBottom = '1px solid rgba(212, 175, 55, 0.15)';
+          navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
         } else {
           navbar.style.background = 'transparent';
           navbar.style.backdropFilter = 'none';
           navbar.style.borderBottom = 'none';
+          navbar.style.boxShadow = 'none';
         }
       }
     };
 
-    // Throttled scroll handler for better performance
+    // Optimized scroll performance
     let ticking = false;
     const throttledScrollHandler = () => {
       if (!ticking) {
@@ -82,27 +83,26 @@ const App = () => {
       }
     };
 
-    // Add premium scroll listeners
     window.addEventListener('scroll', throttledScrollHandler, { passive: true });
     
-    // Initialize animations on load
-    setTimeout(handleScroll, 100);
+    // Initialize premium animations
+    setTimeout(handleScroll, 50);
 
-    // Intersection Observer for animations
+    // Premium Intersection Observer
     const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+      threshold: 0.08,
+      rootMargin: '0px 0px -40px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('smooth-fade', 'visible');
+          entry.target.classList.add('premium-fade-in', 'visible');
         }
       });
     }, observerOptions);
 
-    // Observe all animate-on-scroll elements
+    // Observe elements with slight delay for smooth loading
     setTimeout(() => {
       const elements = document.querySelectorAll('.animate-on-scroll');
       elements.forEach((el) => observer.observe(el));

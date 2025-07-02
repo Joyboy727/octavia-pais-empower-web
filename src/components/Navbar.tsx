@@ -17,6 +17,14 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Auto-scroll to top on navigation
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }, [location.pathname]);
+
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
@@ -27,18 +35,27 @@ const Navbar = () => {
 
   const isActivePath = (path: string) => location.pathname === path;
 
+  const handleNavClick = () => {
+    setIsMobileMenuOpen(false);
+    // Smooth scroll to top
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
       isScrolled ? 'bg-black/90 backdrop-blur-md py-2' : 'bg-transparent py-3 sm:py-4'
     }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           {/* Logo - Updated with new PNG */}
-          <Link to="/" className="flex items-center space-x-2 sm:space-x-3 group">
+          <Link to="/" onClick={handleNavClick} className="flex items-center space-x-2 sm:space-x-3 group">
             <img 
               src="/lovable-uploads/e762880d-c3aa-4d83-a05d-ff106ac7e818.png" 
               alt="Octavia Pais - Life & Speaking Coach" 
-              className="h-8 sm:h-12 w-auto transition-transform duration-300 group-hover:scale-110 seamless-logo"
+              className="h-8 sm:h-12 w-auto transition-all duration-500 group-hover:scale-110 seamless-logo"
             />
             <div className="hidden sm:block">
               <h1 className="font-playfair font-bold text-lg sm:text-xl text-gold gradient-text">
@@ -56,14 +73,15 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                className={`relative py-2 px-3 text-sm font-medium transition-all duration-300 group ${
+                onClick={handleNavClick}
+                className={`relative py-2 px-3 text-sm font-medium transition-all duration-500 group ${
                   isActivePath(item.path) 
                     ? 'text-gold' 
                     : 'text-foreground hover:text-gold'
                 }`}
               >
                 {item.name}
-                <span className={`absolute bottom-0 left-0 h-0.5 bg-gold transition-all duration-300 ${
+                <span className={`absolute bottom-0 left-0 h-0.5 bg-gold transition-all duration-500 ${
                   isActivePath(item.path) ? 'w-full' : 'w-0 group-hover:w-full'
                 }`} />
               </Link>
@@ -73,7 +91,7 @@ const Navbar = () => {
           {/* CTA Button */}
           <div className="hidden md:flex items-center space-x-4">
             <a href="tel:+917975163696" className="magnetic-hover">
-              <Button className="bg-gold hover:bg-gold-dark text-black font-semibold px-4 lg:px-6 py-2 rounded-full glow-effect text-sm">
+              <Button className="bg-gold hover:bg-gold-dark text-black font-semibold px-4 lg:px-6 py-2 rounded-full glow-effect text-sm transition-all duration-500 hover:scale-105">
                 Call Now
               </Button>
             </a>
@@ -84,20 +102,20 @@ const Navbar = () => {
             className="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            <span className={`block w-6 h-0.5 bg-gold transition-all duration-300 ${
+            <span className={`block w-6 h-0.5 bg-gold transition-all duration-500 ${
               isMobileMenuOpen ? 'rotate-45 translate-y-1' : ''
             }`} />
-            <span className={`block w-6 h-0.5 bg-gold transition-all duration-300 ${
+            <span className={`block w-6 h-0.5 bg-gold transition-all duration-500 ${
               isMobileMenuOpen ? 'opacity-0' : ''
             }`} />
-            <span className={`block w-6 h-0.5 bg-gold transition-all duration-300 ${
+            <span className={`block w-6 h-0.5 bg-gold transition-all duration-500 ${
               isMobileMenuOpen ? '-rotate-45 -translate-y-1' : ''
             }`} />
           </button>
         </div>
 
         {/* Mobile Menu */}
-        <div className={`md:hidden transition-all duration-300 overflow-hidden ${
+        <div className={`md:hidden transition-all duration-500 overflow-hidden ${
           isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}>
           <div className="pt-4 pb-2 space-y-3">
@@ -105,8 +123,8 @@ const Navbar = () => {
               <Link
                 key={item.name}
                 to={item.path}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={`block py-2 px-4 text-sm font-medium transition-colors duration-300 ${
+                onClick={handleNavClick}
+                className={`block py-2 px-4 text-sm font-medium transition-all duration-500 ${
                   isActivePath(item.path) 
                     ? 'text-gold bg-gold/10 rounded-lg' 
                     : 'text-foreground hover:text-gold'
@@ -117,7 +135,7 @@ const Navbar = () => {
             ))}
             <div className="pt-2 px-4">
               <a href="tel:+917975163696" className="block">
-                <Button className="w-full bg-gold hover:bg-gold-dark text-black font-semibold py-2 rounded-full text-sm">
+                <Button className="w-full bg-gold hover:bg-gold-dark text-black font-semibold py-2 rounded-full text-sm transition-all duration-500">
                   Call Now
                 </Button>
               </a>

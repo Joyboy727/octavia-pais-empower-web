@@ -21,13 +21,6 @@ const queryClient = new QueryClient();
 
 const App = () => {
   useEffect(() => {
-    // Skip link for accessibility
-    const skipLink = document.createElement('a');
-    skipLink.href = '#main-content';
-    skipLink.className = 'skip-link';
-    skipLink.textContent = 'Skip to main content';
-    document.body.insertBefore(skipLink, document.body.firstChild);
-
     // Feature detection
     const supportsBackdropFilter = CSS.supports('backdrop-filter', 'blur(10px)');
     const supportsGrid = CSS.supports('display', 'grid');
@@ -118,11 +111,6 @@ const App = () => {
     return () => {
       window.removeEventListener('scroll', throttledScrollHandler);
       observer.disconnect();
-      // Cleanup skip link
-      const existingSkipLink = document.querySelector('.skip-link');
-      if (existingSkipLink) {
-        existingSkipLink.remove();
-      }
     };
   }, []);
 
@@ -137,7 +125,7 @@ const App = () => {
             <AnimatedBackground />
             <EnhancedParticleBackground />
             <Navbar />
-            <main id="main-content" className="relative z-10">
+            <main className="relative z-10">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />

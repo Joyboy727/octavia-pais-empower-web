@@ -114,9 +114,9 @@ const Footer = () => {
             <p className="text-xs sm:text-sm text-muted-foreground">
               © {currentYear} Octavia Pais - Mindset & Public Speaking Coach. All rights reserved.
             </p>
-            <p className="text-xs sm:text-sm text-muted-foreground">
+            <a href="https://code-future-priyanshu.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm text-muted-foreground hover:text-gold transition-colors">
               Website Crafted with ❤️ by Priyanshu Chowdhury
-            </p>
+            </a>
           </div>
         </div>
       </div>

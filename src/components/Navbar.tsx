@@ -29,19 +29,19 @@ const Navbar = () => {
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-black/90 backdrop-blur-md py-2' : 'bg-transparent py-4'
+      isScrolled ? 'bg-black/90 backdrop-blur-md py-2' : 'bg-transparent py-3 sm:py-4'
     }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3 group">
+          <Link to="/" className="flex items-center space-x-2 sm:space-x-3 group">
             <img 
-              src="/lovable-uploads/9d0b6c88-a75a-4ea9-9b78-179fd103e9f9.png" 
+              src="/lovable-uploads/10c64aa3-4a08-47fd-b71f-a056e7fb11ba.png" 
               alt="Octavia Pais Logo" 
-              className="h-12 w-auto transition-transform duration-300 group-hover:scale-110"
+              className="h-8 sm:h-12 w-auto transition-transform duration-300 group-hover:scale-110 clean-logo"
             />
             <div className="hidden sm:block">
-              <h1 className="font-playfair font-bold text-xl text-gold gradient-text">
+              <h1 className="font-playfair font-bold text-lg sm:text-xl text-gold gradient-text">
                 Octavia Pais
               </h1>
               <p className="text-xs text-muted-foreground -mt-1">
@@ -51,7 +51,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
             {navItems.map((item) => (
               <Link
                 key={item.name}
@@ -72,8 +72,8 @@ const Navbar = () => {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center space-x-4">
-            <a href="tel:+919008808808" className="magnetic-hover">
-              <Button className="bg-gold hover:bg-gold-dark text-black font-semibold px-6 py-2 rounded-full glow-effect">
+            <a href="tel:+917975163696" className="magnetic-hover">
+              <Button className="bg-gold hover:bg-gold-dark text-black font-semibold px-4 lg:px-6 py-2 rounded-full glow-effect text-sm">
                 Call Now
               </Button>
             </a>
@@ -115,9 +115,9 @@ const Navbar = () => {
                 {item.name}
               </Link>
             ))}
-            <div className="pt-2">
-              <a href="tel:+919008808808" className="block">
-                <Button className="w-full bg-gold hover:bg-gold-dark text-black font-semibold py-2 rounded-full">
+            <div className="pt-2 px-4">
+              <a href="tel:+917975163696" className="block">
+                <Button className="w-full bg-gold hover:bg-gold-dark text-black font-semibold py-2 rounded-full text-sm">
                   Call Now
                 </Button>
               </a>

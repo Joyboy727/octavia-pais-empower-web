@@ -1,5 +1,5 @@
 
-import { Instagram, Facebook, Linkedin, Twitter, Mail, Phone } from 'lucide-react';
+import { Instagram, Facebook, Linkedin, Mail, Phone, Youtube } from 'lucide-react';
 
 interface SocialMediaIconsProps {
   variant?: 'horizontal' | 'vertical';
@@ -31,6 +31,13 @@ const SocialMediaIcons = ({ variant = 'horizontal', size = 24, className = '' }:
       hoverClass: 'hover:text-linkedin'
     },
     {
+      name: 'YouTube',
+      url: 'https://www.youtube.com/@oct.thelifedesigner',
+      icon: Youtube,
+      color: '#FF0000',
+      hoverClass: 'hover:text-red-500'
+    },
+    {
       name: 'Email',
       url: 'mailto:octaviapais@gmail.com',
       icon: Mail,
@@ -39,7 +46,7 @@ const SocialMediaIcons = ({ variant = 'horizontal', size = 24, className = '' }:
     },
     {
       name: 'Phone',
-      url: 'tel:+919008808808',
+      url: 'tel:+917975163696',
       icon: Phone,
       color: '#25D366',
       hoverClass: 'hover:text-green-500'
@@ -47,7 +54,7 @@ const SocialMediaIcons = ({ variant = 'horizontal', size = 24, className = '' }:
   ];
 
   const containerClass = variant === 'horizontal' 
-    ? 'flex flex-row gap-4 justify-center items-center'
+    ? 'flex flex-row flex-wrap gap-3 sm:gap-4 justify-center items-center'
     : 'flex flex-col gap-3 items-center';
 
   return (

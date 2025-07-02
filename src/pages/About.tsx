@@ -71,7 +71,7 @@ const About = () => {
               <div className="relative max-w-md mx-auto">
                 <div className="absolute inset-0 bg-gold/20 rounded-3xl transform rotate-3 animate-gentle-float" />
                 <img 
-                  src="/lovable-uploads/3deeb80c-cb3c-424c-8a59-ed530ead07fd.png"
+                  src="/lovable-uploads/10c64aa3-4a08-47fd-b71f-a056e7fb11ba.png"
                   alt="Octavia Pais"
                   className="relative w-full rounded-3xl shadow-2xl professional-hover"
                 />

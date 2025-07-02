@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -25,7 +24,7 @@ const Success = () => {
     {
       name: "Ananya",
       title: "From Student to Leader",
-      image: "/lovable-uploads/3deeb80c-cb3c-424c-8a59-ed530ead07fd.png",
+      image: "/ananya.jpg",
       story: "Struggled with self-doubt and public speaking anxiety",
       transformation: "Now leads presentations confidently and mentors other students",
       quote: "Octavia helped me find my voice when I thought I had lost it forever. The transformation has been life-changing.",
@@ -36,7 +35,7 @@ const Success = () => {
     {
       name: "Rohit",
       title: "Career Breakthrough",
-      image: "/lovable-uploads/ac02951f-79a7-4a33-ae14-7e22133f5d82.png",
+      image: "/rohit.jpg",
       story: "Felt stuck in his career with no clear direction",
       transformation: "Promoted to team lead and started his own consulting practice",
       quote: "The Evolution Experience completely transformed how I see myself and my potential. I went from feeling invisible to becoming a leader.",
@@ -47,7 +46,7 @@ const Success = () => {
     {
       name: "Priya",
       title: "Mindset Revolution",
-      image: "/lovable-uploads/9d0b6c88-a75a-4ea9-9b78-179fd103e9f9.png",
+      image: "/priya.jpg",
       story: "Battled with imposter syndrome and fear of failure",
       transformation: "Started her own business and became a motivational speaker",
       quote: "Octavia's direct yet compassionate approach helped me break through mental barriers I didn't even know existed.",

@@ -235,9 +235,9 @@ const Services = () => {
               <Button size="lg" className="bg-gold hover:bg-gold-dark text-black font-bold px-8 py-4 rounded-full text-lg magnetic-hover glow-effect">
                 Book Free Clarity Call
               </Button>
-              <a href="tel:+919008808808">
+              <a href="tel:+917975163696">
                 <Button size="lg" variant="outline" className="border-gold text-gold hover:bg-gold hover:text-black font-bold px-8 py-4 rounded-full text-lg magnetic-hover">
-                  Call Now: +91 90088 08808
+                  Call Now
                 </Button>
               </a>
             </div>

@@ -75,16 +75,16 @@ const Contact = () => {
       icon: "📞",
       title: "Call Directly",
       description: "Ready to talk? Give me a call",
-      contact: "+91 90088 08808",
-      action: "tel:+919008808808",
+      contact: "+91 79751 63696",
+      action: "tel:+917975163696",
       color: "text-green-400"
     },
     {
       icon: "💬",
       title: "WhatsApp",
       description: "Quick message or call via WhatsApp", 
-      contact: "+91 90088 08808",
-      action: "https://wa.me/919008808808",
+      contact: "+91 79751 63696",
+      action: "https://wa.me/917975163696",
       color: "text-green-400"
     },
     {
@@ -283,8 +283,8 @@ const Contact = () => {
                     <span className="text-2xl">📞</span>
                     <div>
                       <div className="font-semibold">Call or WhatsApp</div>
-                      <a href="tel:+919008808808" className="text-gold hover:text-gold-light">
-                        +91 90088 08808
+                      <a href="tel:+917975163696" className="text-gold hover:text-gold-light">
+                        +91 79751 63696
                       </a>
                     </div>
                   </div>
@@ -346,7 +346,7 @@ const Contact = () => {
                   <p className="mb-6 text-muted-foreground">
                     Don't wait. Your breakthrough conversation is just one call away.
                   </p>
-                  <a href="tel:+919008808808">
+                  <a href="tel:+917975163696">
                     <Button className="bg-gold hover:bg-gold-dark text-black font-bold px-8 py-3 rounded-full magnetic-hover glow-effect">
                       Call Octavia Now
                     </Button>

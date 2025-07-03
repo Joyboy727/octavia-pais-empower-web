@@ -326,6 +326,15 @@
     }
   }
 
+  /* PREMIUM MESH GRADIENT BACKGROUND */
+  .premium-mesh-gradient {
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 40% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+    animation: meshFloat 20s ease-in-out infinite;
+  }
+
   /* MOTION PREFERENCES */
   @media (prefers-reduced-motion: reduce) {
     .enhanced-particle {
@@ -340,6 +349,10 @@
       animation: none !important;
       opacity: 1 !important;
       transform: none !important;
+    }
+
+    .premium-mesh-gradient {
+      animation: none !important;
     }
   }
 
@@ -437,5 +450,17 @@
   100% {
     transform: translateY(-10vh) translateX(0px) rotate(360deg);
     opacity: 0;
+  }
+}
+
+@keyframes meshFloat {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  33% {
+    transform: scale(1.05) rotate(1deg);
+  }
+  66% {
+    transform: scale(0.95) rotate(-1deg);
   }
 }

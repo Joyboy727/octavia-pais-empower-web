@@ -7,6 +7,7 @@ import BenefitsSection from "@/components/home/BenefitsSection";
 import ProgramsSection from "@/components/home/ProgramsSection";
 import StatsCounter from "@/components/StatsCounter";
 import TestimonialCards from "@/components/TestimonialCards";
+import VideoShowcase from "@/components/VideoShowcase";
 import CTASection from "@/components/home/CTASection";
 
 const Home = () => {
@@ -36,6 +37,7 @@ const Home = () => {
       <BenefitsSection />
       <StatsCounter />
       <ProgramsSection />
+      <VideoShowcase />
       <TestimonialCards />
       <CTASection />
     </div>

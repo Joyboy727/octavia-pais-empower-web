@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import HeroSection from "@/components/home/HeroSection";
 import AboutSection from "@/components/home/AboutSection";
@@ -37,7 +36,6 @@ const Home = () => {
       <BenefitsSection />
       <StatsCounter />
       <ProgramsSection />
-      <VideoShowcase />
       <TestimonialCards />
       <CTASection />
     </div>

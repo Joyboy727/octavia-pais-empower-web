@@ -1,6 +1,6 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import { Play, Expand, Share2, Eye } from 'lucide-react';
+import { Play, Expand, Share2, Eye, Pause, Minimize, Video } from 'lucide-react';
 
 interface Video {
   id: string;
@@ -52,44 +52,279 @@ const FacebookVideoEmbed = ({
   isActive?: boolean;
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [embedError, setEmbedError] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [showControls, setShowControls] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
+  const videoRef = useRef<HTMLDivElement>(null);
+
+  // Convert Facebook URLs to embeddable format with multiple fallback methods
+  const getEmbedUrl = (url: string) => {
+    const embedMethods = [
+      // Method 1: Facebook plugin URL
+      () => {
+        if (url.includes('/share/r/')) {
+          const videoId = url.split('/share/r/')[1].replace('/', '');
+          return `https://www.facebook.com/plugins/video.php?height=314&href=${encodeURIComponent(`https://www.facebook.com/reel/${videoId}`)}&show_text=false&width=560&autoplay=${isActive ? 'true' : 'false'}`;
+        }
+        return `https://www.facebook.com/plugins/video.php?height=314&href=${encodeURIComponent(url)}&show_text=false&width=560&autoplay=${isActive ? 'true' : 'false'}`;
+      },
+      // Method 2: Alternative format
+      () => url.replace('/share/r/', '/plugins/video.php?href='),
+      // Method 3: Direct reel embed
+      () => {
+        if (url.includes('reel/')) {
+          const reelId = url.split('reel/')[1];
+          return `https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F${reelId}&show_text=false&width=560&autoplay=${isActive ? 'true' : 'false'}`;
+        }
+        return url;
+      }
+    ];
+    
+    return embedMethods[retryCount] ? embedMethods[retryCount]() : embedMethods[0]();
+  };
+
+  const handlePlayPause = () => {
+    setIsPlaying(!isPlaying);
+  };
+
+  const handleFullscreen = async () => {
+    if (!isFullscreen && videoRef.current) {
+      try {
+        await videoRef.current.requestFullscreen();
+        setIsFullscreen(true);
+      } catch (err) {
+        console.log('Fullscreen not supported');
+      }
+    } else if (document.fullscreenElement) {
+      await document.exitFullscreen();
+      setIsFullscreen(false);
+    }
+  };
+
+  const handleShare = async () => {
+    const shareData = {
+      title: title,
+      text: `Watch this amazing coaching session: ${title}`,
+      url: window.location.href
+    };
+
+    if (navigator.share && /mobile/i.test(navigator.userAgent)) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        setShowShareModal(true);
+      }
+    } else {
+      setShowShareModal(true);
+    }
+  };
+
+  const handleIframeError = () => {
+    if (retryCount < 2) {
+      setRetryCount(prev => prev + 1);
+      setEmbedError(false);
+      setTimeout(() => setIsLoaded(false), 100);
+    } else {
+      setEmbedError(true);
+    }
+  };
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.6 }}
-      className="relative rounded-2xl overflow-hidden shadow-2xl bg-navy-light"
-    >
-      {!isLoaded && (
-        <motion.div 
-          className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center"
-          animate={{ opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-        >
-          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin" />
-        </motion.div>
-      )}
-      
-      <iframe
-        src={`${videoUrl}?autoplay=${isActive ? 1 : 0}&mute=0`}
-        width="100%"
-        height="400"
-        style={{ border: 'none' }}
-        allowFullScreen
-        onLoad={() => setIsLoaded(true)}
-        className="w-full aspect-video"
-        title={title}
-      />
-      
+    <>
       <motion.div
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.3 }}
-        className="absolute bottom-4 left-4 right-4 bg-navy/80 backdrop-blur-md rounded-xl p-4 border border-white/10"
+        ref={videoRef}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6 }}
+        className={`relative group ${isFullscreen ? 'fixed inset-0 z-50 bg-black' : 'rounded-2xl overflow-hidden shadow-2xl bg-navy-light'}`}
+        onMouseEnter={() => setShowControls(true)}
+        onMouseLeave={() => setShowControls(false)}
       >
-        <h3 className="text-white font-semibold text-lg gradient-text">{title}</h3>
+        {!isLoaded && !embedError && (
+          <motion.div 
+            className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center"
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          >
+            <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+          </motion.div>
+        )}
+
+        {embedError ? (
+          <div className="w-full aspect-video bg-gradient-to-br from-navy to-navy-light flex items-center justify-center rounded-2xl">
+            <div className="text-center text-white p-8">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <Video className="w-12 h-12 mx-auto mb-4 opacity-60" />
+              </motion.div>
+              <h3 className="text-xl font-semibold mb-2 gradient-text">{title}</h3>
+              <p className="text-muted-foreground mb-4">Video temporarily unavailable</p>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => window.open(videoUrl, '_blank')}
+                className="bg-primary hover:bg-primary/90 px-6 py-2 rounded-lg transition-colors"
+              >
+                Watch on Facebook
+              </motion.button>
+            </div>
+          </div>
+        ) : (
+          <div className={`relative ${isFullscreen ? 'w-full h-full' : 'aspect-video'}`}>
+            <iframe
+              src={getEmbedUrl(videoUrl)}
+              width="100%"
+              height="100%"
+              style={{ border: 'none' }}
+              allowFullScreen
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+              onLoad={() => setIsLoaded(true)}
+              onError={handleIframeError}
+              className="w-full h-full"
+              title={title}
+            />
+
+            {/* Custom Controls Overlay */}
+            <AnimatePresence>
+              {showControls && isLoaded && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="absolute inset-0 bg-black/20 flex items-center justify-center group-hover:bg-black/30 transition-colors"
+                >
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={handlePlayPause}
+                    className="bg-white/20 backdrop-blur-sm rounded-full p-4 mr-4 hover:bg-white/30 transition-colors"
+                  >
+                    {isPlaying ? (
+                      <Pause className="w-8 h-8 text-white" />
+                    ) : (
+                      <Play className="w-8 h-8 text-white ml-1" fill="currentColor" />
+                    )}
+                  </motion.button>
+
+                  <div className="absolute bottom-4 right-4 flex space-x-2">
+                    <motion.button
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.9 }}
+                      onClick={handleShare}
+                      className="bg-white/20 backdrop-blur-sm rounded-full p-3 hover:bg-white/30 transition-colors"
+                    >
+                      <Share2 className="w-5 h-5 text-white" />
+                    </motion.button>
+
+                    <motion.button
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.9 }}
+                      onClick={handleFullscreen}
+                      className="bg-white/20 backdrop-blur-sm rounded-full p-3 hover:bg-white/30 transition-colors"
+                    >
+                      {isFullscreen ? (
+                        <Minimize className="w-5 h-5 text-white" />
+                      ) : (
+                        <Expand className="w-5 h-5 text-white" />
+                      )}
+                    </motion.button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        )}
+        
+        {!isFullscreen && (
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="absolute bottom-4 left-4 right-4 bg-navy/80 backdrop-blur-md rounded-xl p-4 border border-white/10"
+          >
+            <h3 className="text-white font-semibold text-lg gradient-text">{title}</h3>
+          </motion.div>
+        )}
       </motion.div>
-    </motion.div>
+
+      {/* Share Modal */}
+      <AnimatePresence>
+        {showShareModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+            onClick={() => setShowShareModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-card rounded-xl p-6 max-w-md w-full mx-4 border border-border"
+            >
+              <h3 className="text-xl font-bold mb-4 gradient-text">Share Video</h3>
+              <div className="grid grid-cols-2 gap-3 mb-4">
+                {[
+                  { name: 'Facebook', url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(videoUrl)}` },
+                  { name: 'Twitter', url: `https://twitter.com/intent/tweet?url=${encodeURIComponent(videoUrl)}&text=${encodeURIComponent(title)}` },
+                  { name: 'LinkedIn', url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(videoUrl)}` },
+                  { name: 'WhatsApp', url: `https://wa.me/?text=${encodeURIComponent(title + ' ' + videoUrl)}` }
+                ].map((option) => (
+                  <motion.a
+                    key={option.name}
+                    href={option.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center justify-center p-3 rounded-lg bg-accent/10 hover:bg-accent/20 transition-colors text-foreground"
+                  >
+                    <span>{option.name}</span>
+                  </motion.a>
+                ))}
+              </div>
+              
+              <div className="flex space-x-2">
+                <input
+                  type="text"
+                  value={videoUrl}
+                  readOnly
+                  className="flex-1 p-2 border border-border rounded-lg bg-background text-foreground"
+                />
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    navigator.clipboard.writeText(videoUrl);
+                    setShowShareModal(false);
+                  }}
+                  className="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+                >
+                  Copy
+                </motion.button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 

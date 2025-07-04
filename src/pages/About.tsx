@@ -1,6 +1,10 @@
 
 import { useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import SkillBars from "@/components/about/SkillBars";
+import PhotoGallery from "@/components/about/PhotoGallery";
+import AchievementBadges from "@/components/about/AchievementBadges";
+import PersonalValues from "@/components/about/PersonalValues";
 
 const About = () => {
   useEffect(() => {
@@ -178,6 +182,18 @@ const About = () => {
           </div>
         </div>
       </section>
+
+      {/* Skills Section */}
+      <SkillBars />
+
+      {/* Personal Values */}
+      <PersonalValues />
+
+      {/* Photo Gallery */}
+      <PhotoGallery />
+
+      {/* Achievement Badges */}
+      <AchievementBadges />
 
       {/* Personal Touch */}
       <section className="py-16">

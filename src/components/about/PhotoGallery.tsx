@@ -22,30 +22,6 @@ const photos: Photo[] = [
   },
   {
     id: '2',
-    src: '/lovable-uploads/ac02951f-79a7-4a33-ae14-7e22133f5d82.png',
-    alt: 'Octavia speaking',
-    title: 'Public Speaking Workshop',
-    description: 'Empowering others to find their voice',
-    category: 'speaking'
-  },
-  {
-    id: '3',
-    src: '/lovable-uploads/9138164a-e7ad-4bad-a4dd-b5039c883402.png',
-    alt: 'Group workshop',
-    title: 'Group Transformation',
-    description: 'Leading breakthrough workshops',
-    category: 'workshop'
-  },
-  {
-    id: '4',
-    src: '/lovable-uploads/e762880d-c3aa-4d83-a05d-ff106ac7e818.png',
-    alt: 'Corporate training',
-    title: 'Corporate Training',
-    description: 'Professional development sessions',
-    category: 'corporate'
-  },
-  {
-    id: '5',
     src: '/lovable-uploads/3deeb80c-cb3c-424c-8a59-ed530ead07fd.png',
     alt: 'Success celebration',
     title: 'Success Stories',
@@ -53,12 +29,12 @@ const photos: Photo[] = [
     category: 'success'
   },
   {
-    id: '6',
-    src: '/lovable-uploads/9d0b6c88-a75a-4ea9-9b78-179fd103e9f9.png',
-    alt: 'Personal moment',
-    title: 'Behind the Scenes',
-    description: 'Authentic moments of connection',
-    category: 'personal'
+    id: '3',
+    src: '/lovable-uploads/51cae283-e75f-4902-a215-aef5185b0ae4.png',
+    alt: 'Empowerment event',
+    title: 'Empowerment Event',
+    description: 'Inspiring moments from empowerment events',
+    category: 'event'
   }
 ];
 

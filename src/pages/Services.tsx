@@ -2,8 +2,6 @@
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import FluidProgramsGrid from "@/components/programs/FluidProgramsGrid";
-import PremiumPricingCalculator from "@/components/programs/PremiumPricingCalculator";
 
 const Services = () => {
   useEffect(() => {
@@ -37,71 +35,67 @@ const Services = () => {
 
   const programs = [
     {
-      id: "breakthrough-blueprint",
       name: "The Breakthrough Blueprint",
       price: "₹5,000",
       duration: "3 Days",
+      gradient: "from-blue-600 to-blue-800",
+      icon: "🌟",
       description: "Break free from limiting beliefs and discover your true potential",
-      features: [
-        "20+ Hours Live Coaching",
-        "Breakthrough Exercises", 
-        "Hot Seat Coaching",
-        "7-Day Action Plan"
+      benefits: [
+        "Identify and eliminate self-sabotaging patterns",
+        "Build unshakeable confidence",
+        "Create a personalized action plan",
+        "Access to exclusive resources"
       ],
-      category: "intensive",
+      cta: "Join The Bootcamp"
     },
     {
-      id: "momentum-bootcamp",
       name: "Unstoppable Momentum Bootcamp", 
       price: "₹4,999",
-      duration: "5 Days",
-      description: "Build habits that create lasting change",
-      features: [
-        "Daily Live Sessions",
-        "Habit Tracking Tools",
-        "Accountability System", 
-        "Neuroscience Methods"
+      duration: "Intensive Program",
+      gradient: "from-purple-600 to-purple-800",
+      icon: "🚀",
+      description: "Transform your mindset and accelerate your personal growth",
+      benefits: [
+        "Daily momentum-building exercises",
+        "Group coaching sessions",
+        "Accountability partnership",
+        "Breakthrough techniques"
       ],
-      category: "bootcamp",
+      cta: "Join The Bootcamp"
     },
     {
-      id: "evolution-experience",
       name: "The Evolution Experience",
-      price: "₹49,999",
-      originalPrice: "₹65,000",
+      price: "₹49,999 + Taxes",
       duration: "6 Months",
-      description: "Complete life transformation journey",
-      features: [
-        "12 Private Sessions",
-        "Public Speaking Mastery",
-        "WhatsApp Support",
-        "Business Networking"
+      gradient: "from-gold to-yellow-600",
+      icon: "💫",
+      description: "Premium transformation program for serious change-makers",
+      benefits: [
+        "Weekly 1-on-1 coaching sessions",
+        "Complete mindset makeover",
+        "Public speaking mastery",
+        "Lifetime support community",
+        "Business networking opportunities"
       ],
-      category: "premium",
-      isPremium: true
+      cta: "Apply Now",
+      premium: true
     },
     {
-      id: "speak-impact",
       name: "Speak With Impact",
       price: "₹9,999",
       duration: "5 Sessions",
-      description: "Master confident communication",
-      features: [
-        "1-on-1 Coaching",
-        "Voice Training", 
-        "Presentation Skills",
-        "Real Practice"
+      gradient: "from-red-600 to-red-800", 
+      icon: "🎤",
+      description: "Master the art of confident, compelling communication",
+      benefits: [
+        "Overcome speaking anxiety",
+        "Develop your unique voice",
+        "Advanced presentation skills",
+        "Real-world practice opportunities"
       ],
-      category: "speaking",
+      cta: "Book Your Spot"
     }
-  ];
-
-  const filters = [
-    { id: 'all', name: 'All Programs', icon: '📚' },
-    { id: 'intensive', name: 'Intensive', icon: '⚡' },
-    { id: 'bootcamp', name: 'Bootcamp', icon: '🚀' },
-    { id: 'premium', name: 'Premium', icon: '💎' },
-    { id: 'speaking', name: 'Speaking', icon: '🎤' }
   ];
 
   return (
@@ -122,25 +116,69 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Enhanced Programs Grid */}
+      {/* Programs Grid */}
       <section className="py-24">
         <div className="container mx-auto px-4">
-          <FluidProgramsGrid programs={programs} filters={filters} />
-        </div>
-      </section>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
+            {programs.map((program, index) => (
+              <Card 
+                key={program.name}
+                className={`${program.premium ? 'lg:col-span-2' : ''} bg-gradient-to-br ${program.gradient} border-0 text-white overflow-hidden relative group animate-on-scroll`}
+                style={{ animationDelay: `${index * 0.2}s` }}
+              >
+                {program.premium && (
+                  <div className="absolute top-4 right-4 bg-gold text-black px-3 py-1 rounded-full text-sm font-bold animate-pulse-glow">
+                    PREMIUM
+                  </div>
+                )}
+                
+                <CardHeader className="relative z-10">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-5xl group-hover:animate-bounce">{program.icon}</span>
+                    <div className="text-right">
+                      <div className="text-3xl font-bold">{program.price}</div>
+                      <div className="text-sm opacity-80">{program.duration}</div>
+                    </div>
+                  </div>
+                  <CardTitle className="font-playfair text-3xl font-bold mb-4">
+                    {program.name}
+                  </CardTitle>
+                  <p className="text-lg opacity-90 leading-relaxed">
+                    {program.description}
+                  </p>
+                </CardHeader>
 
-      {/* Premium Pricing Calculator */}
-      <section className="py-24 bg-black/20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="font-playfair text-4xl md:text-6xl font-bold mb-8 gradient-text">
-              Calculate Your Investment
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Customize your coaching journey and see exactly what your transformation will cost
-            </p>
+                <CardContent className="relative z-10">
+                  <div className="space-y-4 mb-8">
+                    <h4 className="font-semibold text-lg mb-3">What You'll Get:</h4>
+                    <ul className="space-y-2">
+                      {program.benefits.map((benefit, benefitIndex) => (
+                        <li key={benefitIndex} className="flex items-start space-x-2">
+                          <span className="text-white/80 mt-1">✓</span>
+                          <span className="text-white/90">{benefit}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <Button 
+                    size="lg" 
+                    className={`w-full font-bold text-lg py-4 rounded-full transition-all duration-300 magnetic-hover ${
+                      program.premium 
+                        ? 'bg-gold hover:bg-gold-dark text-black' 
+                        : 'bg-white/20 hover:bg-white/30 text-white border-white/30'
+                    }`}
+                    onClick={() => handleButtonClick(program.cta)}
+                  >
+                    {program.cta}
+                  </Button>
+                </CardContent>
+
+                {/* Animated Background Effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+              </Card>
+            ))}
           </div>
-          <PremiumPricingCalculator />
         </div>
       </section>
 

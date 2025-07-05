@@ -1,4 +1,3 @@
-
 import PremiumCard from "@/components/PremiumCard";
 import PremiumButton from "@/components/PremiumButton";
 
@@ -23,14 +22,14 @@ const ProgramsSection = () => {
       borderGradient: "border-blue-500/50",
       icon: "🌟",
       description: "Intensive mindset rewiring program",
-      features: ["20+ Hours Live Coaching", "Breakthrough Exercises", "Hot Seat Coaching", "7-Day Action Plan"],
+      features: ["6+ hours of Coaching", "Breakthrough Exercises", "Hot Seat Coaching", "7-Day Action Plan"],
       badge: "Most Popular",
       cta: "Join The Bootcamp"
     },
     {
       name: "Unstoppable Momentum Bootcamp",
-      price: "₹4,999",
-      duration: "5 Days",
+      price: "₹9,999",
+      duration: "5 Days (2 hours per day)",
       gradient: "from-purple-600/30 to-purple-800/30",
       borderGradient: "border-purple-500/50",
       icon: "🚀",

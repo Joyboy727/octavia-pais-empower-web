@@ -1,4 +1,3 @@
-
 import CounterAnimation from "@/components/CounterAnimation";
 import PremiumCard from "@/components/PremiumCard";
 
@@ -18,7 +17,7 @@ const WhoIHelpSection = () => {
           {/* Enhanced Age Indicator */}
           <PremiumCard variant="glass" className="inline-block p-8 mb-8 premium-scale-in">
             <div className="text-6xl md:text-8xl font-bold text-gold premium-glow">
-              <CounterAnimation target={16} suffix="+" />
+              <CounterAnimation target={18} suffix="+" />
             </div>
             <div className="text-lg text-muted-foreground mt-2">Years & Above</div>
             <div className="text-sm text-gold font-medium">All Ages Welcome</div>

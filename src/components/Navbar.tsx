@@ -62,7 +62,7 @@ const Navbar = () => {
                 Octavia Pais
               </h1>
               <p className="text-xs text-muted-foreground -mt-1">
-                Life & Speaking Coach
+                Growth & Mindset Coach
               </p>
             </div>
           </Link>
@@ -90,9 +90,9 @@ const Navbar = () => {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center space-x-4">
-            <a href="tel:+917975163696" className="magnetic-hover">
+            <a href="https://calendly.com/octaviathelifecoach/30min" target="_blank" rel="noopener noreferrer" className="magnetic-hover">
               <Button className="bg-gold hover:bg-gold-dark text-black font-semibold px-4 lg:px-6 py-2 rounded-full glow-effect text-sm transition-all duration-500 hover:scale-105">
-                Call Now
+                Book Free Clarity Call
               </Button>
             </a>
           </div>
@@ -134,9 +134,9 @@ const Navbar = () => {
               </Link>
             ))}
             <div className="pt-2 px-4">
-              <a href="tel:+917975163696" className="block">
+              <a href="https://calendly.com/octaviathelifecoach/30min" target="_blank" rel="noopener noreferrer" className="block">
                 <Button className="w-full bg-gold hover:bg-gold-dark text-black font-semibold py-2 rounded-full text-sm transition-all duration-500">
-                  Call Now
+                  Book Free Clarity Call
                 </Button>
               </a>
             </div>

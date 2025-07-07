@@ -124,14 +124,14 @@ const Success = () => {
               >
                 {/* Image */}
                 <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
-                  <div className="relative max-w-md mx-auto">
+                  <div className="relative max-w-xs mx-auto">
                     <div className="absolute inset-0 bg-gold/20 rounded-3xl transform rotate-2 animate-gentle-float" />
                     <img 
                       src={story.image}
                       alt={story.name}
-                      className="relative w-full rounded-3xl shadow-2xl professional-hover"
+                      className="relative w-full h-48 object-cover rounded-3xl shadow-2xl professional-hover"
                     />
-                    <div className="absolute -top-3 -right-3 bg-gold text-navy w-12 h-12 rounded-full flex items-center justify-center text-xl">
+                    <div className="absolute -top-3 -right-3 bg-gold text-navy w-10 h-10 rounded-full flex items-center justify-center text-lg">
                       {story.icon}
                     </div>
                   </div>
@@ -216,6 +216,21 @@ const Success = () => {
                 quote: "The transformation I experienced was beyond what I thought possible.",
                 name: "Meera R.",
                 role: "Teacher"
+              },
+              {
+                quote: "Working with Octavia was the best investment I made in myself.",
+                name: "Kavya S.",
+                role: "Software Engineer"
+              },
+              {
+                quote: "She helped me find my voice and confidence I never knew I had.",
+                name: "Arun M.",
+                role: "Business Owner"
+              },
+              {
+                quote: "The mindset shift was incredible. I'm a completely different person now.",
+                name: "Ritu P.",
+                role: "HR Manager"
               }
             ].map((testimonial, index) => (
               <Card 

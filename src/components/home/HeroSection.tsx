@@ -22,27 +22,6 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy-light to-navy" />
       
       <div className="relative z-10 text-center max-w-6xl mx-auto">
-        {/* Logo - Fixed flickering with immediate visibility */}
-        <div className="mb-12 premium-fade-in opacity-100">
-          <img 
-            src="/lovable-uploads/e762880d-c3aa-4d83-a05d-ff106ac7e818.png" 
-            alt="Octavia Pais - Life & Speaking Coach" 
-            className="h-32 sm:h-40 md:h-56 lg:h-64 w-auto mx-auto mb-8 no-flicker-logo"
-            style={{ 
-              opacity: 1,
-              visibility: 'visible',
-              imageRendering: 'crisp-edges',
-              transform: 'translateZ(0)',
-              backfaceVisibility: 'hidden'
-            }}
-            loading="eager"
-            onLoad={(e) => {
-              const img = e.target as HTMLImageElement;
-              img.style.opacity = '1';
-              img.style.visibility = 'visible';
-            }}
-          />
-        </div>
 
         {/* Main Headlines with premium typography */}
         <div className="space-y-4 sm:space-y-6 mb-12 sm:mb-16">
@@ -61,7 +40,7 @@ const HeroSection = () => {
           </h1>
           
           <p className="text-lg sm:text-xl md:text-2xl text-gold font-medium premium-fade-in px-4" style={{ animationDelay: '0.9s' }}>
-            Mindset & Public Speaking Coach — Bangalore
+            Growth & Mindset Coach | Public Speaking Strategist
           </p>
 
           <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-8 mt-8 premium-fade-in px-4" style={{ animationDelay: '1.2s' }}>
@@ -99,14 +78,6 @@ const HeroSection = () => {
             Book Your Free Clarity Call
           </PremiumButton>
           
-          <PremiumButton 
-            variant="outline" 
-            size="lg"
-            className="font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg border-2 hover:border-gold-light w-full sm:w-auto premium-button-luxury"
-            onClick={() => handleButtonClick("Call Octavia Now")}
-          >
-            Call Octavia Now → 7975163696
-          </PremiumButton>
         </div>
 
         {/* Premium Scroll Indicator */}

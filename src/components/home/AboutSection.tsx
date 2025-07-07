@@ -91,28 +91,6 @@ const AboutSection = () => {
           </div>
         </div>
 
-        {/* Journey Timeline Preview */}
-        <div className="mt-20 text-center animate-on-scroll premium-fade-in" style={{ animationDelay: '1.3s' }}>
-          <h3 className="font-playfair text-2xl md:text-3xl font-bold mb-8 gradient-text">My Journey</h3>
-          <div className="flex flex-wrap justify-center gap-8 max-w-4xl mx-auto">
-            {[
-              { place: "Mangalore", description: "Born & Raised", icon: "🏠" },
-              { place: "UAE", description: "Banking & Education", icon: "🏢" },
-              { place: "Bangalore", description: "Coaching & Speaking", icon: "🎤" }
-            ].map((item, index) => (
-              <PremiumCard 
-                key={item.place}
-                variant="hover-lift" 
-                className="p-6 text-center min-w-[200px] premium-slide-up premium-card-hover border-0"
-                style={{ animationDelay: `${1.5 + index * 0.2}s` }}
-              >
-                <div className="text-3xl mb-3">{item.icon}</div>
-                <h4 className="font-bold text-gold mb-2">{item.place}</h4>
-                <p className="text-sm text-muted-foreground">{item.description}</p>
-              </PremiumCard>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );

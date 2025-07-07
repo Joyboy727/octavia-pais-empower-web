@@ -98,8 +98,8 @@ const Contact = () => {
       icon: "📧",
       title: "Email",
       description: "Send me a detailed message",
-      contact: "octaviapais@gmail.com",
-      action: "mailto:octaviapais@gmail.com",
+      contact: "octaviathelifecoach@gmail.com",
+      action: "mailto:octaviathelifecoach@gmail.com",
       color: "text-blue-400"
     }
   ];
@@ -125,6 +125,13 @@ const Contact = () => {
       url: "https://www.linkedin.com/in/octavia-pais-40185280/?originalSubdomain=in",
       icon: "💼",
       color: "text-blue-300"
+    },
+    {
+      platform: "YouTube",
+      handle: "octavia pais",
+      url: "https://www.youtube.com/@oct.thelifedesigner",
+      icon: "📺",
+      color: "text-red-400"
     }
   ];
 
@@ -193,7 +200,7 @@ const Contact = () => {
               <Card className="bg-card/50 border-gold/20 hover:border-gold/50 transition-all duration-300 glow-effect">
                 <CardHeader>
                   <CardTitle className="font-playfair text-3xl font-bold gradient-text">
-                    Send Me a Message
+                    LET'S CONNECT
                   </CardTitle>
                   <p className="text-muted-foreground">
                     Fill out the form below and I'll get back to you within 24 hours.
@@ -299,8 +306,8 @@ const Contact = () => {
                     <span className="text-2xl">📧</span>
                     <div>
                       <div className="font-semibold">Email</div>
-                      <a href="mailto:octaviapais@gmail.com" className="text-gold hover:text-gold-light">
-                        octaviapais@gmail.com
+                      <a href="mailto:octaviathelifecoach@gmail.com" className="text-gold hover:text-gold-light">
+                        octaviathelifecoach@gmail.com
                       </a>
                     </div>
                   </div>

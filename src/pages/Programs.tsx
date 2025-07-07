@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Star, Clock, Users, Award, CheckCircle, Play, ArrowRight, Target, Heart, TrendingUp } from "lucide-react";
 
 const Programs = () => {
-  const [selectedFilter, setSelectedFilter] = useState("all");
+  const [selectedFilter, setSelectedFilter] = useState("growth");
   const [isFilterAnimating, setIsFilterAnimating] = useState(false);
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
   const [compareList, setCompareList] = useState<number[]>([]);
@@ -46,7 +46,6 @@ const Programs = () => {
   };
 
   const filters = [
-    { id: "all", name: "All Programs", icon: "🎯" },
     { id: "speaking", name: "Public Speaking", icon: "🎤" },
     { id: "leadership", name: "Leadership", icon: "👑" },
     { id: "growth", name: "Personal Growth", icon: "🌱" },
@@ -204,7 +203,7 @@ const Programs = () => {
   }, [testimonials.length]);
 
   const filteredPrograms = programs.filter(program => 
-    selectedFilter === "all" || program.category === selectedFilter
+    program.category === selectedFilter
   );
 
   const handleFilterChange = async (filterId: string) => {
@@ -434,7 +433,7 @@ const Programs = () => {
                     className="ml-3 bg-primary/20 text-primary px-2 py-1 rounded-full text-sm"
                     animate={{ scale: selectedFilter === filter.id ? 1.1 : 1 }}
                   >
-                    {programs.filter(p => filter.id === 'all' || p.category === filter.id).length}
+                    {programs.filter(p => p.category === filter.id).length}
                   </motion.div>
                 </motion.button>
               ))}

@@ -26,10 +26,21 @@ const About = () => {
   }, []);
 
   const certifications = [
-    "NLP Practitioner",
-    "Certified Life Coach", 
-    "Public Speaking Expert",
-    "Mindset Transformation Specialist"
+    "Life Coach Certification – RR Training Systems",
+    "Life Coaching Certificate: Beginner to Advanced – Joeel & Natalie Rivera",
+    "NLP Practitioner Certification – Neuro-Linguistic Programming (NLP) Practitioner Course by Kain Ramsay",
+    "Masters in English Literature - Bangalore University",
+    "CIDTL (Cambridge International Diploma for Teachers and Learners) – Indus International School, Bangalore",
+    "Bachelor of Education – Bangalore University",
+    "Train the Trainer Certification – Jack Canfield's Canfield Training Group",
+    "NLP Practitioner Certification – Neuro-Linguistic Programming (NLP) Practitioner Certificate (Accredited) by Kain Ramsay"
+  ];
+
+  const credentialsOrder = [
+    "🏆 Certified Life Coach",
+    "🏆 Mindset Transformation Specialist", 
+    "🏆 NLP Practitioner",
+    "🏆 Public Speaking Expert"
   ];
 
   const timeline = [
@@ -49,24 +60,50 @@ const About = () => {
             {/* Text Content */}
             <div className="animate-on-scroll">
               <h1 className="font-playfair text-responsive-xl font-bold mb-6">
-                <span className="gradient-text">Meet</span>
+                <span className="gradient-text">MY</span>
                 <br />
-                <span className="text-white">Octavia Pais</span>
+                <span className="text-white">STORY</span>
               </h1>
+              <p className="text-lg text-gold font-medium mb-6">
+                Growth & Mindset Coach | Public Speaking Strategist
+              </p>
               <div className="space-y-4 text-responsive-base leading-relaxed text-muted-foreground">
                 <p>
-                  After years of climbing the corporate ladder in banking and making a mark in education, 
-                  I discovered my true calling: <span className="text-gold font-semibold">helping people break through their mental barriers</span> 
-                  and find their authentic voice.
+                  <span className="text-gold font-semibold">From the outside, everything looked picture-perfect.</span>
                 </p>
                 <p>
-                  My journey from <span className="text-gold">Mangalore to the UAE and back to Bangalore</span> taught me that 
-                  transformation isn't about where you are—it's about who you choose to become.
+                  A successful banking career, international experience, and a respected role as an educator in Bangalore. I had stability, security, and status. But deep inside, I felt a quiet ache—a sense that I was meant for more.
                 </p>
                 <p>
-                  Today, I combine <span className="text-gold font-semibold">mindset work with practical communication skills</span> 
-                  to help people not just speak up, but show up powerfully in every area of their lives.
+                  I often found myself asking: <span className="text-gold font-semibold">"Is this it?"</span>
                 </p>
+                <p>
+                  There was a voice within me that refused to be silenced. It whispered, <span className="text-gold font-semibold">"You're here to do work that changes lives."</span> And eventually, I listened.
+                </p>
+                <p>
+                  After over 12 years in corporate sectors and nearly a decade of shaping young minds in international schools, I took a leap of faith—away from certainty and into purpose.
+                </p>
+                <p>
+                  I realized that my gift wasn't just in delivering lessons or closing deals. It was in helping people break through self-doubt, speak with confidence, and take aligned action toward their dreams.
+                </p>
+                <p>
+                  <span className="text-gold font-semibold">That's how my coaching practice was born.</span>
+                </p>
+                <p>
+                  Since then, I've devoted myself to helping ambitious men and women master their mindset, find their authentic voice, and lead lives that feel as good on the inside as they look on the outside.
+                </p>
+                <div className="mt-8 p-6 bg-card/30 rounded-2xl border border-gold/20">
+                  <h3 className="text-xl font-bold text-gold mb-4">💡 ✨ Fun Facts About Me</h3>
+                  <p>
+                    I was born and raised in the UAE, spent a few years in Mangalore after marriage, and now call Bangalore home. Each place has shaped my worldview and added a unique layer to my journey.
+                  </p>
+                  <p className="mt-3">
+                    I'm deeply rooted in practices like vision boards, prayer, affirmations, and what I call "aligned hustle"—where faith meets focused action.
+                  </p>
+                  <p className="mt-3">
+                    Nothing excites me more than witnessing someone go from <span className="text-gold font-semibold">"I don't think I can"</span> to <span className="text-gold font-semibold">"Just watch me do it!"</span>
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -85,65 +122,45 @@ const About = () => {
         </div>
       </section>
 
-      {/* Story Timeline */}
-      <section className="py-16 bg-navy-light/30">
-        <div className="container mx-auto px-4 mobile-padding">
-          <h2 className="font-playfair text-2xl md:text-4xl font-bold text-center mb-12 gradient-text animate-on-scroll">
-            My Journey
-          </h2>
-          
-          <div className="max-w-4xl mx-auto">
-            <div className="relative">
-              {/* Timeline Line */}
-              <div className="absolute left-1/2 transform -translate-x-0.5 h-full w-0.5 bg-gold/50 hidden md:block" />
-              
-              {timeline.map((item, index) => (
-                <div 
-                  key={item.place}
-                  className={`flex items-center mb-12 animate-on-scroll ${
-                    index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                  } flex-col md:gap-0 gap-4`}
-                  style={{ animationDelay: `${index * 0.2}s` }}
-                >
-                  <div className={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:pr-8 md:text-right' : 'md:pl-8'} text-center md:text-left`}>
-                    <Card className="bg-card/50 border-gold/20 hover:border-gold/40 transition-all duration-300 card-elegant">
-                      <CardContent className="p-6">
-                        <h3 className="font-playfair text-xl font-bold text-gold mb-2">
-                          {item.place}
-                        </h3>
-                        <p className="text-muted-foreground mb-2">{item.description}</p>
-                        <span className="text-sm text-gold font-medium">{item.year}</span>
-                      </CardContent>
-                    </Card>
-                  </div>
-                  
-                  {/* Timeline Dot */}
-                  <div className="hidden md:block w-4 h-4 bg-gold rounded-full border-4 border-navy z-10 subtle-pulse-glow" />
-                  
-                  <div className="hidden md:block w-1/2" />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Certifications */}
       <section className="py-16">
         <div className="container mx-auto px-4 mobile-padding">
           <h2 className="font-playfair text-2xl md:text-4xl font-bold text-center mb-12 gradient-text animate-on-scroll">
-            Credentials & Expertise
+            🎓 CERTIFICATIONS & TRAINING
+          </h2>
+          <p className="text-center text-muted-foreground mb-8 max-w-3xl mx-auto">
+            Years of experience and continuous learning have shaped my expertise across multiple domains
+          </p>
+          
+          <div className="grid grid-cols-1 gap-4 max-w-4xl mx-auto mb-16">
+            {certifications.map((cert, index) => (
+              <Card 
+                key={cert}
+                className="bg-card/50 border-gold/20 hover:border-gold/40 transition-all duration-300 card-elegant animate-on-scroll"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <CardContent className="p-4">
+                  <p className="text-muted-foreground text-sm">
+                    {cert}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <h2 className="font-playfair text-2xl md:text-4xl font-bold text-center mb-12 gradient-text animate-on-scroll">
+            Credentials & Expertise 🏆
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {certifications.map((cert, index) => (
+            {credentialsOrder.map((cert, index) => (
               <Card 
                 key={cert}
                 className="bg-card/50 border-gold/20 hover:border-gold/40 transition-all duration-300 card-elegant animate-on-scroll text-center"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <CardContent className="p-6">
-                  <div className="text-2xl mb-3 professional-hover">🏆</div>
                   <h3 className="font-semibold text-base text-gold">
                     {cert}
                   </h3>

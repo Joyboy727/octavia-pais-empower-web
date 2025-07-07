@@ -1,58 +1,17 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useInView, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useInView, useMotionValue, useSpring, useTransform, Variants } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Star, Clock, Users, Award, CheckCircle, Play, ArrowRight, Target, Heart, TrendingUp } from "lucide-react";
+// Remove unused imports
+// import octavia1 from '/public/placeholder.svg';
+// import octavia2 from '/public/placeholder.svg';
+// import octavia3 from '/public/placeholder.svg';
+// import octavia4 from '/public/placeholder.svg';
 
-const Programs = () => {
-  const [selectedFilter, setSelectedFilter] = useState("growth");
-  const [isFilterAnimating, setIsFilterAnimating] = useState(false);
-  const [expandedCard, setExpandedCard] = useState<number | null>(null);
-  const [compareList, setCompareList] = useState<number[]>([]);
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const heroRef = useRef(null);
-  const cardsRef = useRef(null);
-  const isHeroInView = useInView(heroRef, { once: true });
-  const areCardsInView = useInView(cardsRef, { once: true });
-
-  // Animated counters
-  const [studentCount, setStudentCount] = useState(0);
-  const [successRate, setSuccessRate] = useState(0);
-  const [experience, setExperience] = useState(0);
-
-  useEffect(() => {
-    if (isHeroInView) {
-      // Animate counters
-      animateCounter(setStudentCount, 2847, 2000);
-      animateCounter(setSuccessRate, 96, 1500);
-      animateCounter(setExperience, 15, 1000);
-    }
-  }, [isHeroInView]);
-
-  const animateCounter = (setter: any, target: number, duration: number) => {
-    let current = 0;
-    const increment = target / (duration / 16);
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        setter(target);
-        clearInterval(timer);
-      } else {
-        setter(Math.floor(current));
-      }
-    }, 16);
-  };
-
-  const filters = [
-    { id: "speaking", name: "Public Speaking", icon: "🎤" },
-    { id: "leadership", name: "Leadership", icon: "👑" },
-    { id: "growth", name: "Personal Growth", icon: "🌱" },
-    { id: "executive", name: "Executive Coaching", icon: "💼" },
-  ];
-
-  const programs = [
+const programData = [
     {
       id: 1,
       title: "The Breakthrough Blueprint",
@@ -168,717 +127,344 @@ const Programs = () => {
     }
   ];
 
-  const testimonials = [
-    {
-      name: "Ananya Sharma",
-      role: "Marketing Executive",
-      image: "/ananya.jpg",
-      text: "Octavia's coaching transformed my confidence completely. I went from avoiding presentations to leading company-wide meetings.",
-      rating: 5,
-      program: "Speak With Impact"
-    },
-    {
-      name: "Rohit Verma",
-      role: "Tech Lead",
-      image: "/rohit.jpg",
-      text: "The Evolution Experience gave me clarity on my career goals and the confidence to pursue leadership opportunities.",
-      rating: 5,
-      program: "The Evolution Experience"
-    },
-    {
-      name: "Priya Nair",
-      role: "Entrepreneur",
-      image: "/priya.jpg",
-      text: "The Breakthrough Blueprint helped me overcome years of self-doubt and launch my dream business.",
-      rating: 5,
-      program: "The Breakthrough Blueprint"
-    }
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [testimonials.length]);
-
-  const filteredPrograms = programs.filter(program => 
-    program.category === selectedFilter
-  );
-
-  const handleFilterChange = async (filterId: string) => {
-    setIsFilterAnimating(true);
-    await new Promise(resolve => setTimeout(resolve, 300));
-    setSelectedFilter(filterId);
-    setIsFilterAnimating(false);
-  };
-
-  const toggleCompare = (programId: number) => {
-    if (compareList.includes(programId)) {
-      setCompareList(compareList.filter(id => id !== programId));
-    } else if (compareList.length < 3) {
-      setCompareList([...compareList, programId]);
-    }
-  };
-
-  const getDifficultyColor = (difficulty: string) => {
-    switch (difficulty) {
-      case "Beginner": return "bg-green-500";
-      case "Intermediate": return "bg-yellow-500";
-      case "Advanced": return "bg-red-500";
-      default: return "bg-gray-500";
-    }
-  };
-
-  return (
-    <div className="min-h-screen pt-20 relative overflow-hidden">
-      {/* Hero Section with Dynamic Background */}
-      <motion.section
-        ref={heroRef}
-        className="relative py-24 overflow-hidden"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
-        {/* Animated Gradient Background */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-blue-900/20 to-indigo-900/20"
-          animate={{
-            background: [
-              "linear-gradient(135deg, rgba(147, 51, 234, 0.2) 0%, rgba(59, 130, 246, 0.2) 50%, rgba(79, 70, 229, 0.2) 100%)",
-              "linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(79, 70, 229, 0.2) 50%, rgba(147, 51, 234, 0.2) 100%)",
-              "linear-gradient(135deg, rgba(79, 70, 229, 0.2) 0%, rgba(147, 51, 234, 0.2) 50%, rgba(59, 130, 246, 0.2) 100%)"
-            ]
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-        />
-
-        {/* Floating Geometric Shapes */}
-        <div className="absolute inset-0 overflow-hidden">
-          {[...Array(6)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-64 h-64 rounded-full bg-gradient-to-r from-purple-500/10 to-blue-500/10 blur-xl"
-              animate={{
-                x: [0, 100, 0],
-                y: [0, -50, 0],
-                scale: [1, 1.2, 1],
-              }}
-              transition={{
-                duration: 8 + i * 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: i * 1.5
-              }}
-              style={{
-                left: `${20 + i * 15}%`,
-                top: `${10 + i * 10}%`,
-              }}
-            />
-          ))}
-        </div>
-
-        <div className="relative z-10 container mx-auto px-4 text-center">
-          <motion.h1
-            className="font-playfair text-5xl md:text-7xl font-bold mb-8"
-            initial={{ y: 50, opacity: 0 }}
-            animate={isHeroInView ? { y: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <motion.span
-              className="gradient-text block"
-              animate={{ 
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] 
-              }}
-              transition={{ duration: 3, repeat: Infinity }}
-              style={{
-                background: "linear-gradient(90deg, #D4AF37, #FFD700, #FFA500, #D4AF37)",
-                backgroundSize: "200% 100%",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text"
-              }}
-            >
-              Transform Your Life
-            </motion.span>
-            <motion.span 
-              className="text-white block"
-              initial={{ y: 30, opacity: 0 }}
-              animate={isHeroInView ? { y: 0, opacity: 1 } : {}}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              Choose Your Journey
-            </motion.span>
-          </motion.h1>
-
-          <motion.p
-            className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12"
-            initial={{ y: 30, opacity: 0 }}
-            animate={isHeroInView ? { y: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            Discover the program that's right for you and start your transformation today
-          </motion.p>
-
-          {/* Animated Statistics */}
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-12"
-            initial={{ y: 50, opacity: 0 }}
-            animate={isHeroInView ? { y: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.8 }}
-          >
-            <motion.div
-              className="glass-card p-6 text-center"
-              whileHover={{ scale: 1.05, y: -5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <motion.div
-                className="text-4xl font-bold text-primary mb-2"
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                {studentCount.toLocaleString()}+
-              </motion.div>
-              <div className="text-muted-foreground">Students Enrolled</div>
-            </motion.div>
-            
-            <motion.div
-              className="glass-card p-6 text-center"
-              whileHover={{ scale: 1.05, y: -5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <motion.div
-                className="text-4xl font-bold text-primary mb-2"
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
-              >
-                {successRate}%
-              </motion.div>
-              <div className="text-muted-foreground">Success Rate</div>
-            </motion.div>
-            
-            <motion.div
-              className="glass-card p-6 text-center"
-              whileHover={{ scale: 1.05, y: -5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <motion.div
-                className="text-4xl font-bold text-primary mb-2"
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
-              >
-                {experience}+
-              </motion.div>
-              <div className="text-muted-foreground">Years Experience</div>
-            </motion.div>
-          </motion.div>
-
-          {/* Floating CTA Button */}
-          <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            animate={isHeroInView ? { y: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.8, delay: 1 }}
-          >
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-primary to-accent text-primary-foreground font-bold px-8 py-4 rounded-full text-lg premium-button-luxury"
-              onClick={() => document.getElementById('programs-grid')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              <motion.span
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                Explore Programs
-              </motion.span>
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </motion.div>
-        </div>
-      </motion.section>
-
-      {/* Premium Filter Bar */}
-      <motion.section
-        className="py-8 relative z-10"
-        initial={{ y: 50, opacity: 0 }}
-        animate={areCardsInView ? { y: 0, opacity: 1 } : {}}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="container mx-auto px-4">
-          <motion.div
-            className="glass-card p-6 mb-12"
-            whileHover={{ scale: 1.01 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            <div className="flex flex-wrap justify-center gap-4">
-              {filters.map((filter, index) => (
-                <motion.button
-                  key={filter.id}
-                  className={`filter-btn ${selectedFilter === filter.id ? 'active' : ''}`}
-                  onClick={() => handleFilterChange(filter.id)}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <motion.span
-                    className="text-2xl mr-3"
-                    animate={{ rotate: selectedFilter === filter.id ? 360 : 0 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    {filter.icon}
-                  </motion.span>
-                  <span className="font-semibold">{filter.name}</span>
-                  <motion.div
-                    className="ml-3 bg-primary/20 text-primary px-2 py-1 rounded-full text-sm"
-                    animate={{ scale: selectedFilter === filter.id ? 1.1 : 1 }}
-                  >
-                    {programs.filter(p => p.category === filter.id).length}
-                  </motion.div>
-                </motion.button>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </motion.section>
-
-      {/* Programs Grid */}
-      <motion.section
-        ref={cardsRef}
-        id="programs-grid"
-        className="py-12 relative z-10"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="container mx-auto px-4">
-          <AnimatePresence mode="wait">
-            {isFilterAnimating && (
-              <motion.div
-                key="loading"
-                className="flex justify-center py-20"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                <div className="loading-spinner" />
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          <AnimatePresence mode="popLayout">
-            <motion.div
-              className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto"
-              layout
-            >
-              {filteredPrograms.map((program, index) => (
-                <ProgramCard
-                  key={program.id}
-                  program={program}
-                  index={index}
-                  isExpanded={expandedCard === program.id}
-                  onToggleExpand={() => setExpandedCard(expandedCard === program.id ? null : program.id)}
-                  isInCompare={compareList.includes(program.id)}
-                  onToggleCompare={() => toggleCompare(program.id)}
-                  compareCount={compareList.length}
-                />
-              ))}
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </motion.section>
-
-      {/* Testimonial Carousel */}
-      <motion.section
-        className="py-20 relative"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-      >
-        <div className="container mx-auto px-4">
-          <motion.h2
-            className="text-4xl md:text-6xl font-playfair font-bold text-center mb-16 gradient-text"
-            initial={{ y: 30, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            Success Stories
-          </motion.h2>
-
-          <div className="relative max-w-4xl mx-auto">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentTestimonial}
-                className="glass-card p-8 text-center"
-                initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -100 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="flex justify-center mb-6">
-                  {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ scale: 0, rotate: 180 }}
-                      animate={{ scale: 1, rotate: 0 }}
-                      transition={{ delay: i * 0.1, type: "spring" }}
-                    >
-                      <Star className="h-6 w-6 text-yellow-400 fill-current" />
-                    </motion.div>
-                  ))}
-                </div>
-                
-                <motion.p
-                  className="text-xl italic mb-6 text-muted-foreground"
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.3 }}
-                >
-                  "{testimonials[currentTestimonial].text}"
-                </motion.p>
-                
-                <motion.div
-                  className="flex items-center justify-center space-x-4"
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.5 }}
-                >
-                  <img
-                    src={testimonials[currentTestimonial].image}
-                    alt={testimonials[currentTestimonial].name}
-                    className="w-16 h-16 rounded-full object-cover"
-                  />
-                  <div className="text-left">
-                    <h4 className="font-semibold text-lg">{testimonials[currentTestimonial].name}</h4>
-                    <p className="text-muted-foreground">{testimonials[currentTestimonial].role}</p>
-                    <Badge variant="secondary" className="mt-1">
-                      {testimonials[currentTestimonial].program}
-                    </Badge>
-                  </div>
-                </motion.div>
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Testimonial Navigation */}
-            <div className="flex justify-center mt-8 space-x-2">
-              {testimonials.map((_, index) => (
-                <motion.button
-                  key={index}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentTestimonial ? 'bg-primary' : 'bg-primary/30'
-                  }`}
-                  onClick={() => setCurrentTestimonial(index)}
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.9 }}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Final CTA Section */}
-      <motion.section
-        className="py-24 relative"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20" />
-        
-        <div className="relative z-10 container mx-auto px-4 text-center">
-          <motion.div
-            className="max-w-4xl mx-auto"
-            initial={{ y: 30, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="font-playfair text-4xl md:text-6xl font-bold mb-8 gradient-text">
-              Ready to Begin Your Transformation?
-            </h2>
-            <p className="text-xl mb-12 text-muted-foreground leading-relaxed">
-              Don't wait for the "perfect" moment. The best time to start is now. 
-              Book your free clarity call and let's discuss which program is right for you.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Button 
-                size="lg" 
-                className="bg-gradient-to-r from-primary to-accent text-primary-foreground font-bold px-8 py-4 rounded-full text-lg premium-button-luxury"
-                onClick={() => window.open("https://calendly.com/octaviathelifecoach/30min", "_blank")}
-              >
-                Book Free Clarity Call
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-bold px-8 py-4 rounded-full text-lg premium-button-luxury"
-                onClick={() => window.location.href = "tel:+917975163696"}
-              >
-                Call Now
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-      </motion.section>
-    </div>
-  );
+const cardVariants: Variants = {
+  offscreen: { opacity: 0, y: 60 },
+  onscreen: { opacity: 1, y: 0, transition: { type: 'spring', bounce: 0.2, duration: 0.8 } },
 };
 
-// Program Card Component with Advanced Animations
-const ProgramCard = ({ program, index, isExpanded, onToggleExpand, isInCompare, onToggleCompare, compareCount }: any) => {
-  const cardRef = useRef(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  
-  const springX = useSpring(mouseX, { stiffness: 300, damping: 30 });
-  const springY = useSpring(mouseY, { stiffness: 300, damping: 30 });
-  
-  const rotateX = useTransform(springY, [-100, 100], [5, -5]);
-  const rotateY = useTransform(springX, [-100, 100], [-5, 5]);
+const imageVariants: Variants = {
+  offscreen: { opacity: 0, scale: 0.8 },
+  onscreen: { opacity: 1, scale: 1, transition: { type: 'spring', stiffness: 100, damping: 10, delay: 0.2 } },
+};
 
-  const handleMouseMove = (e: any) => {
-    if (!cardRef.current) return;
-    
-    const rect = (cardRef.current as HTMLElement).getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    
-    mouseX.set(e.clientX - centerX);
-    mouseY.set(e.clientY - centerY);
+const contentVariants: Variants = {
+  offscreen: { opacity: 0, y: 30 },
+  onscreen: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100, damping: 10, delay: 0.4 } },
+};
+
+const Programs = () => {
+  // Create a staggered container animation
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delayChildren: 0.2,
+      }
+    }
   };
 
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    mouseX.set(0);
-    mouseY.set(0);
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        type: "spring", 
+        stiffness: 100, 
+        damping: 12 
+      } 
+    }
   };
 
   return (
-    <motion.div
-      ref={cardRef}
-      layout
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -50 }}
-      transition={{
-        type: "spring",
-        stiffness: 300,
-        damping: 25,
-        delay: index * 0.1,
-      }}
-      className={`${program.premium ? 'lg:col-span-2' : ''} relative group cursor-pointer`}
-      style={{
-        rotateX,
-        rotateY,
-        transformStyle: 'preserve-3d',
-      }}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={handleMouseLeave}
-    >
-      <Card className={`premium-card-hover bg-gradient-to-br ${program.gradient} border-0 text-white overflow-hidden relative h-full`}>
-        {/* Premium Badge */}
-        {program.premium && (
-          <motion.div
-            className="absolute top-4 right-4 bg-gold text-black px-3 py-1 rounded-full text-sm font-bold z-20"
-            animate={{ scale: [1, 1.1, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            PREMIUM
-          </motion.div>
-        )}
-
-        {/* Compare Button */}
-        <motion.button
-          className={`absolute top-4 left-4 w-8 h-8 rounded-full border-2 border-white/50 z-20 ${
-            isInCompare ? 'bg-white text-black' : 'bg-transparent text-white'
-          }`}
-          onClick={(e) => {
-            e.stopPropagation();
-            onToggleCompare();
-          }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          disabled={!isInCompare && compareCount >= 3}
+    <div className="min-h-screen pt-20" style={{ background: '#0B1426' }}>
+      <motion.div
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, type: "spring" }}
+        className="container mx-auto text-center mb-12 pt-8"
+      >
+          <motion.h1
+          className="text-4xl md:text-5xl font-bold text-white mb-4"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2, duration: 0.8, type: "spring" }}
         >
-          {isInCompare ? '✓' : '+'}
-        </motion.button>
-        
-        <CardHeader className="relative z-10">
-          <div className="flex items-center justify-between mb-4">
+          Our Transformative Programs
+          </motion.h1>
+          <motion.p
+          className="text-xl text-gold max-w-3xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
+        >
+          Discover the perfect program to elevate your personal and professional growth
+          </motion.p>
+      </motion.div>
+
+          <motion.div
+        className="container mx-auto px-4 py-12 grid gap-12 md:gap-16"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {programData.map((program, idx) => (
+          <motion.section
+            key={program.id}
+            className="flex flex-col md:flex-row items-center bg-[#181F2A] rounded-3xl shadow-xl overflow-hidden border border-gray-800 md:even:flex-row-reverse"
+            variants={itemVariants}
+            whileHover={{ scale: 1.025, y: -6, boxShadow: '0 8px 32px rgba(0,0,0,0.10)' }}
+            transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+          >
+            {/* Program Image */}
             <motion.div
-              className="text-6xl group-hover:animate-bounce"
-              animate={{ scale: isHovered ? 1.1 : 1 }}
-              transition={{ type: "spring" }}
+              className="w-full md:w-1/2 flex justify-center items-center p-8 bg-transparent"
+              variants={imageVariants}
             >
-              🎯
+              <div className="relative">
+                {/* Optimized glow effect with reduced performance impact */}
+              <motion.div
+                  className="absolute inset-0 rounded-2xl bg-primary/10"
+                  animate={{
+                    boxShadow: [
+                      "0 0 15px 2px rgba(255,255,255,0.2)",
+                      "0 0 20px 5px rgba(255,255,255,0.1)",
+                      "0 0 15px 2px rgba(255,255,255,0.2)"
+                    ]
+                  }}
+                  transition={{ 
+                    duration: 3, 
+                    repeat: Infinity, 
+                    repeatType: "mirror",
+                    ease: "easeInOut"
+                  }}
+                />
+                <motion.img
+                  src={program.image}
+                  alt="Octavia Pais"
+                  className="relative w-48 h-48 md:w-64 md:h-64 object-cover rounded-2xl shadow-lg border-4 border-primary/20"
+                  whileHover={{ scale: 1.05, rotate: 2 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ 
+                    type: "spring", 
+                    stiffness: 300, 
+                    damping: 10 
+                  }}
+                />
+              </div>
             </motion.div>
-            <div className="text-right">
-              <motion.div
-                className="text-3xl font-bold"
-                animate={{ scale: isHovered ? 1.05 : 1 }}
-                transition={{ type: "spring" }}
+            {/* Program Content */}
+            <motion.div
+              className="w-full md:w-1/2 p-8 md:p-12 flex flex-col gap-4"
+              variants={contentVariants}
+            >
+              <motion.h2 
+                className="text-2xl md:text-3xl font-bold font-playfair mb-2 flex items-center gap-2 text-white"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, type: "spring" }}
               >
-                ₹{program.price.toLocaleString()}
+                {program.title}
+                {program.premium && (
+                  <motion.span 
+                    className="inline-block ml-2 bg-gradient-to-r from-yellow-400 to-yellow-600 text-black text-xs px-2 py-1 rounded-full"
+                    initial={{ scale: 0 }}
+                animate={{ scale: [1, 1.1, 1] }}
+                    transition={{ duration: 1, repeat: Infinity, repeatType: "reverse" }}
+                  >
+                    PREMIUM
+                  </motion.span>
+                )}
+              </motion.h2>
+                  <motion.div
+                className="text-lg text-gold font-semibold mb-2"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2, type: "spring" }}
+              >
+                {program.description}
               </motion.div>
-              {program.originalPrice && (
-                <motion.div
-                  className="text-sm opacity-60 line-through"
-                  initial={{ x: 20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 0.6 }}
-                  transition={{ delay: 0.3 }}
-                >
-                  ₹{program.originalPrice.toLocaleString()}
-                </motion.div>
-              )}
-              <div className="text-sm opacity-80">{program.duration}</div>
-            </div>
-          </div>
-
-          <CardTitle className="font-playfair text-3xl font-bold mb-4">
-            {program.title}
-          </CardTitle>
-
-          <p className="text-lg opacity-90 leading-relaxed mb-4">
-            {program.description}
-          </p>
-
-          {/* Program Stats */}
-          <div className="flex items-center space-x-4 mb-4">
-            <div className="flex items-center space-x-1">
-              <Users className="h-4 w-4" />
-              <span className="text-sm">{program.students} students</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <Star className="h-4 w-4 text-yellow-400 fill-current" />
-              <span className="text-sm">{program.rating}</span>
-            </div>
-            <Badge className={`${getDifficultyColor(program.difficulty)} text-white`}>
-              {program.difficulty}
-            </Badge>
-          </div>
-
-          {/* Progress Bar */}
-          <div className="mb-4">
-            <div className="flex justify-between text-sm mb-1">
-              <span>Completion Rate</span>
-              <span>{program.completionRate}%</span>
-            </div>
-            <div className="w-full bg-white/20 rounded-full h-2">
-              <motion.div
-                className="bg-white h-2 rounded-full"
-                initial={{ width: 0 }}
-                animate={{ width: `${program.completionRate}%` }}
-                transition={{ duration: 1, delay: index * 0.2 }}
-              />
-            </div>
-          </div>
-        </CardHeader>
-
-        <CardContent className="relative z-10">
-          <AnimatePresence>
-            {isExpanded && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: 'auto', opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                className="overflow-hidden"
+            <motion.div
+                className="flex flex-wrap gap-4 text-sm mb-4"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+                transition={{ staggerChildren: 0.1, delayChildren: 0.3 }}
               >
-                <div className="space-y-4 mb-6">
-                  <h4 className="font-semibold text-lg">What You'll Learn:</h4>
-                  <ul className="space-y-2">
-                    {program.benefits.map((benefit: string, i: number) => (
+                <motion.span 
+                  className="bg-primary/10 text-gold px-3 py-1 rounded-full font-medium"
+                  initial={{ y: 20, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  whileHover={{ y: -5, scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  💰 Investment: {program.price.toLocaleString()}
+                </motion.span>
+                <motion.span 
+                  className="bg-accent/10 text-accent px-3 py-1 rounded-full font-medium"
+                  initial={{ y: 20, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  whileHover={{ y: -5, scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300, delay: 0.1 }}
+                >
+                  📍 Format: {program.duration}
+                </motion.span>
+                <motion.span 
+                  className="bg-secondary/10 text-secondary px-3 py-1 rounded-full font-medium"
+                  initial={{ y: 20, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  whileHover={{ y: -5, scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300, delay: 0.2 }}
+                >
+                  📅 Duration: {program.duration}
+                </motion.span>
+              </motion.div>
+              {/* Main content with optimized animations */}
+              <div className="mb-6">
+                <div className="font-semibold text-gold mb-3">💡 YOU WILL LEARN HOW TO:</div>
+                <motion.ul 
+                  className="list-none space-y-2"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-50px" }}
+                  variants={{
+                    visible: {
+                      transition: {
+                        staggerChildren: 0.1,
+                        delayChildren: 0.2
+                      }
+                    },
+                    hidden: {}
+                  }}
+                >
+                  {program.benefits.map((item, i) => (
                       <motion.li
                         key={i}
-                        className="flex items-start space-x-2"
-                        initial={{ x: -20, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        transition={{ delay: i * 0.1 }}
+                      className="flex items-start gap-2 text-base text-white"
+                      variants={{
+                        hidden: { opacity: 0, x: -20 },
+                        visible: { opacity: 1, x: 0 }
+                      }}
+                      transition={{ type: "spring", stiffness: 100, damping: 10 }}
                       >
                         <CheckCircle className="h-5 w-5 text-green-400 mt-0.5 flex-shrink-0" />
-                        <span className="text-white/90">{benefit}</span>
+                      <span>{item}</span>
                       </motion.li>
                     ))}
-                  </ul>
+                </motion.ul>
                 </div>
 
-                <div className="space-y-4 mb-6">
-                  <h4 className="font-semibold text-lg">Curriculum:</h4>
-                  <ul className="space-y-2">
-                    {program.curriculum.map((item: string, i: number) => (
+              <div className="mb-6">
+                <div className="font-semibold text-gold mb-3">📚 CURRICULUM:</div>
+                <motion.ul 
+                  className="list-disc ml-6 space-y-2 text-base text-gray-300"
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-50px" }}
+                  variants={{
+                    visible: {
+                      transition: {
+                        staggerChildren: 0.1,
+                        delayChildren: 0.3
+                      }
+                    },
+                    hidden: {}
+                  }}
+                >
+                  {program.curriculum.map((item, i) => (
                       <motion.li
                         key={i}
-                        className="flex items-start space-x-2"
-                        initial={{ x: -20, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        transition={{ delay: i * 0.1 + 0.3 }}
-                      >
-                        <div className="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-sm font-bold mt-0.5">
-                          {i + 1}
-                        </div>
-                        <span className="text-white/90">{item}</span>
+                      variants={{
+                        hidden: { opacity: 0, x: -20 },
+                        visible: { opacity: 1, x: 0 }
+                      }}
+                      transition={{ type: "spring", stiffness: 100, damping: 10 }}
+                    >
+                      {item}
                       </motion.li>
                     ))}
-                  </ul>
+                </motion.ul>
+              </div>
+              
+              <motion.div 
+                className="mb-6"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <div className="font-semibold text-gold mb-3">🔒 YOUR INVESTMENT:</div>
+                <div className="text-xl font-bold text-white">
+                  {program.price.toLocaleString()} <span className="text-sm text-gray-400 line-through ml-2">{program.originalPrice?.toLocaleString()}</span>
                 </div>
               </motion.div>
-            )}
-          </AnimatePresence>
-
-          <div className="space-y-4">
+              <motion.div 
+                className="mt-8"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <motion.div 
+                  className="relative inline-block"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                  {/* Pulsing effect with reduced performance impact */}
+                  <motion.div
+                    className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 blur-md"
+                    animate={{
+                      scale: [1, 1.2, 1],
+                      opacity: [0.7, 0.2, 0.7]
+                    }}
+                    transition={{ 
+                      duration: 2, 
+                      repeat: Infinity, 
+                      repeatType: "reverse",
+                      ease: "easeInOut",
+                      times: [0, 0.5, 1]
+                    }}
+                  />
             <Button 
               size="lg" 
-              className="w-full font-bold text-lg py-4 rounded-full premium-button-luxury bg-white/20 hover:bg-white/30 text-white border-white/30"
+                    className="relative w-full md:w-auto font-bold text-lg py-3 px-8 rounded-full bg-gradient-to-r from-primary to-accent text-white shadow-lg"
               onClick={() => window.open("https://calendly.com/octaviathelifecoach/30min", "_blank")}
             >
               Enroll Now
             </Button>
-
-            <Button
-              variant="outline"
-              size="sm"
-              className="w-full border-white/30 text-white hover:bg-white/10"
-              onClick={onToggleExpand}
-            >
-              <motion.span
-                animate={{ rotate: isExpanded ? 180 : 0 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="mr-2"
-              >
-                ↓
-              </motion.span>
-              {isExpanded ? 'Show Less' : 'Learn More'}
-            </Button>
-          </div>
-        </CardContent>
-
-        {/* Hover Effect Overlay */}
+                </motion.div>
+              </motion.div>
+            </motion.div>
+          </motion.section>
+        ))}
+      </motion.div>
+      
+      <motion.div
+        className="container mx-auto text-center py-12"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true, margin: "-100px" }}
+      >
+        <motion.div className="relative inline-block">
+          {/* Optimized glow effect */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 -translate-x-full"
+            className="absolute inset-0 rounded-full bg-gradient-to-r from-gold/30 to-amber-500/30 blur-lg"
           animate={{
-            translateX: isHovered ? '200%' : '-100%'
-          }}
-          transition={{ duration: 0.6 }}
-        />
-      </Card>
+              scale: [1, 1.15, 1],
+              opacity: [0.5, 0.8, 0.5]
+            }}
+            transition={{ 
+              duration: 3, 
+              repeat: Infinity, 
+              repeatType: "reverse",
+              ease: "easeInOut" 
+            }}
+          />
+          <motion.button
+            className="relative px-8 py-4 bg-gradient-to-r from-gold to-amber-500 text-black font-bold rounded-full text-lg shadow-lg"
+            whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(255,215,0,0.5)" }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+            Explore All Programs
+          </motion.button>
+        </motion.div>
     </motion.div>
+    </div>
   );
-};
-
-const getDifficultyColor = (difficulty: string) => {
-  switch (difficulty) {
-    case "Beginner": return "bg-green-500";
-    case "Intermediate": return "bg-yellow-500";
-    case "Advanced": return "bg-red-500";
-    default: return "bg-gray-500";
-  }
 };
 
 export default Programs;

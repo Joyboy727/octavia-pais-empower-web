@@ -1,10 +1,108 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { motion, AnimatePresence, useInView, Variants } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+
+// Define animation variants
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
+    }
+  }
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { 
+      type: "spring", 
+      stiffness: 100, 
+      damping: 12 
+    } 
+  }
+};
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { 
+      type: "spring", 
+      stiffness: 80, 
+      damping: 12 
+    } 
+  },
+  hover: { 
+    y: -10, 
+    boxShadow: "0 20px 25px -5px rgba(212, 175, 55, 0.1), 0 10px 10px -5px rgba(212, 175, 55, 0.04)",
+    transition: { type: "spring", stiffness: 400, damping: 10 }
+  }
+};
+
+const formItemVariants: Variants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: { 
+    opacity: 1, 
+    x: 0,
+    transition: { 
+      type: "spring", 
+      stiffness: 100, 
+      damping: 15 
+    } 
+  }
+};
+
+const buttonVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: { 
+    opacity: 1, 
+    scale: 1,
+    transition: { 
+      type: "spring", 
+      stiffness: 200, 
+      damping: 10 
+    } 
+  },
+  hover: { 
+    scale: 1.05,
+    boxShadow: "0 0 20px rgba(212, 175, 55, 0.5)",
+    transition: { type: "spring", stiffness: 400, damping: 10 }
+  },
+  tap: { 
+    scale: 0.95,
+    transition: { type: "spring", stiffness: 400, damping: 10 }
+  }
+};
+
+const iconVariants: Variants = {
+  hidden: { opacity: 0, scale: 0, rotate: -30 },
+  visible: { 
+    opacity: 1, 
+    scale: 1,
+    rotate: 0,
+    transition: { 
+      type: "spring", 
+      stiffness: 200, 
+      damping: 10 
+    } 
+  },
+  hover: { 
+    scale: 1.2,
+    rotate: 5,
+    transition: { type: "spring", stiffness: 300, damping: 8 }
+  }
+};
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -16,23 +114,15 @@ const Contact = () => {
   });
   const { toast } = useToast();
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in-up');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = document.querySelectorAll('.animate-on-scroll');
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
+  // We'll use Framer Motion's useInView instead of IntersectionObserver
+  const heroRef = useRef(null);
+  const heroInView = useInView(heroRef, { once: true, margin: "-100px" });
+  
+  const methodsRef = useRef(null);
+  const methodsInView = useInView(methodsRef, { once: true, margin: "-100px" });
+  
+  const formRef = useRef(null);
+  const formInView = useInView(formRef, { once: true, margin: "-100px" });
 
   const handleButtonClick = (buttonText: string) => {
     const bookingButtons = ["Join The Bootcamp", "Apply Now", "Book Your Spot", "Book Free Clarity Call", "Start Your Transformation", "Send Message"];
@@ -138,77 +228,191 @@ const Contact = () => {
   return (
     <div className="min-h-screen pt-24">
       {/* Hero Section */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black parallax-bg" />
+      <motion.section 
+        ref={heroRef}
+        className="py-24 relative overflow-hidden"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        <motion.div 
+          className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black parallax-bg"
+          initial={{ scale: 1.1, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+        />
         
         <div className="relative z-10 container mx-auto px-4 text-center">
-          <h1 className="font-playfair text-5xl md:text-7xl font-bold mb-8 animate-scale-in">
-            <span className="gradient-text">Ready to Start?</span>
-            <br />
-            <span className="text-white">Let's Talk.</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            Your transformation journey begins with a conversation. 
-            Let's discuss how I can help you break through and reach your potential.
-          </p>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.h1 
+              className="font-playfair text-5xl md:text-7xl font-bold mb-8"
+              variants={itemVariants}
+            >
+              <motion.span 
+                className="gradient-text"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 100, 
+                  damping: 12,
+                  delay: 0.2 
+                }}
+              >
+                Ready to Start?
+              </motion.span>
+              <br />
+              <motion.span 
+                className="text-white"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 100, 
+                  damping: 12,
+                  delay: 0.4 
+                }}
+              >
+                Let's Talk.
+              </motion.span>
+            </motion.h1>
+            <motion.p 
+              className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto"
+              variants={itemVariants}
+              transition={{ delay: 0.6 }}
+            >
+              Your transformation journey begins with a conversation. 
+              Let's discuss how I can help you break through and reach your potential.
+            </motion.p>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Contact Methods */}
-      <section className="py-24 bg-black/30">
+      <motion.section 
+        ref={methodsRef}
+        className="py-24 bg-black/30"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="container mx-auto px-4">
-          <h2 className="font-playfair text-4xl md:text-6xl font-bold text-center mb-16 gradient-text animate-on-scroll">
+          <motion.h2 
+            className="font-playfair text-4xl md:text-6xl font-bold text-center mb-16 gradient-text"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ 
+              type: "spring", 
+              stiffness: 100, 
+              damping: 12 
+            }}
+          >
             Get In Touch
-          </h2>
+          </motion.h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-16">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-16"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             {contactMethods.map((method, index) => (
-              <Card 
+              <motion.div
                 key={method.title}
-                className="bg-card/50 border-gold/20 hover:border-gold/50 transition-all duration-300 text-center card-3d animate-on-scroll group"
-                style={{ animationDelay: `${index * 0.2}s` }}
+                variants={cardVariants}
+                custom={index}
+                whileHover="hover"
+                transition={{ delay: index * 0.1 }}
               >
-                <CardContent className="p-8">
-                  <div className="text-4xl mb-4 group-hover:animate-bounce">
-                    {method.icon}
-                  </div>
-                  <h3 className="font-playfair text-xl font-bold text-gold mb-2">
-                    {method.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-4 text-sm">
-                    {method.description}
-                  </p>
-                  <a 
-                    href={method.action}
-                    className={`${method.color} font-semibold hover:text-gold transition-colors duration-300`}
-                  >
-                    {method.contact}
-                  </a>
-                </CardContent>
-              </Card>
+                <Card className="bg-card/50 border-gold/20 hover:border-gold/50 transition-all duration-300 text-center card-3d h-full">
+                  <CardContent className="p-8">
+                    <motion.div 
+                      className="text-4xl mb-4"
+                      variants={iconVariants}
+                      whileHover="hover"
+                    >
+                      {method.icon}
+                    </motion.div>
+                    <motion.h3 
+                      className="font-playfair text-xl font-bold text-gold mb-2"
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3 + (index * 0.1) }}
+                    >
+                      {method.title}
+                    </motion.h3>
+                    <motion.p 
+                      className="text-muted-foreground mb-4 text-sm"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.4 + (index * 0.1) }}
+                    >
+                      {method.description}
+                    </motion.p>
+                    <motion.a 
+                      href={method.action}
+                      className={`${method.color} font-semibold hover:text-gold transition-colors duration-300`}
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.5 + (index * 0.1) }}
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      {method.contact}
+                    </motion.a>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Contact Form */}
-      <section className="py-24">
+      <motion.section 
+        ref={formRef}
+        className="py-24"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
             {/* Form */}
-            <div className="animate-on-scroll">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
               <Card className="bg-card/50 border-gold/20 hover:border-gold/50 transition-all duration-300 glow-effect">
                 <CardHeader>
-                  <CardTitle className="font-playfair text-3xl font-bold gradient-text">
-                    LET'S CONNECT
-                  </CardTitle>
-                  <p className="text-muted-foreground">
-                    Fill out the form below and I'll get back to you within 24 hours.
-                  </p>
+                  <motion.div variants={itemVariants}>
+                    <CardTitle className="font-playfair text-3xl font-bold gradient-text">
+                      LET'S CONNECT
+                    </CardTitle>
+                    <p className="text-muted-foreground">
+                      Fill out the form below and I'll get back to you within 24 hours.
+                    </p>
+                  </motion.div>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <motion.form 
+                    onSubmit={handleSubmit} 
+                    className="space-y-6"
+                    variants={containerVariants}
+                  >
+                    <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-4" variants={formItemVariants}>
                       <div className="space-y-2">
                         <label className="text-sm font-medium text-gold">Name *</label>
                         <Input
@@ -230,9 +434,9 @@ const Contact = () => {
                           required
                         />
                       </div>
-                    </div>
+                    </motion.div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-4" variants={formItemVariants}>
                       <div className="space-y-2">
                         <label className="text-sm font-medium text-gold">Phone</label>
                         <Input
@@ -257,9 +461,9 @@ const Contact = () => {
                           </SelectContent>
                         </Select>
                       </div>
-                    </div>
+                    </motion.div>
 
-                    <div className="space-y-2">
+                    <motion.div className="space-y-2" variants={formItemVariants}>
                       <label className="text-sm font-medium text-gold">Message *</label>
                       <Textarea
                         value={formData.message}
@@ -269,109 +473,172 @@ const Contact = () => {
                         className="bg-background/50 border-gold/20 focus:border-gold resize-none"
                         required
                       />
-                    </div>
+                    </motion.div>
 
-                    <Button 
-                      type="submit" 
-                      size="lg" 
-                      className="w-full bg-gold hover:bg-gold-dark text-black font-bold py-3 rounded-full text-lg magnetic-hover glow-effect"
+                    <motion.div 
+                      variants={buttonVariants}
+                      whileHover="hover"
+                      whileTap="tap"
                     >
-                      Send Message
-                    </Button>
-                  </form>
+                      <Button 
+                        type="submit" 
+                        size="lg" 
+                        className="w-full bg-gold hover:bg-gold-dark text-black font-bold py-3 rounded-full text-lg magnetic-hover glow-effect"
+                      >
+                        Send Message
+                      </Button>
+                    </motion.div>
+                  </motion.form>
                 </CardContent>
               </Card>
-            </div>
+            </motion.div>
 
             {/* Contact Info & Social */}
-            <div className="space-y-8 animate-on-scroll" style={{ animationDelay: '0.3s' }}>
+            <motion.div 
+              className="space-y-8"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
               {/* Quick Contact */}
-              <Card className="bg-card/50 border-gold/20">
-                <CardHeader>
-                  <CardTitle className="font-playfair text-2xl font-bold text-gold">
-                    Quick Contact
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gold/10 transition-colors duration-300">
-                    <span className="text-2xl">📞</span>
-                    <div>
-                      <div className="font-semibold">Call or WhatsApp</div>
-                      <a href="tel:+917975163696" className="text-gold hover:text-gold-light">
-                        +91 79751 63696
-                      </a>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gold/10 transition-colors duration-300">
-                    <span className="text-2xl">📧</span>
-                    <div>
-                      <div className="font-semibold">Email</div>
-                      <a href="mailto:octaviathelifecoach@gmail.com" className="text-gold hover:text-gold-light">
-                        octaviathelifecoach@gmail.com
-                      </a>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gold/10 transition-colors duration-300">
-                    <span className="text-2xl">📍</span>
-                    <div>
-                      <div className="font-semibold">Location</div>
-                      <div className="text-muted-foreground">Bangalore, India</div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+              <motion.div variants={itemVariants}>
+                <Card className="bg-card/50 border-gold/20">
+                  <CardHeader>
+                    <CardTitle className="font-playfair text-2xl font-bold text-gold">
+                      Quick Contact
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <motion.div 
+                      className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gold/10 transition-colors duration-300"
+                      whileHover={{ x: 5 }}
+                    >
+                      <span className="text-2xl">📞</span>
+                      <div>
+                        <div className="font-semibold">Call or WhatsApp</div>
+                        <a href="tel:+917975163696" className="text-gold hover:text-gold-light">
+                          +91 79751 63696
+                        </a>
+                      </div>
+                    </motion.div>
+                    <motion.div 
+                      className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gold/10 transition-colors duration-300"
+                      whileHover={{ x: 5 }}
+                    >
+                      <span className="text-2xl">📧</span>
+                      <div>
+                        <div className="font-semibold">Email</div>
+                        <a href="mailto:octaviathelifecoach@gmail.com" className="text-gold hover:text-gold-light">
+                          octaviathelifecoach@gmail.com
+                        </a>
+                      </div>
+                    </motion.div>
+                    <motion.div 
+                      className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gold/10 transition-colors duration-300"
+                      whileHover={{ x: 5 }}
+                    >
+                      <span className="text-2xl">📍</span>
+                      <div>
+                        <div className="font-semibold">Location</div>
+                        <div className="text-muted-foreground">Bangalore, India</div>
+                      </div>
+                    </motion.div>
+                  </CardContent>
+                </Card>
+              </motion.div>
 
               {/* Social Media */}
-              <Card className="bg-card/50 border-gold/20">
-                <CardHeader>
-                  <CardTitle className="font-playfair text-2xl font-bold text-gold">
-                    Follow My Journey
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {socialLinks.map((social, index) => (
-                      <a
-                        key={social.platform}
-                        href={social.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gold/10 transition-colors duration-300 group"
-                      >
-                        <span className="text-2xl group-hover:animate-bounce">{social.icon}</span>
-                        <div>
-                          <div className="font-semibold">{social.platform}</div>
-                          <div className={`${social.color} group-hover:text-gold transition-colors`}>
-                            {social.handle}
+              <motion.div variants={itemVariants}>
+                <Card className="bg-card/50 border-gold/20">
+                  <CardHeader>
+                    <CardTitle className="font-playfair text-2xl font-bold text-gold">
+                      Follow My Journey
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <motion.div 
+                      className="space-y-4"
+                      variants={containerVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                    >
+                      {socialLinks.map((social, index) => (
+                        <motion.a
+                          key={social.platform}
+                          href={social.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gold/10 transition-colors duration-300 group"
+                          variants={itemVariants}
+                          custom={index}
+                          whileHover={{ x: 5 }}
+                        >
+                          <motion.span 
+                            className="text-2xl group-hover:animate-bounce"
+                            variants={iconVariants}
+                            whileHover="hover"
+                          >
+                            {social.icon}
+                          </motion.span>
+                          <div>
+                            <div className="font-semibold">{social.platform}</div>
+                            <div className={`${social.color} group-hover:text-gold transition-colors`}>
+                              {social.handle}
+                            </div>
                           </div>
-                        </div>
-                      </a>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+                        </motion.a>
+                      ))}
+                    </motion.div>
+                  </CardContent>
+                </Card>
+              </motion.div>
 
               {/* Call to Action */}
-              <Card className="bg-gradient-to-br from-gold/20 to-gold/10 border-gold/50">
-                <CardContent className="p-8 text-center">
-                  <h3 className="font-playfair text-2xl font-bold mb-4 gradient-text">
-                    Ready for Immediate Action?
-                  </h3>
-                  <p className="mb-6 text-muted-foreground">
-                    Don't wait. Your breakthrough conversation is just one call away.
-                  </p>
-                  <Button 
-                    className="bg-gold hover:bg-gold-dark text-black font-bold px-8 py-3 rounded-full magnetic-hover glow-effect"
-                    onClick={() => handleButtonClick("Call Octavia Now")}
-                  >
-                    Call Octavia Now
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
+              <motion.div 
+                variants={cardVariants}
+                whileHover="hover"
+              >
+                <Card className="bg-gradient-to-br from-gold/20 to-gold/10 border-gold/50">
+                  <CardContent className="p-8 text-center">
+                    <motion.h3 
+                      className="font-playfair text-2xl font-bold mb-4 gradient-text"
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      Ready for Immediate Action?
+                    </motion.h3>
+                    <motion.p 
+                      className="mb-6 text-muted-foreground"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      Don't wait. Your breakthrough conversation is just one call away.
+                    </motion.p>
+                    <motion.div
+                      variants={buttonVariants}
+                      whileHover="hover"
+                      whileTap="tap"
+                    >
+                      <Button 
+                        className="bg-gold hover:bg-gold-dark text-black font-bold px-8 py-3 rounded-full magnetic-hover glow-effect"
+                        onClick={() => handleButtonClick("Call Octavia Now")}
+                      >
+                        Call Octavia Now
+                      </Button>
+                    </motion.div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 };

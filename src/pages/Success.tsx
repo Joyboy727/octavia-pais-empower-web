@@ -1,24 +1,72 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { motion, AnimatePresence, useInView, Variants } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 
+// Define animation variants
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
+    }
+  }
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { 
+      type: "spring", 
+      stiffness: 100, 
+      damping: 12 
+    } 
+  }
+};
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { 
+      type: "spring", 
+      stiffness: 80, 
+      damping: 12 
+    } 
+  },
+  hover: { 
+    y: -10, 
+    boxShadow: "0 20px 25px -5px rgba(212, 175, 55, 0.1), 0 10px 10px -5px rgba(212, 175, 55, 0.04)",
+    transition: { type: "spring", stiffness: 400, damping: 10 }
+  }
+};
+
+const imageVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.8, rotate: -5 },
+  visible: { 
+    opacity: 1, 
+    scale: 1, 
+    rotate: 0,
+    transition: { 
+      type: "spring", 
+      stiffness: 100, 
+      damping: 15, 
+      delay: 0.2 
+    } 
+  },
+  hover: { 
+    scale: 1.05, 
+    rotate: 2,
+    transition: { type: "spring", stiffness: 300, damping: 10 }
+  }
+};
+
 const Success = () => {
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('smooth-fade', 'visible');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = document.querySelectorAll('.animate-on-scroll');
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
+  // We'll replace the old IntersectionObserver with Framer Motion's useInView
 
   const successStories = [
     {
@@ -66,141 +114,361 @@ const Success = () => {
   return (
     <div className="min-h-screen pt-24 bg-navy">
       {/* Hero Section */}
-      <section className="py-16 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy-light to-navy parallax-bg" />
+      <motion.section 
+        className="py-20 md:py-32 bg-gradient-to-r from-navy to-navy-dark relative overflow-hidden"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        <motion.div 
+          className="absolute inset-0 bg-pattern opacity-10"
+          initial={{ scale: 1.1, opacity: 0 }}
+          animate={{ scale: 1, opacity: 0.1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+        />
         
-        <div className="relative z-10 container mx-auto px-4 mobile-padding text-center">
-          <h1 className="font-playfair text-responsive-xl font-bold mb-6 elegant-entrance">
-            <span className="gradient-text">Success</span>
-            <br />
-            <span className="text-white">Stories</span>
-          </h1>
-          <p className="text-responsive-lg text-muted-foreground max-w-3xl mx-auto professional-animation" style={{ animationDelay: '0.3s' }}>
-            Real transformations from real people who dared to change their story
-          </p>
+        <div className="container mx-auto px-4 mobile-padding relative z-10">
+          <motion.div 
+            className="max-w-4xl mx-auto text-center"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            transition={{ staggerChildren: 0.3 }}
+          >
+            <motion.h1 
+              className="font-playfair text-4xl md:text-6xl font-bold mb-6 gradient-text"
+              variants={itemVariants}
+              custom={0}
+            >
+              Success Stories
+            </motion.h1>
+            <motion.p 
+              className="text-xl text-muted-foreground mb-8 leading-relaxed"
+              variants={itemVariants}
+              custom={1}
+            >
+              Discover how our programs have transformed lives and empowered individuals to achieve their full potential. These are real stories from real people who have experienced remarkable growth.
+            </motion.p>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-navy-light/30">
+      <motion.section 
+        className="py-16 bg-navy-dark"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="container mx-auto px-4 mobile-padding">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             {stats.map((stat, index) => (
-              <div 
+              <motion.div 
                 key={stat.label}
-                className="text-center animate-on-scroll"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="text-center"
+                variants={itemVariants}
+                custom={index}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -5, transition: { type: "spring", stiffness: 300 } }}
               >
-                <div className="text-2xl mb-2 professional-animation" style={{ animationDelay: `${index * 0.2}s` }}>
+                <motion.div 
+                  className="text-2xl mb-2"
+                  initial={{ scale: 0, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ 
+                    type: "spring", 
+                    stiffness: 200, 
+                    damping: 10, 
+                    delay: 0.2 + (index * 0.1) 
+                  }}
+                >
                   {stat.icon}
-                </div>
-                <div className="text-2xl md:text-4xl font-bold text-gold mb-2 subtle-pulse-glow">
+                </motion.div>
+                <motion.div 
+                  className="text-2xl md:text-4xl font-bold text-gold mb-2"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  animate={{ 
+                    boxShadow: ["0 0 0 rgba(212, 175, 55, 0)", "0 0 20px rgba(212, 175, 55, 0.5)", "0 0 0 rgba(212, 175, 55, 0)"],
+                  }}
+                  transition={{ 
+                    opacity: { delay: 0.3 + (index * 0.1) },
+                    boxShadow: {
+                      repeat: Infinity,
+                      duration: 2,
+                      ease: "easeInOut",
+                      delay: index * 0.2
+                    }
+                  }}
+                >
                   {stat.number}
-                </div>
-                <div className="text-sm text-muted-foreground font-medium">
+                </motion.div>
+                <motion.div 
+                  className="text-sm text-muted-foreground font-medium"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4 + (index * 0.1) }}
+                >
                   {stat.label}
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Success Stories */}
-      <section className="py-16">
+      <motion.section 
+        className="py-16"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="container mx-auto px-4 mobile-padding">
-          <h2 className="font-playfair text-2xl md:text-4xl font-bold text-center mb-12 gradient-text animate-on-scroll">
+          <motion.h2 
+            className="font-playfair text-2xl md:text-4xl font-bold text-center mb-12 gradient-text"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ 
+              type: "spring", 
+              stiffness: 100, 
+              damping: 12 
+            }}
+          >
             Transformation Stories
-          </h2>
+          </motion.h2>
           
-          <div className="space-y-16 max-w-6xl mx-auto">
+          <motion.div 
+            className="space-y-16 max-w-6xl mx-auto"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
             {successStories.map((story, index) => (
-              <div 
+              <motion.div 
                 key={story.name}
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center animate-on-scroll ${
+                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
                   index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''
                 }`}
-                style={{ animationDelay: `${index * 0.2}s` }}
+                variants={cardVariants}
+                custom={index}
+                transition={{ delay: index * 0.2 }}
               >
                 {/* Image */}
                 <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
                   <div className="relative max-w-xs mx-auto">
-                    <div className="absolute inset-0 bg-gold/20 rounded-3xl transform rotate-2 animate-gentle-float" />
-                    <img 
+                    <motion.div 
+                      className="absolute inset-0 bg-gold/20 rounded-3xl transform rotate-2"
+                      animate={{ 
+                        y: [0, -10, 0],
+                        rotate: [2, 4, 2]
+                      }}
+                      transition={{ 
+                        duration: 5, 
+                        ease: "easeInOut", 
+                        repeat: Infinity,
+                        repeatType: "reverse" 
+                      }}
+                    />
+                    <motion.img 
                       src={story.image}
                       alt={story.name}
-                      className="relative w-full h-48 object-cover rounded-3xl shadow-2xl professional-hover"
+                      className="relative w-full h-48 object-cover rounded-3xl shadow-2xl"
+                      variants={imageVariants}
+                      whileHover="hover"
                     />
-                    <div className="absolute -top-3 -right-3 bg-gold text-navy w-10 h-10 rounded-full flex items-center justify-center text-lg">
+                    <motion.div 
+                      className="absolute -top-3 -right-3 bg-gold text-navy w-10 h-10 rounded-full flex items-center justify-center text-lg"
+                      initial={{ scale: 0, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ 
+                        type: "spring", 
+                        stiffness: 300, 
+                        damping: 10, 
+                        delay: 0.5 + (index * 0.1) 
+                      }}
+                    >
                       {story.icon}
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
 
                 {/* Content */}
                 <div className={index % 2 === 1 ? 'lg:col-start-1' : ''}>
-                  <Card className="bg-card/50 border-gold/20 hover:border-gold/40 transition-all duration-300 card-elegant">
-                    <CardContent className="p-8">
-                      <div className="flex items-center justify-between mb-6">
-                        <div>
-                          <h3 className="font-playfair text-xl font-bold text-gold mb-1">
-                            {story.name}
-                          </h3>
-                          <p className="text-muted-foreground">{story.title}</p>
-                        </div>
-                        <div className="text-right">
-                          <div className="text-xs text-muted-foreground mb-1">Program</div>
-                          <div className="text-gold font-medium text-sm">{story.program}</div>
-                        </div>
-                      </div>
+                  <motion.div
+                    whileHover={{ y: -10 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 10 }}
+                  >
+                    <Card className="bg-card/50 border-gold/20 hover:border-gold/40 transition-all duration-300">
+                      <CardContent className="p-8">
+                        <motion.div 
+                          className="flex items-center justify-between mb-6"
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.2 }}
+                        >
+                          <div>
+                            <motion.h3 
+                              className="font-playfair text-xl font-bold text-gold mb-1"
+                              initial={{ opacity: 0, x: -20 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ 
+                                type: "spring", 
+                                stiffness: 100, 
+                                damping: 10, 
+                                delay: 0.3 
+                              }}
+                            >
+                              {story.name}
+                            </motion.h3>
+                            <motion.p 
+                              className="text-muted-foreground"
+                              initial={{ opacity: 0 }}
+                              whileInView={{ opacity: 1 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: 0.4 }}
+                            >
+                              {story.title}
+                            </motion.p>
+                          </div>
+                          <motion.div 
+                            className="text-right"
+                            initial={{ opacity: 0, x: 20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ 
+                              type: "spring", 
+                              stiffness: 100, 
+                              damping: 10, 
+                              delay: 0.3 
+                            }}
+                          >
+                            <div className="text-xs text-muted-foreground mb-1">Program</div>
+                            <div className="text-gold font-medium text-sm">{story.program}</div>
+                          </motion.div>
+                        </motion.div>
 
-                      {/* Before/After */}
-                      <div className="space-y-3 mb-6">
-                        <div>
-                          <h4 className="font-semibold text-red-400 mb-2 text-sm">Before:</h4>
-                          <p className="text-muted-foreground text-sm">{story.story}</p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold text-green-400 mb-2 text-sm">After:</h4>
-                          <p className="text-muted-foreground text-sm">{story.transformation}</p>
-                        </div>
-                      </div>
+                        {/* Before/After */}
+                        <motion.div 
+                          className="space-y-3 mb-6"
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.4 }}
+                        >
+                          <motion.div
+                            initial={{ opacity: 0, x: -10 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.5 }}
+                          >
+                            <h4 className="font-semibold text-red-400 mb-2 text-sm">Before:</h4>
+                            <p className="text-muted-foreground text-sm">{story.story}</p>
+                          </motion.div>
+                          <motion.div
+                            initial={{ opacity: 0, x: -10 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.6 }}
+                          >
+                            <h4 className="font-semibold text-green-400 mb-2 text-sm">After:</h4>
+                            <p className="text-muted-foreground text-sm">{story.transformation}</p>
+                          </motion.div>
+                        </motion.div>
 
-                      {/* Confidence Meter */}
-                      <div className="mb-6">
-                        <div className="flex justify-between items-center mb-2">
-                          <span className="text-sm font-medium">Confidence Growth</span>
-                          <span className="text-gold font-bold">{story.confidenceGrowth}%</span>
-                        </div>
-                        <div className="w-full bg-navy-light rounded-full h-2">
-                          <div 
-                            className="bg-gradient-to-r from-gold to-gold-light h-2 rounded-full transition-all duration-1000"
-                            style={{ width: `${story.confidenceGrowth}%` }}
-                          />
-                        </div>
-                      </div>
+                        {/* Confidence Meter */}
+                        <motion.div 
+                          className="mb-6"
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.7 }}
+                        >
+                          <div className="flex justify-between items-center mb-2">
+                            <span className="text-sm font-medium">Confidence Growth</span>
+                            <span className="text-gold font-bold">{story.confidenceGrowth}%</span>
+                          </div>
+                          <div className="w-full bg-navy-light rounded-full h-2">
+                            <motion.div 
+                              className="bg-gradient-to-r from-gold to-gold-light h-2 rounded-full"
+                              initial={{ width: 0 }}
+                              whileInView={{ width: `${story.confidenceGrowth}%` }}
+                              viewport={{ once: true }}
+                              transition={{ 
+                                duration: 1.5, 
+                                ease: "easeOut", 
+                                delay: 0.8 
+                              }}
+                            />
+                          </div>
+                        </motion.div>
 
-                      {/* Quote */}
-                      <blockquote className="border-l-4 border-gold pl-4 italic text-base leading-relaxed">
-                        "{story.quote}"
-                      </blockquote>
-                    </CardContent>
-                  </Card>
+                        {/* Quote */}
+                        <motion.blockquote 
+                          className="border-l-4 border-gold pl-4 italic text-base leading-relaxed"
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.9 }}
+                        >
+                          "{story.quote}"
+                        </motion.blockquote>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Testimonial Highlights */}
-      <section className="py-16 bg-navy-light/30">
+      <motion.section 
+        className="py-16 bg-navy-light/30"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="container mx-auto px-4 mobile-padding">
-          <h2 className="font-playfair text-2xl md:text-4xl font-bold text-center mb-12 gradient-text animate-on-scroll">
+          <motion.h2 
+            className="font-playfair text-2xl md:text-4xl font-bold text-center mb-12 gradient-text"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ 
+              type: "spring", 
+              stiffness: 100, 
+              damping: 12 
+            }}
+          >
             What People Say
-          </h2>
+          </motion.h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             {[
               {
                 quote: "Octavia has a gift for seeing potential where others see problems.",
@@ -233,51 +501,133 @@ const Success = () => {
                 role: "HR Manager"
               }
             ].map((testimonial, index) => (
-              <Card 
+              <motion.div
                 key={testimonial.name}
-                className="bg-card/50 border-gold/20 hover:border-gold/40 transition-all duration-300 text-center card-elegant animate-on-scroll"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                variants={itemVariants}
+                custom={index}
+                whileHover={{ y: -10 }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 300, 
+                  damping: 15 
+                }}
               >
-                <CardContent className="p-6">
-                  <div className="text-3xl mb-4">💬</div>
-                  <blockquote className="text-base italic mb-4 leading-relaxed">
-                    "{testimonial.quote}"
-                  </blockquote>
-                  <div className="border-t border-gold/20 pt-4">
-                    <div className="font-semibold text-gold">{testimonial.name}</div>
-                    <div className="text-sm text-muted-foreground">{testimonial.role}</div>
-                  </div>
-                </CardContent>
-              </Card>
+                <Card 
+                  className="bg-card/50 border-gold/20 hover:border-gold/40 transition-all duration-300 text-center h-full"
+                >
+                  <CardContent className="p-6">
+                    <motion.div 
+                      className="text-3xl mb-4"
+                      initial={{ scale: 0, opacity: 0 }}
+                      whileInView={{ scale: 1, opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ 
+                        type: "spring", 
+                        stiffness: 200, 
+                        damping: 10, 
+                        delay: 0.2 + (index * 0.1) 
+                      }}
+                    >
+                      💬
+                    </motion.div>
+                    <motion.blockquote 
+                      className="text-base italic mb-4 leading-relaxed"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ 
+                        type: "spring", 
+                        stiffness: 100, 
+                        damping: 15, 
+                        delay: 0.3 + (index * 0.1) 
+                      }}
+                    >
+                      "{testimonial.quote}"
+                    </motion.blockquote>
+                    <motion.div 
+                      className="border-t border-gold/20 pt-4"
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.4 + (index * 0.1) }}
+                    >
+                      <motion.div 
+                        className="font-semibold text-gold"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.5 + (index * 0.1) }}
+                      >
+                        {testimonial.name}
+                      </motion.div>
+                      <motion.div 
+                        className="text-sm text-muted-foreground"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.6 + (index * 0.1) }}
+                      >
+                        {testimonial.role}
+                      </motion.div>
+                    </motion.div>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* CTA Section */}
-      <section className="py-16 relative">
+      <motion.section 
+        className="py-16 relative"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="absolute inset-0 bg-gradient-to-r from-gold/10 to-transparent" />
         
         <div className="relative z-10 container mx-auto px-4 mobile-padding text-center">
-          <div className="max-w-4xl mx-auto animate-on-scroll">
-            <h2 className="font-playfair text-2xl md:text-4xl font-bold mb-6 gradient-text">
+          <motion.div 
+            className="max-w-4xl mx-auto"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <motion.h2 
+              className="font-playfair text-2xl md:text-4xl font-bold mb-6 gradient-text"
+              variants={itemVariants}
+            >
               Your Success Story Starts Here
-            </h2>
-            <p className="text-responsive-lg mb-8 text-muted-foreground leading-relaxed">
+            </motion.h2>
+            <motion.p 
+              className="text-responsive-lg mb-8 text-muted-foreground leading-relaxed"
+              variants={itemVariants}
+            >
               Join the hundreds of people who have transformed their lives. 
               Your breakthrough is just one conversation away.
-            </p>
+            </motion.p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mobile-stack">
-              <a href="tel:+919008808808">
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4 justify-center mobile-stack"
+              variants={itemVariants}
+            >
+              <motion.a 
+                href="tel:+919008808808"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
                 <button className="bg-gold hover:bg-gold-dark text-navy font-bold px-6 py-3 rounded-full text-base professional-hover subtle-glow transition-all duration-300">
                   Start Your Transformation
                 </button>
-              </a>
-            </div>
-          </div>
+              </motion.a>
+            </motion.div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 };

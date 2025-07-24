@@ -22,7 +22,7 @@ const photos: Photo[] = [
   },
   {
     id: '2',
-    src: '/public/DSC_1019.JPG',
+    src: '/DSC_1019.JPG',
     alt: 'Success celebration',
     title: 'Success Stories',
     description: 'Celebrating client achievements',
@@ -30,7 +30,7 @@ const photos: Photo[] = [
   },
   {
     id: '3',
-    src: '/public/DSC_0855.JPG',
+    src: '/DSC_0855.JPG',
     alt: 'Empowerment event',
     title: 'Empowerment Event',
     description: 'Inspiring moments from empowerment events',

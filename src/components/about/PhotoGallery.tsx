@@ -22,7 +22,7 @@ const photos: Photo[] = [
   },
   {
     id: '2',
-    src: '/lovable-uploads/3deeb80c-cb3c-424c-8a59-ed530ead07fd.png',
+    src: '/public/DSC_1019.JPG',
     alt: 'Success celebration',
     title: 'Success Stories',
     description: 'Celebrating client achievements',
@@ -30,11 +30,59 @@ const photos: Photo[] = [
   },
   {
     id: '3',
-    src: '/lovable-uploads/51cae283-e75f-4902-a215-aef5185b0ae4.png',
+    src: '/public/DSC_0855.JPG',
     alt: 'Empowerment event',
     title: 'Empowerment Event',
     description: 'Inspiring moments from empowerment events',
     category: 'event'
+  },
+  {
+    id: '4',
+    src: '/DSC_0709.JPG',
+    alt: 'Octavia speaking event',
+    title: 'Speaking Engagement',
+    description: 'Captivating audience with inspiring words',
+    category: 'speaking'
+  },
+  {
+    id: '5',
+    src: '/20220625_190522.jpg',
+    alt: 'Octavia workshop',
+    title: 'Interactive Workshop',
+    description: 'Engaging participants in growth-oriented activities',
+    category: 'workshop'
+  },
+  {
+    id: '6',
+    src: '/DSC_0692.JPG',
+    alt: 'Octavia corporate training',
+    title: 'Corporate Training',
+    description: 'Delivering impactful training sessions for professionals',
+    category: 'corporate'
+  },
+  {
+    id: '7',
+    src: '/20220504_095537.jpg',
+    alt: 'Octavia personal development',
+    title: 'Personal Growth',
+    description: 'Guiding individuals on their journey of self-discovery',
+    category: 'personal'
+  },
+  {
+    id: '8',
+    src: '/DSC_0808.JPG',
+    alt: 'Octavia leadership training',
+    title: 'Leadership Training',
+    description: 'Developing future leaders through comprehensive training programs',
+    category: 'corporate'
+  },
+  {
+    id: '9',
+    src: '/DSC_0950.JPG',
+    alt: 'Octavia motivational speaking',
+    title: 'Motivational Speaking',
+    description: 'Inspiring audiences to achieve their full potential',
+    category: 'speaking'
   }
 ];
 

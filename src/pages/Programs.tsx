@@ -22,7 +22,7 @@ const programData = [
       students: 1247,
       rating: 4.9,
       difficulty: "Beginner",
-      image: "/lovable-uploads/10c64aa3-4a08-47fd-b71f-a056e7fb11ba.png",
+      image: "/DSC_0697.JPG",
       description: "A 3-Day Live Intensive to Rewire Your Mindset, Build Unshakable Confidence & Step Into the Life You Deserve",
       benefits: [
         "Let go of limiting beliefs and imposter syndrome",
@@ -49,7 +49,7 @@ const programData = [
       students: 892,
       rating: 4.8,
       difficulty: "Intermediate",
-      image: "/lovable-uploads/29e81a7c-71b6-407c-bdb8-1769fc86fd82.png",
+      image: "/DSC_0736.JPG",
       description: "A 5-Day Power-Packed Coaching Series to Build Discipline, Create Unshakable Habits & Accelerate Success",
       benefits: [
         "Build habits that stick, even when motivation fades",
@@ -78,7 +78,7 @@ const programData = [
       students: 458,
       rating: 5.0,
       difficulty: "Advanced",
-      image: "/lovable-uploads/3deeb80c-cb3c-424c-8a59-ed530ead07fd.png",
+      image: "/DSC_0752.JPG",
       description: "A 6-Month Deep Coaching Journey to Rewire Your Mindset, Build Confidence & Speak with Power",
       benefits: [
         "Rewire self-doubt and overthinking into self-trust",
@@ -106,7 +106,7 @@ const programData = [
       students: 623,
       rating: 4.7,
       difficulty: "Beginner",
-      image: "/lovable-uploads/51cae283-e75f-4902-a215-aef5185b0ae4.png",
+      image: "/DSC_0889.JPG",
       description: "A 5-Session Public Speaking Coaching Program to Build Confidence, Presence & Clarity",
       benefits: [
         "Overcome fear, nervousness, and self-doubt while speaking",

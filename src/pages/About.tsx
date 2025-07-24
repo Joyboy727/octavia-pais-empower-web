@@ -296,7 +296,7 @@ const About = () => {
                   }}
                 />
                 <motion.img 
-                  src="/lovable-uploads/10c64aa3-4a08-47fd-b71f-a056e7fb11ba.png"
+                  src="/DSC_0790.JPG"
                   alt="Octavia Pais"
                   className="relative w-full rounded-3xl shadow-2xl"
                   whileHover={{ scale: 1.03 }}

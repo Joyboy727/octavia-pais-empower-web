@@ -30,7 +30,7 @@ const photos: Photo[] = [
   },
   {
     id: '3',
-    src: '/20240213_195733[1]',
+    src: '/DSC_0855.JPG',
     alt: 'Empowerment event',
     title: 'Empowerment Event',
     description: 'Inspiring moments from empowerment events',

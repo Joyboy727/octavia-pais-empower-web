@@ -286,7 +286,7 @@ const Success = () => {
                     <motion.img 
                       src={story.image}
                       alt={story.name}
-                      className="relative w-full h-48 object-cover rounded-3xl shadow-2xl"
+                      className="relative w-full h-78 object-cover rounded-3xl shadow-2xl"
                       variants={imageVariants}
                       whileHover="hover"
                     />

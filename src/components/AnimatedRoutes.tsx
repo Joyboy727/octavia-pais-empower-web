@@ -32,7 +32,7 @@ const pageTransition = {
   type: 'tween',
   ease: 'anticipate',
   duration: 0.8,
-};
+} as const;
 
 const AnimatedRoutes = () => {
   const location = useLocation();

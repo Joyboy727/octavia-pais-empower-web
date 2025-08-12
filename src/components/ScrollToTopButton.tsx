@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaArrowUp } from 'react-icons/fa';
+import { ArrowUp } from 'lucide-react';
 
 const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -33,7 +33,7 @@ const ScrollToTopButton = () => {
           exit={{ opacity: 0, y: 20 }}
           transition={{ duration: 0.3 }}
         >
-          <FaArrowUp size={20} />
+          <ArrowUp size={20} />
         </motion.button>
       )}
     </AnimatePresence>

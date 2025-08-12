@@ -84,8 +84,9 @@ const AboutSection = () => {
                 withGlow 
                 withShimmer
                 className="font-bold px-8 py-4 premium-button-hover"
+                onClick={() => window.open("https://calendly.com/octaviathelifecoach/30min", "_blank")}
               >
-                Learn More About My Journey
+                Book a Free Clarity Call
               </PremiumButton>
             </div>
           </div>

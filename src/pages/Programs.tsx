@@ -16,7 +16,7 @@ const programData = [
       id: 1,
       title: "The Breakthrough Blueprint",
       category: "growth",
-      price: 5000,
+      price: 9999,
       originalPrice: 7500,
       duration: "3 Days",
       students: 1247,
@@ -43,9 +43,9 @@ const programData = [
       id: 2,
       title: "Unstoppable Momentum Bootcamp",
       category: "growth",
-      price: 9999,
+      price: 15000,
       originalPrice: 14999,
-      duration: "5 Days (2 hours per day)",
+      duration: "5 Days",
       students: 892,
       rating: 4.8,
       difficulty: "Intermediate",
@@ -161,7 +161,7 @@ const Programs = () => {
       opacity: 1, 
       y: 0,
       transition: { 
-        type: "spring", 
+        type: "spring" as const, 
         stiffness: 100, 
         damping: 12 
       } 
@@ -203,7 +203,7 @@ const Programs = () => {
         {programData.map((program, idx) => (
           <motion.section
             key={program.id}
-            className="flex flex-col md:flex-row items-center bg-[#181F2A] rounded-3xl shadow-xl overflow-hidden border border-gray-800 md:even:flex-row-reverse"
+            className="flex flex-col md:flex-row items-center bg-[#181F2A] rounded-3xl shadow-xl overflow-hidden border border-gray-800"
             variants={itemVariants}
             whileHover={{ scale: 1.025, y: -6, boxShadow: '0 8px 32px rgba(0,0,0,0.10)' }}
             transition={{ type: 'spring', stiffness: 200, damping: 20 }}
@@ -292,15 +292,6 @@ const Programs = () => {
                   💰 Investment: {program.price.toLocaleString()}
                 </motion.span>
                 <motion.span 
-                  className="bg-accent/10 text-accent px-3 py-1 rounded-full font-medium"
-                  initial={{ y: 20, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  whileHover={{ y: -5, scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 300, delay: 0.1 }}
-                >
-                  📍 Format: {program.duration}
-                </motion.span>
-                <motion.span 
                   className="bg-secondary/10 text-secondary px-3 py-1 rounded-full font-medium"
                   initial={{ y: 20, opacity: 0 }}
                   whileInView={{ y: 0, opacity: 1 }}
@@ -345,37 +336,6 @@ const Programs = () => {
                 </motion.ul>
                 </div>
 
-              <div className="mb-6">
-                <div className="font-semibold text-gold mb-3">📚 CURRICULUM:</div>
-                <motion.ul 
-                  className="list-disc ml-6 space-y-2 text-base text-gray-300"
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-50px" }}
-                  variants={{
-                    visible: {
-                      transition: {
-                        staggerChildren: 0.1,
-                        delayChildren: 0.3
-                      }
-                    },
-                    hidden: {}
-                  }}
-                >
-                  {program.curriculum.map((item, i) => (
-                      <motion.li
-                        key={i}
-                      variants={{
-                        hidden: { opacity: 0, x: -20 },
-                        visible: { opacity: 1, x: 0 }
-                      }}
-                      transition={{ type: "spring", stiffness: 100, damping: 10 }}
-                    >
-                      {item}
-                      </motion.li>
-                    ))}
-                </motion.ul>
-              </div>
               
               <motion.div 
                 className="mb-6"
@@ -386,7 +346,7 @@ const Programs = () => {
               >
                 <div className="font-semibold text-gold mb-3">🔒 YOUR INVESTMENT:</div>
                 <div className="text-xl font-bold text-white">
-                  {program.price.toLocaleString()} <span className="text-sm text-gray-400 line-through ml-2">{program.originalPrice?.toLocaleString()}</span>
+                  ₹{program.price.toLocaleString()} {program.originalPrice ? <span className="text-sm text-gray-400 line-through ml-2">₹{program.originalPrice.toLocaleString()}</span> : null}
                 </div>
               </motion.div>
               <motion.div 

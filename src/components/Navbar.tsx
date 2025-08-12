@@ -50,20 +50,11 @@ const Navbar = () => {
     }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
-          {/* Logo - Updated with new PNG */}
           <Link to="/" onClick={handleNavClick} className="flex items-center space-x-2 sm:space-x-3 group">
-            <img 
-              src="/lovable-uploads/e762880d-c3aa-4d83-a05d-ff106ac7e818.png" 
-              alt="Octavia Pais - Life & Speaking Coach" 
-              className="h-8 sm:h-12 w-auto transition-all duration-500 group-hover:scale-110 seamless-logo"
-            />
-            <div className="hidden sm:block">
+            <div>
               <h1 className="font-playfair font-bold text-lg sm:text-xl text-gold gradient-text">
                 Octavia Pais
               </h1>
-              <p className="text-xs text-muted-foreground -mt-1">
-                Growth & Mindset Coach
-              </p>
             </div>
           </Link>
 

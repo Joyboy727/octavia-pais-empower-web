@@ -179,33 +179,7 @@ const About = () => {
                 variants={itemVariants} 
                 className="font-playfair text-responsive-xl font-bold mb-6"
               >
-                <motion.span 
-                  className="gradient-text"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ 
-                    delay: 0.3, 
-                    duration: 0.8, 
-                    type: "spring", 
-                    stiffness: 100 
-                  }}
-                >
-                  MY
-                </motion.span>
-                <br />
-                <motion.span 
-                  className="text-white"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ 
-                    delay: 0.5, 
-                    duration: 0.8, 
-                    type: "spring", 
-                    stiffness: 100 
-                  }}
-                >
-                  STORY
-                </motion.span>
+                My Story
               </motion.h1>
               <motion.p 
                 variants={itemVariants}
@@ -218,28 +192,40 @@ const About = () => {
                 className="space-y-4 text-responsive-base leading-relaxed text-muted-foreground"
               >
                 <motion.p variants={itemVariants}>
-                  <span className="text-gold font-semibold">From the outside, everything looked picture-perfect.</span>
+                  From the outside, everything looked perfect. A successful career in banking. International experience. A respected teaching role in Bangalore. On paper, I had it all—stability, security, and success.
                 </motion.p>
                 <motion.p variants={itemVariants}>
-                  A successful banking career, international experience, and a respected role as an educator in Bangalore. I had stability, security, and status. But deep inside, I felt a quiet ache—a sense that I was meant for more.
+                  But deep down, I kept wondering: “Is this it?”
                 </motion.p>
                 <motion.p variants={itemVariants}>
-                  I often found myself asking: <span className="text-gold font-semibold">"Is this it?"</span>
+                  Maybe you’ve asked yourself the same question. That quiet nudge... the sense that you’re made for more—but unsure what “more” looks like or how to get there.
                 </motion.p>
                 <motion.p variants={itemVariants}>
-                  There was a voice within me that refused to be silenced. It whispered, <span className="text-gold font-semibold">"You're here to do work that changes lives."</span> And eventually, I listened.
+                  For me, that nudge became a wake-up call. After over 12 years in corporate roles and nearly a decade teaching in international schools, I stepped away from certainty—and into purpose.
                 </motion.p>
                 <motion.p variants={itemVariants}>
-                  After over 12 years in corporate sectors and nearly a decade of shaping young minds in international schools, I took a leap of faith—away from certainty and into purpose.
+                  I realized my true gift wasn’t in closing deals or delivering lessons. It was in helping people rewrite the stories they were telling themselves. To silence self-doubt. Speak with power and take meaningful action.
                 </motion.p>
                 <motion.p variants={itemVariants}>
-                  I realized that my gift wasn't just in delivering lessons or closing deals. It was in helping people break through self-doubt, speak with confidence, and take aligned action toward their dreams.
+                  That’s how my coaching practice was born.
                 </motion.p>
                 <motion.p variants={itemVariants}>
-                  <span className="text-gold font-semibold">That's how my coaching practice was born.</span>
+                  What I Do Today I help professionals—just like you—get unstuck and stand up for the life they actually want.
                 </motion.p>
                 <motion.p variants={itemVariants}>
-                  Since then, I've devoted myself to helping ambitious men and women master their mindset, find their authentic voice, and lead lives that feel as good on the inside as they look on the outside.
+                  Whether you're 28 and wrestling with imposter syndrome… Or 48 and craving a life with more purpose than pressure— I'm here to guide you from anxious to aligned, and from quiet to confident.
+                </motion.p>
+                <motion.p variants={itemVariants}>
+                  You don’t have to keep playing small.
+                </motion.p>
+                <motion.p variants={itemVariants}>
+                  Fun Facts About Me Born and raised in the UAE, lived in Mangalore, and now in Bangalore. Each place shaped how I see the world. I'm deeply grounded in what I call aligned hustle—where faith meets focused action. I light up when I see someone go from, “I don’t think I can” to “Just watch me.”
+                </motion.p>
+                <motion.p variants={itemVariants}>
+                  Ready to Begin Your Transformation? If you’re feeling the pull toward something deeper, more empowered, and more you—that’s not random. That’s alignment knocking.
+                </motion.p>
+                <motion.p variants={itemVariants}>
+                  Book a free clarity call and let’s begin.
                 </motion.p>
                 <motion.div 
                   variants={cardVariants}

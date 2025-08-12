@@ -101,6 +101,28 @@ const Success = () => {
       program: "Breakthrough Blueprint",
       confidenceGrowth: 78,
       icon: "🚀"
+    },
+    {
+      name: "A., Product Manager",
+      title: "Clarity and Confidence",
+      image: "/DSC_0950.JPG",
+      story: "Struggled to communicate ideas under pressure",
+      transformation: "Now presents ideas with clarity and influence",
+      quote: "Clear, calm, and confident — that’s the shift I experienced.",
+      program: "Speak With Impact",
+      confidenceGrowth: 88,
+      icon: "📣"
+    },
+    {
+      name: "S., Student",
+      title: "From Overthinking to Action",
+      image: "/DSC_1019.JPG",
+      story: "Overthinking and self-doubt stalled progress",
+      transformation: "Built daily habits and momentum toward goals",
+      quote: "Small, consistent actions changed everything for me.",
+      program: "Unstoppable Momentum Bootcamp",
+      confidenceGrowth: 80,
+      icon: "🎯"
     }
   ];
 
@@ -269,7 +291,7 @@ const Success = () => {
               >
                 {/* Image */}
                 <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
-                  <div className="relative max-w-xs mx-auto">
+                  <div className="relative max-w-[220px] mx-auto">
                     <motion.div 
                       className="absolute inset-0 bg-gold/20 rounded-3xl transform rotate-2"
                       animate={{ 

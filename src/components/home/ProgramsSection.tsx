@@ -39,6 +39,18 @@ const ProgramsSection = () => {
       cta: "Join The Bootcamp"
     },
     {
+      name: "Speak With Impact",
+      price: "₹9,999",
+      duration: "5 Sessions",
+      gradient: "from-red-600/30 to-red-800/30",
+      borderGradient: "border-red-500/50",
+      icon: "🎤",
+      description: "Master confident communication",
+      features: ["1-on-1 Coaching", "Voice Training", "Presentation Skills", "Real Practice"],
+      badge: "Specialist",
+      cta: "Book Your Spot"
+    },
+    {
       name: "The Evolution Experience",
       price: "₹49,999",
       originalPrice: "₹65,000",
@@ -51,18 +63,6 @@ const ProgramsSection = () => {
       badge: "Premium",
       isPremium: true,
       cta: "Apply Now"
-    },
-    {
-      name: "Speak With Impact",
-      price: "₹9,999",
-      duration: "5 Sessions",
-      gradient: "from-red-600/30 to-red-800/30",
-      borderGradient: "border-red-500/50",
-      icon: "🎤",
-      description: "Master confident communication",
-      features: ["1-on-1 Coaching", "Voice Training", "Presentation Skills", "Real Practice"],
-      badge: "Specialist",
-      cta: "Book Your Spot"
     }
   ];
 
@@ -72,27 +72,27 @@ const ProgramsSection = () => {
       <div className="relative z-10 container mx-auto px-4 mobile-padding">
         {/* Section Header */}
         <div className="text-center mb-16 animate-on-scroll">
-          <h2 className="font-playfair text-4xl md:text-6xl font-bold mb-6 gradient-text text-shadow-gold premium-slide-up">
-            Transform Your Life
+          <h2 className="font-serif text-5xl md:text-6xl font-extrabold mb-6 text-gold tracking-wide leading-tight">
+            Our Signature Programs
           </h2>
-          <p className="text-responsive-lg text-muted-foreground max-w-3xl mx-auto premium-fade-in" style={{ animationDelay: '0.2s' }}>
-            Choose the program that aligns with your transformation goals
+          <p className="text-white text-lg max-w-3xl mx-auto opacity-90" style={{ animationDelay: '0.2s' }}>
+            Choose the program that aligns with your transformation goals and unlock your true potential.
           </p>
         </div>
         
         {/* Programs Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto items-stretch">
           {programs.map((program, index) => (
             <PremiumCard
               key={program.name}
-              className={`${program.isPremium ? 'lg:col-span-2 relative' : ''} 
+              className={`${program.isPremium ? 'lg:col-span-3 relative' : ''} ${program.name === "Speak With Impact" ? 'md:col-span-1' : ''}
                 bg-gradient-to-br ${program.gradient} ${program.borderGradient} border-2 
-                text-white overflow-hidden group animate-on-scroll premium-card-hover`}
+                text-white overflow-hidden group animate-on-scroll premium-card-hover rounded-3xl shadow-xl h-full flex flex-col`}
               style={{ animationDelay: `${index * 0.2}s` }}
             >
               {/* Badge */}
               {program.badge && (
-                <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-bold z-10 ${
+                <div className={`absolute top-6 right-6 px-4 py-1.5 rounded-full text-sm font-bold z-10 ${
                   program.isPremium 
                     ? 'bg-gold text-navy animate-pulse' 
                     : 'bg-white/20 text-white border border-white/30'
@@ -104,7 +104,7 @@ const ProgramsSection = () => {
               <div className="p-8">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-6">
-                  <span className="text-5xl group-hover:animate-bounce transition-all duration-300">
+                  <span className="text-6xl group-hover:scale-110 transition-transform duration-300">
                     {program.icon}
                   </span>
                   <div className="text-right">
@@ -114,34 +114,34 @@ const ProgramsSection = () => {
                           {program.originalPrice}
                         </span>
                       )}
-                      <div className="text-2xl md:text-3xl font-bold text-gold">
-                        {program.price}
-                      </div>
+                      <div className="text-3xl md:text-4xl font-bold text-gold">
+                      {program.price}
+                    </div>
                     </div>
                     <div className="text-sm opacity-80">{program.duration}</div>
                   </div>
                 </div>
 
                 {/* Title and Description */}
-                <h3 className="font-playfair text-xl md:text-2xl font-bold mb-4 group-hover:text-gold-light transition-colors">
+                <h3 className="font-serif text-2xl md:text-3xl font-bold mb-4 group-hover:text-gold-light transition-colors">
                   {program.name}
                 </h3>
-                <p className="text-white/90 mb-6 group-hover:text-white transition-colors">
+                <p className="text-white/90 mb-8 group-hover:text-white transition-colors text-lg">
                   {program.description}
                 </p>
 
                 {/* Features */}
-                <div className="space-y-3 mb-8">
-                  <h4 className="font-semibold text-gold mb-3">What's Included:</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                <div className="space-y-4 mb-10">
+                  <h4 className="font-semibold text-gold mb-4 text-xl">What's Included:</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {program.features.map((feature, featureIndex) => (
                       <div 
                         key={featureIndex} 
                         className="flex items-start space-x-3 text-sm premium-fade-in"
                         style={{ animationDelay: `${(index * 0.2) + (featureIndex * 0.1) + 0.3}s` }}
                       >
-                        <span className="text-gold mt-1 text-xs">✓</span>
-                        <span className="text-white/90 group-hover:text-white transition-colors">
+                        <svg className="w-5 h-5 text-gold flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                        <span className="text-white/90 group-hover:text-white transition-colors text-base">
                           {feature}
                         </span>
                       </div>
@@ -155,7 +155,7 @@ const ProgramsSection = () => {
                   size="lg"
                   withGlow={program.isPremium}
                   withShimmer={program.isPremium}
-                  className="w-full font-bold text-lg py-4"
+                  className="w-full font-bold text-lg py-4 mt-auto"
                   onClick={() => handleButtonClick(program.cta)}
                 >
                   {program.cta}
@@ -163,9 +163,9 @@ const ProgramsSection = () => {
 
                 {/* Urgency Indicator */}
                 {program.badge === "Most Popular" && (
-                  <div className="mt-4 text-center">
-                    <div className="inline-flex items-center gap-2 text-xs text-gold bg-gold/10 px-3 py-1 rounded-full">
-                      <div className="w-2 h-2 bg-gold rounded-full animate-pulse"></div>
+                  <div className="mt-6 text-center">
+                    <div className="inline-flex items-center gap-2 text-sm text-gold bg-gold/10 px-4 py-2 rounded-full">
+                      <div className="w-2.5 h-2.5 bg-gold rounded-full animate-pulse"></div>
                       <span>Limited seats available</span>
                     </div>
                   </div>
@@ -179,20 +179,8 @@ const ProgramsSection = () => {
         </div>
 
         {/* Bottom Testimonial */}
-        <div className="text-center mt-16 animate-on-scroll premium-fade-in" style={{ animationDelay: '1s' }}>
-          <PremiumCard variant="glass" className="max-w-4xl mx-auto p-8">
-            <blockquote className="text-lg md:text-xl italic text-muted-foreground mb-4">
-              "Octavia's coaching didn't just change my mindset—it transformed my entire life. 
-              I went from being afraid to speak up in meetings to confidently leading presentations."
-            </blockquote>
-            <cite className="text-gold font-medium">— Sarah M., Marketing Executive</cite>
-            <div className="flex justify-center mt-4">
-              {[...Array(5)].map((_, i) => (
-                <span key={i} className="text-gold text-xl">⭐</span>
-              ))}
-            </div>
-          </PremiumCard>
-        </div>
+        {/* Optional: Add a subtle background pattern or texture */}
+        <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'url(/path/to/subtle-pattern.png)' }} />
       </div>
     </section>
   );

@@ -177,7 +177,7 @@ const Programs = () => {
         className="container mx-auto text-center mb-12 pt-8"
       >
           <motion.h1
-          className="text-4xl md:text-5xl font-bold text-white mb-4"
+          className="text-4xl md:text-5xl font-bold text-gold mb-4"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, duration: 0.8, type: "spring" }}
@@ -251,7 +251,7 @@ const Programs = () => {
               variants={contentVariants}
             >
               <motion.h2 
-                className="text-2xl md:text-3xl font-bold font-playfair mb-2 flex items-center gap-2 text-white"
+                className="text-2xl md:text-3xl font-bold font-playfair mb-2 flex items-center gap-2 text-gold"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, type: "spring" }}
@@ -345,7 +345,7 @@ const Programs = () => {
                 viewport={{ once: true }}
               >
                 <div className="font-semibold text-gold mb-3">🔒 YOUR INVESTMENT:</div>
-                <div className="text-xl font-bold text-white">
+                <div className="text-xl font-bold text-gold">
                   ₹{program.price.toLocaleString()} {program.originalPrice ? <span className="text-sm text-gray-400 line-through ml-2">₹{program.originalPrice.toLocaleString()}</span> : null}
                 </div>
               </motion.div>
@@ -379,7 +379,7 @@ const Programs = () => {
                   />
             <Button 
               size="lg" 
-                    className="relative w-full md:w-auto font-bold text-lg py-3 px-8 rounded-full bg-gradient-to-r from-primary to-accent text-white shadow-lg"
+                    className="relative w-full md:w-auto font-bold text-lg py-3 px-8 rounded-full bg-gradient-to-r from-primary to-accent text-navy shadow-lg"
               onClick={() => window.open("https://calendly.com/octaviathelifecoach/30min", "_blank")}
             >
               Enroll Now

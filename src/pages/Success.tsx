@@ -165,7 +165,7 @@ const Success = () => {
               Success Stories
             </motion.h1>
             <motion.p 
-              className="text-xl text-muted-foreground mb-8 leading-relaxed"
+              className="text-xl text-gold mb-8 leading-relaxed"
               variants={itemVariants}
               custom={1}
             >
@@ -400,7 +400,7 @@ const Success = () => {
                             viewport={{ once: true }}
                             transition={{ delay: 0.5 }}
                           >
-                            <h4 className="font-semibold text-red-400 mb-2 text-sm">Before:</h4>
+                            <h4 className="font-semibold text-navy-dark mb-2 text-sm">Before:</h4>
                             <p className="text-muted-foreground text-sm">{story.story}</p>
                           </motion.div>
                           <motion.div
@@ -409,7 +409,7 @@ const Success = () => {
                             viewport={{ once: true }}
                             transition={{ delay: 0.6 }}
                           >
-                            <h4 className="font-semibold text-green-400 mb-2 text-sm">After:</h4>
+                            <h4 className="font-semibold text-gold mb-2 text-sm">After:</h4>
                             <p className="text-muted-foreground text-sm">{story.transformation}</p>
                           </motion.div>
                         </motion.div>

@@ -1,92 +1,28 @@
 
-import { useRef } from "react";
-import PremiumButton from "@/components/PremiumButton";
-import CounterAnimation from "@/components/CounterAnimation";
+import { useRef, useEffect } from "react";
+import { ChevronDown } from "lucide-react";
 
 const HeroSection = () => {
   const heroRef = useRef<HTMLDivElement>(null);
 
-  const handleButtonClick = (buttonText: string) => {
-    const bookingButtons = ["Join The Bootcamp", "Apply Now", "Book Your Spot", "Book Free Clarity Call", "Start Your Transformation", "Send Message"];
-    const callButtons = ["Call Now", "Call Now (desktop)", "Call Now (mobile)", "Call Octavia Now"];
-    
-    if (bookingButtons.includes(buttonText)) {
-      window.open("https://calendly.com/octaviathelifecoach/30min", "_blank");
-    } else if (callButtons.includes(buttonText)) {
-      window.location.href = "tel:+917975163696";
-    }
-  };
-
   return (
-    <section ref={heroRef} className="relative min-h-screen flex items-center justify-center px-4 mobile-padding overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy-light to-navy" />
-      
-      <div className="relative z-10 text-center max-w-6xl mx-auto">
+    <section ref={heroRef} className="relative min-h-screen overflow-hidden">
+      <div className="absolute inset-0">
+        <img src="/DSC_0855.JPG" alt="Octavia" className="w-full h-full object-cover" />
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-navy to-transparent" />
 
-        {/* Main Headlines with premium typography */}
-        <div className="space-y-4 sm:space-y-6 mb-12 sm:mb-16">
-          <h1 className="font-playfair font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight px-2">
-            <span className="gradient-text text-shadow-gold premium-slide-in inline-block">
-              Break Free from Doubt.
-            </span>
-            <br />
-            <span className="text-white premium-slide-in" style={{ animationDelay: '0.3s' }}>
-              Speak Up.
-            </span>
-            <br />
-            <span className="gradient-text premium-slide-in" style={{ animationDelay: '0.6s' }}>
-              Transform Your Life.
-            </span>
-          </h1>
-          
-          <p className="text-lg sm:text-xl md:text-2xl text-gold font-medium premium-fade-in px-4" style={{ animationDelay: '0.9s' }}>
-            Growth & Mindset Coach | Public Speaking Strategist
-          </p>
+      </div>
 
-          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-8 mt-8 premium-fade-in px-4" style={{ animationDelay: '1.2s' }}>
-            <div className="text-center premium-stat-card">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gold">
-                <CounterAnimation target={8} suffix="+" />
-              </div>
-              <div className="text-xs sm:text-sm text-muted-foreground">Years Experience</div>
-            </div>
-            <div className="text-center premium-stat-card">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gold">
-                <CounterAnimation target={500} suffix="+" />
-              </div>
-              <div className="text-xs sm:text-sm text-muted-foreground">Lives Transformed</div>
-            </div>
-            <div className="text-center premium-stat-card">
-              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-gold">
-                <CounterAnimation target={95} suffix="%" />
-              </div>
-              <div className="text-xs sm:text-sm text-muted-foreground">Success Rate</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Premium CTA Buttons - Updated with click handlers */}
-        <div className="flex flex-col gap-4 sm:gap-6 justify-center items-center mb-12 premium-fade-in px-4" style={{ animationDelay: '1.5s' }}>
-          <PremiumButton 
-            variant="cta" 
-            size="lg" 
-            withGlow 
-            withShimmer
-            className="font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg w-full sm:w-auto premium-button-luxury"
-            onClick={() => handleButtonClick("Book Free Clarity Call")}
-          >
-            Book Your Free Clarity Call
-          </PremiumButton>
-          
-        </div>
-
-        {/* Premium Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 premium-fade-in hidden sm:block" style={{ animationDelay: '1.8s' }}>
-          <div className="w-6 h-10 border-2 border-gold rounded-full flex justify-center premium-scroll-indicator">
-            <div className="w-1 h-3 bg-gold rounded-full animate-bounce mt-2"></div>
-          </div>
-          <p className="text-xs text-gold mt-2 premium-text">Scroll to explore</p>
-        </div>
+      <div className="absolute bottom-0 left-0 right-0 p-8 text-center z-20">
+        <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 leading-tight drop-shadow-lg font-serif">
+          Unlock Your Full Potential
+        </h1>
+        <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto font-light">
+          Empowering leaders to achieve extraordinary results and lasting impact.
+        </p>
+        <button className="bg-gradient-to-r from-gold-500 to-gold-700 text-navy font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out">
+          Book Your Clarity Call
+        </button>
       </div>
     </section>
   );

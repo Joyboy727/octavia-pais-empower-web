@@ -20,6 +20,8 @@ export default {
 		},
 		extend: {
 			fontFamily: {
+				heading: ['"Neue Haas Grotesk Display Pro"', 'Canela', 'Inter', 'Playfair Display', 'sans-serif', 'serif'],
+				body: ['Inter', 'Plus Jakarta Sans', 'sans-serif'],
 				'playfair': ['Playfair Display', 'serif'],
 				'inter': ['Inter', 'sans-serif'],
 			},

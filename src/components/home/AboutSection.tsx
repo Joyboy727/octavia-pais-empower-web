@@ -1,97 +1,84 @@
 
-import { Button } from "@/components/ui/button";
-import PremiumButton from "@/components/PremiumButton";
-import PremiumCard from "@/components/PremiumCard";
+import React from 'react';
 
 const AboutSection = () => {
   return (
-    <section className="py-20 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-navy to-navy-light parallax-bg" />
-      <div className="premium-gradient-overlay absolute inset-0" />
-      
+    <section className="pt-48 pb-28 relative overflow-hidden bg-gradient-to-br from-navy/95 to-navy-light/95">
       <div className="relative z-10 container mx-auto px-4 mobile-padding">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Octavia's Image with Premium Effects - No Border */}
-          <div className="animate-on-scroll premium-scale-in">
-            <div className="relative max-w-md mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-br from-gold/30 to-gold-light/20 rounded-3xl transform rotate-3 animate-gentle-float premium-shadow opacity-50" />
-              <div className="premium-image-hover">
-                <img 
-                  src="/lovable-uploads/10c64aa3-4a08-47fd-b71f-a056e7fb11ba.png"
-                  alt="Octavia Pais - Life & Public Speaking Coach"
-                  className="relative w-full rounded-3xl shadow-2xl border-0 outline-none"
-                  loading="lazy"
-                  style={{
-                    border: 'none',
-                    outline: 'none',
-                    boxShadow: '0 25px 50px rgba(0, 0, 0, 0.3)'
-                  }}
-                />
-              </div>
-              <div className="absolute -bottom-6 -right-6 bg-gradient-to-r from-gold to-gold-light text-navy px-6 py-3 rounded-full font-bold text-sm premium-badge premium-glow">
-                <span className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-navy rounded-full animate-pulse"></span>
-                  8+ Years Experience
-                </span>
-              </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          {/* Octavia's Image - Larger and More Prominent */}
+          <div className="animate-on-scroll">
+            <div className="relative w-full lg:w-[115%] mx-auto rounded-3xl overflow-hidden">
+              <img 
+                src="/20240213_195733[1].jpg"
+                alt="Octavia Pais - Life & Public Speaking Coach"
+                className="w-full h-full object-cover rounded-3xl shadow-2xl transition-all duration-300 hover:scale-105"
+                loading="lazy"
+              />
             </div>
           </div>
 
-          {/* About Text with Enhanced Typography */}
-          <div className="animate-on-scroll premium-slide-in-right" style={{ animationDelay: '0.3s' }}>
-            <h2 className="font-playfair text-4xl md:text-6xl font-bold mb-8 gradient-text text-shadow-gold">
+          {/* About Text - Clean and Professional */}
+          <div className="animate-on-scroll">
+            <h2 className="font-serif text-5xl md:text-6xl font-extrabold mb-8 text-gold tracking-wide leading-tight">
               Meet Octavia Pais
             </h2>
             
-            <div className="space-y-6 text-responsive-lg leading-relaxed">
-              <PremiumCard variant="glass" className="p-6 premium-fade-in border-0" style={{ animationDelay: '0.5s' }}>
-                <p className="text-muted-foreground">
-                  After years in <span className="text-gold font-semibold bg-gold/10 px-2 py-1 rounded">banking, education & leadership</span>, 
-                  I now help people break mental barriers, build true self-belief, and 
-                  <span className="text-gold font-semibold bg-gold/10 px-2 py-1 rounded ml-1">show up powerfully</span> in life and work.
+            <div className="space-y-8">
+              <div className="relative p-10 rounded-xl border border-gold/20 bg-navy-light/30 backdrop-blur-sm">
+                <p className="text-white text-lg leading-loose font-light mb-4">
+                  After over two decades in banking, leadership, and education, I reached a turning point. I realized the real work wasn't just about success on paper—it was about silencing self-doubt, finding your voice, and showing up as the most powerful version of yourself.
                 </p>
-              </PremiumCard>
+                <p className="text-white text-lg leading-loose font-light">
+                  Now, I help ambitious individuals break free from limiting beliefs, build deep inner confidence, and express themselves with clarity and conviction—on stage, at work, and in life.
+                </p>
+                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/3 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent animate-fade-in" />
+              </div>
               
-              <PremiumCard variant="glass" className="p-6 premium-fade-in border-0" style={{ animationDelay: '0.7s' }}>
-                <p className="text-muted-foreground">
-                  My coaching combines <span className="text-gold font-semibold bg-gold/10 px-2 py-1 rounded">mindset transformation</span> with 
-                  real-world communication tools to help you own your story and express it clearly.
+              <div className="relative p-10 rounded-xl border border-gold/20 bg-navy-light/30 backdrop-blur-sm">
+                <p className="text-white text-lg leading-loose font-light">
+                  My coaching blends mindset transformation with real-world communication tools—so you don't just think differently, you live differently.
                 </p>
-              </PremiumCard>
+                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/3 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent animate-fade-in" />
+              </div>
 
-              <PremiumCard variant="glass" className="p-6 premium-fade-in border-0" style={{ animationDelay: '0.9s' }}>
-                <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-gold rounded-full"></span>
-                    <span>NLP Practitioner</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-gold rounded-full"></span>
-                    <span>MA Literature</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-gold rounded-full"></span>
-                    <span>B.Ed</span>
-                  </div>
-                </div>
-              </PremiumCard>
+              <div className="relative p-10 rounded-xl border border-gold/20 bg-navy-light/30 backdrop-blur-sm">
+                <h3 className="font-serif font-bold text-gold mb-6 text-2xl">Credentials:</h3>
+                <ul className="text-white text-lg space-y-3 grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-8">
+                  <li className="flex items-center">
+                    <svg className="w-6 h-6 text-gold mr-3" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                    Certified Life Coach
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-6 h-6 text-gold mr-3" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                    Public Speaking Trainer
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-6 h-6 text-gold mr-3" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                    NLP Practitioner
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-6 h-6 text-gold mr-3" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                    Author & Keynote Speaker
+                  </li>
+                </ul>
+                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/3 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent animate-fade-in" />
+              </div>
             </div>
-            
-            <div className="mt-10 premium-fade-in" style={{ animationDelay: '1.1s' }}>
-              <PremiumButton 
-                variant="primary" 
-                size="lg" 
-                withGlow 
-                withShimmer
-                className="font-bold px-8 py-4 premium-button-hover"
+
+            {/* Call to Action Button */}
+            <div className="mt-12 text-center">
+              <button 
+                className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-lg font-bold text-navy rounded-full group bg-gradient-to-br from-gold to-gold-dark group-hover:from-gold group-hover:to-gold-dark hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-gold-light dark:focus:ring-gold-dark transform transition-all duration-300 hover:scale-105"
                 onClick={() => window.open("https://calendly.com/octaviathelifecoach/30min", "_blank")}
               >
-                Book a Free Clarity Call
-              </PremiumButton>
+                <span className="relative px-8 py-4 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-full group-hover:bg-opacity-0">
+                  Book a Free Clarity Call
+                </span>
+              </button>
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );

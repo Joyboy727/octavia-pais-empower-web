@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import HeroSection from "@/components/home/HeroSection";
+
 import AboutSection from "@/components/home/AboutSection";
 import WhoIHelpSection from "@/components/home/WhoIHelpSection";
 import BenefitsSection from "@/components/home/BenefitsSection";
@@ -9,6 +10,8 @@ import TestimonialCards from "@/components/TestimonialCards";
 import CTASection from "@/components/home/CTASection";
 
 const Home = () => {
+
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -30,6 +33,7 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-navy">
       <HeroSection />
+
       <AboutSection />
       <WhoIHelpSection />
       <BenefitsSection />

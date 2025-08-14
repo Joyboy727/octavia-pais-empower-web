@@ -3,10 +3,10 @@ import PremiumCard from "@/components/PremiumCard";
 
 const WhoIHelpSection = () => {
   const challenges = [
-    { icon: "🔒", text: "Stuck", delay: "0.1s", description: "Feeling trapped in current situation" },
-    { icon: "😰", text: "Overwhelmed", delay: "0.2s", description: "Too many thoughts, too little clarity" },
-    { icon: "🤔", text: "Overthinking", delay: "0.3s", description: "Analysis paralysis holding you back" },
-    { icon: "🚀", text: "Ready for Action", delay: "0.4s", description: "Prepared to make the change" }
+    { icon: "🔒", text: "Stuck", delay: "0.1s", description: "Trapped in your current situation with no clear way forward" },
+    { icon: "😰", text: "Overwhelmed", delay: "0.2s", description: "Too many thoughts, too much pressure, zero clarity" },
+    { icon: "🤔", text: "Overthinking", delay: "0.3s", description: "Paralyzed by what-ifs, doubts, and constant second-guessing" },
+    { icon: "🚀", text: "Ready for Action", delay: "0.4s", description: "You know there’s more for you—and you're ready to claim it" }
   ];
 
   return (
@@ -24,11 +24,14 @@ const WhoIHelpSection = () => {
           </PremiumCard>
           
           <h2 className="font-playfair text-3xl md:text-5xl font-bold mb-8 gradient-text premium-slide-up text-shadow-gold">
-            Who I Help Transform Their Lives
+            This Is Where the Shift Begins
           </h2>
           
           <p className="text-responsive-lg text-muted-foreground mb-12 max-w-3xl mx-auto premium-fade-in" style={{ animationDelay: '0.3s' }}>
-            Whether you're feeling any of these emotions or situations, you're in exactly the right place for transformation:
+            Whether you're battling self-doubt, buried under overthinking, or standing at the edge of something big—this space is made for your transformation.
+          </p>
+          <p className="text-responsive-lg text-muted-foreground mb-12 max-w-3xl mx-auto premium-fade-in" style={{ animationDelay: '0.3s' }}>
+            Here’s what I help you move through:
           </p>
           
           {/* Enhanced Challenge Cards */}

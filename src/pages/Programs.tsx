@@ -156,7 +156,7 @@ const Programs = () => {
           Our Transformative Programs
         </h1>
         <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-          Luxury coaching designed for high-achievers. Unlock your next level of success, confidence, and impact.
+          Unlock your next level of success, confidence, and impact.
         </p>
       </motion.div>
 

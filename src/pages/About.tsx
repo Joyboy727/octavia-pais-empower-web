@@ -1,575 +1,275 @@
-
-import { useRef } from 'react';
-import { motion, useInView, Variants } from 'framer-motion';
-import { Card, CardContent } from '@/components/ui/card';
-import SkillBars from '@/components/about/SkillBars';
-import PersonalValues from '@/components/about/PersonalValues';
-import PhotoGallery from '@/components/about/PhotoGallery';
-import AchievementBadges from '@/components/about/AchievementBadges';
-
-// Define animation variants
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.3,
-    },
-  },
-};
-
-const itemVariants: Variants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 10,
-    },
-  },
-};
-
-const cardVariants: Variants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 10,
-    },
-  },
-  hover: {
-    scale: 1.02,
-    boxShadow: "0 10px 30px rgba(234, 179, 8, 0.2)",
-    borderColor: "rgba(234, 179, 8, 0.4)",
-    transition: {
-      type: "spring",
-      stiffness: 400,
-      damping: 10,
-    },
-  },
-};
-
-const imageVariants: Variants = {
-  hidden: { scale: 0.8, opacity: 0 },
-  visible: {
-    scale: 1,
-    opacity: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 10,
-    },
-  },
-  hover: {
-    scale: 1.05,
-    transition: {
-      type: "spring",
-      stiffness: 400,
-      damping: 10,
-    },
-  },
-};
-
-const listItemVariants: Variants = {
-  hidden: { x: -20, opacity: 0 },
-  visible: (i: number) => ({
-    x: 0,
-    opacity: 1,
-    transition: {
-      delay: i * 0.1,
-      type: "spring",
-      stiffness: 100,
-      damping: 10,
-    },
-  }),
-  hover: {
-    scale: 1.03,
-    color: "#EAB308",
-    transition: {
-      type: "spring",
-      stiffness: 400,
-      damping: 10,
-    },
-  },
-};
-
-const badgeVariants: Variants = {
-  hidden: { scale: 0, opacity: 0, rotate: -10 },
-  visible: (i: number) => ({
-    scale: 1,
-    opacity: 1,
-    rotate: 0,
-    transition: {
-      delay: i * 0.1,
-      type: "spring",
-      stiffness: 200,
-      damping: 15,
-    },
-  }),
-  hover: {
-    scale: 1.1,
-    rotate: 5,
-    y: -5,
-    transition: {
-      type: "spring",
-      stiffness: 400,
-      damping: 10,
-    },
-  },
-};
+import React, { useEffect, useRef, useState } from 'react';
+import { CinematicButton } from '@/components/CinematicButton';
+import { CinematicCard } from '@/components/CinematicCard';
+import { CinematicQuote } from '@/components/CinematicQuote';
+import { CertificationItem } from '@/components/CertificationItem';
+import { Sparkles, Heart, Globe, ArrowRight } from 'lucide-react';
 
 const About = () => {
+  const [isHeroVisible, setIsHeroVisible] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
 
-  const certifications = [
-    "Life Coach Certification – RR Training Systems",
-    "Life Coaching Certificate: Beginner to Advanced – Joeel & Natalie Rivera",
-    "NLP Practitioner Certification – Neuro-Linguistic Programming (NLP) Practitioner Course by Kain Ramsay",
-    "Masters in English Literature - Bangalore University",
-    "CIDTL (Cambridge International Diploma for Teachers and Learners) – Indus International School, Bangalore",
-    "Bachelor of Education – Bangalore University",
-    "Train the Trainer Certification – Jack Canfield's Canfield Training Group",
-    "NLP Practitioner Certification – Neuro-Linguistic Programming (NLP) Practitioner Certificate (Accredited) by Kain Ramsay"
-  ];
-
-  const credentialsOrder = [
-    "🏆 Certified Life Coach",
-    "🏆 Mindset Transformation Specialist", 
-    "🏆 NLP Practitioner",
-    "🏆 Public Speaking Expert"
-  ];
-
-  const timeline = [
-    { place: "Mangalore", description: "Born and raised", year: "Early Years" },
-    { place: "UAE", description: "Banking & Education Career", year: "Career Journey" },
-    { place: "Bangalore", description: "Life & Speaking Coach", year: "Current" }
-  ];
-
-  // Create refs for scroll animations
-  const heroRef = useRef(null);
-  const heroInView = useInView(heroRef, { once: true, margin: "-100px" });
+  useEffect(() => {
+    const timer = setTimeout(() => setIsHeroVisible(true), 300);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <div className="min-h-screen pt-24 bg-navy">
-      {/* Hero Section */}
-      <motion.section 
-        ref={heroRef}
-        initial="hidden"
-        animate={heroInView ? "visible" : "hidden"}
-        variants={containerVariants}
-        className="py-16 relative overflow-hidden"
-      >
-        <motion.div 
-          className="absolute inset-0 bg-gradient-to-br from-navy via-navy-light to-navy parallax-bg"
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-        />
+    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+      {/* Cinematic Hero Section */}
+      <section ref={heroRef} className="min-h-screen relative flex items-center cinematic-hero-bg">
+        {/* Parallax Background */}
+        <div className="absolute inset-0 cinematic-parallax-bg" />
         
-        <div className="relative z-10 container mx-auto px-4 mobile-padding">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Text Content */}
-            <motion.div variants={containerVariants}>
-              <motion.h1 
-                variants={itemVariants} 
-                className="font-playfair text-responsive-xl font-bold mb-6"
-              >
-                My Story
-              </motion.h1>
-              <motion.p 
-                variants={itemVariants}
-                className="text-lg text-gold font-medium mb-6"
-              >
-                Growth & Mindset Coach | Public Speaking Strategist
-              </motion.p>
-              <motion.div 
-                variants={containerVariants}
-                className="space-y-4 text-responsive-base leading-relaxed text-muted-foreground"
-              >
-                <motion.p variants={itemVariants}>
-                  From the outside, everything looked perfect. A successful career in banking. International experience. A respected teaching role in Bangalore. On paper, I had it all—stability, security, and success.
-                </motion.p>
-                <motion.p variants={itemVariants}>
-                  But deep down, I kept wondering: “Is this it?”
-                </motion.p>
-                <motion.p variants={itemVariants}>
-                  Maybe you’ve asked yourself the same question. That quiet nudge... the sense that you’re made for more—but unsure what “more” looks like or how to get there.
-                </motion.p>
-                <motion.p variants={itemVariants}>
-                  For me, that nudge became a wake-up call. After over 12 years in corporate roles and nearly a decade teaching in international schools, I stepped away from certainty—and into purpose.
-                </motion.p>
-                <motion.p variants={itemVariants}>
-                  I realized my true gift wasn’t in closing deals or delivering lessons. It was in helping people rewrite the stories they were telling themselves. To silence self-doubt. Speak with power and take meaningful action.
-                </motion.p>
-                <motion.p variants={itemVariants}>
-                  That’s how my coaching practice was born.
-                </motion.p>
-                <motion.p variants={itemVariants}>
-                  What I Do Today I help professionals—just like you—get unstuck and stand up for the life they actually want.
-                </motion.p>
-                <motion.p variants={itemVariants}>
-                  Whether you're 28 and wrestling with imposter syndrome… Or 48 and craving a life with more purpose than pressure— I'm here to guide you from anxious to aligned, and from quiet to confident.
-                </motion.p>
-                <motion.p variants={itemVariants}>
-                  You don’t have to keep playing small.
-                </motion.p>
-                <motion.p variants={itemVariants}>
-                  Fun Facts About Me Born and raised in the UAE, lived in Mangalore, and now in Bangalore. Each place shaped how I see the world. I'm deeply grounded in what I call aligned hustle—where faith meets focused action. I light up when I see someone go from, “I don’t think I can” to “Just watch me.”
-                </motion.p>
-                <motion.p variants={itemVariants}>
-                  Ready to Begin Your Transformation? If you’re feeling the pull toward something deeper, more empowered, and more you—that’s not random. That’s alignment knocking.
-                </motion.p>
-                <motion.p variants={itemVariants}>
-                  Book a free clarity call and let’s begin.
-                </motion.p>
-                <motion.div 
-                  variants={cardVariants}
-                  whileHover="hover"
-                  className="mt-8 p-6 bg-card/30 rounded-2xl border border-gold/20"
-                >
-                  <motion.h3 
-                    variants={itemVariants}
-                    className="text-xl font-bold text-gold mb-4"
-                  >
-                    💡 ✨ Fun Facts About Me
-                  </motion.h3>
-                  <motion.p variants={itemVariants}>
-                    I was born and raised in the UAE, spent a few years in Mangalore after marriage, and now call Bangalore home. Each place has shaped my worldview and added a unique layer to my journey.
-                  </motion.p>
-                  <motion.p 
-                    variants={itemVariants}
-                    className="mt-3"
-                  >
-                    I'm deeply rooted in practices like vision boards, prayer, affirmations, and what I call "aligned hustle"—where faith meets focused action.
-                  </motion.p>
-                  <motion.p 
-                    variants={itemVariants}
-                    className="mt-3"
-                  >
-                    Nothing excites me more than witnessing someone go from <span className="text-gold font-semibold">"I don't think I can"</span> to <span className="text-gold font-semibold">"Just watch me do it!"</span>
-                  </motion.p>
-                </motion.div>
-              </motion.div>
-            </motion.div>
-
-            {/* Portrait */}
-            <motion.div 
-              variants={itemVariants}
-              initial="hidden"
-              animate={heroInView ? "visible" : "hidden"}
-              transition={{ delay: 0.3 }}
-            >
-              <motion.div 
-                className="relative max-w-md mx-auto"
-                whileHover="hover"
-                variants={imageVariants}
-              >
-                <motion.div 
-                  className="absolute inset-0 bg-gold/20 rounded-3xl transform rotate-3"
-                  animate={{ 
-                    rotate: [3, 2, 4, 3],
-                    scale: [1, 1.02, 0.98, 1] 
-                  }}
-                  transition={{ 
-                    duration: 8, 
-                    repeat: Infinity, 
-                    repeatType: "reverse" 
-                  }}
-                />
-                <motion.img 
-                  src="/DSC_0790.JPG"
-                  alt="Octavia Pais"
-                  className="relative w-full rounded-3xl shadow-2xl"
-                  whileHover={{ scale: 1.03 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                />
-              </motion.div>
-            </motion.div>
-          </div>
-        </div>
-      </motion.section>
-
-
-      {/* Certifications */}
-      <motion.section 
-        className="py-16"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={containerVariants}
-      >
-        <div className="container mx-auto px-4 mobile-padding">
-          <motion.h2 
-            className="font-playfair text-2xl md:text-4xl font-bold text-center mb-12 gradient-text"
-            variants={itemVariants}
-          >
-            🎓 CERTIFICATIONS & TRAINING
-          </motion.h2>
-          <motion.p 
-            className="text-center text-muted-foreground mb-8 max-w-3xl mx-auto"
-            variants={itemVariants}
-          >
-            Years of experience and continuous learning have shaped my expertise across multiple domains
-          </motion.p>
-          
-          <motion.div 
-            className="grid grid-cols-1 gap-4 max-w-4xl mx-auto mb-16"
-            variants={containerVariants}
-          >
-            {certifications.map((cert, index) => (
-              <motion.div
-                key={cert}
-                custom={index}
-                variants={cardVariants}
-                whileHover="hover"
-              >
-                <Card className="bg-card/50 border-gold/20 transition-all duration-300 card-elegant">
-                  <CardContent className="p-4">
-                    <p className="text-muted-foreground text-sm">
-                      {cert}
-                    </p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <motion.h2 
-            className="font-playfair text-2xl md:text-4xl font-bold text-center mb-12 gradient-text"
-            variants={itemVariants}
-          >
-            Credentials & Expertise 🏆
-          </motion.h2>
-          
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto"
-            variants={containerVariants}
-          >
-            {credentialsOrder.map((cert, index) => (
-              <motion.div
-                key={cert}
-                custom={index}
-                variants={cardVariants}
-                whileHover="hover"
-              >
-                <Card className="bg-card/50 border-gold/20 transition-all duration-300 card-elegant text-center">
-                  <CardContent className="p-6">
-                    <h3 className="font-semibold text-base text-gold">
-                      {cert}
-                    </h3>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </motion.section>
-
-      {/* Coaching Style */}
-      <motion.section 
-        className="py-16 bg-navy-light/30"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={containerVariants}
-      >
-        <div className="container mx-auto px-4 mobile-padding text-center">
-          <motion.h2 
-            className="font-playfair text-2xl md:text-4xl font-bold mb-12 gradient-text"
-            variants={itemVariants}
-          >
-            My Coaching Style
-          </motion.h2>
-          
-          <motion.div 
-            className="max-w-4xl mx-auto"
-            variants={containerVariants}
-          >
-            <motion.div className="flex flex-wrap justify-center gap-4 mb-8">
-              {['Direct', 'Empowering', 'Energetic', 'Honest', 'Empathetic'].map((word, index) => (
-                <motion.span 
-                  key={word}
-                  className="bg-gold text-navy px-4 py-2 rounded-full text-base font-bold cursor-default"
-                  custom={index}
-                  variants={badgeVariants}
-                  whileHover="hover"
-                >
-                  {word}
-                </motion.span>
-              ))}
-            </motion.div>
-            
-            <motion.p 
-              className="text-responsive-lg leading-relaxed text-muted-foreground"
-              variants={itemVariants}
-            >
-              I believe in cutting through the noise and getting to the heart of what's holding you back. 
-              My approach combines <span className="text-gold font-semibold">compassionate understanding</span> with 
-              <span className="text-gold font-semibold"> practical action steps</span> that create real, lasting change.
-            </motion.p>
-          </motion.div>
-        </div>
-      </motion.section>
-
-      {/* Skills Section */}
-      <SkillBars />
-
-      {/* Personal Values */}
-      <PersonalValues />
-
-      {/* Photo Gallery */}
-      <PhotoGallery />
-
-      {/* Achievement Badges */}
-      <AchievementBadges />
-
-      {/* Personal Touch Section */}
-      <motion.section 
-        className="py-16 bg-navy-light"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={containerVariants}
-      >
-        <div className="container mx-auto px-4 mobile-padding">
-          <motion.div 
-            className="text-center mb-12"
-            variants={containerVariants}
-          >
-            <motion.h2 
-              className="text-responsive-2xl font-bold mb-4"
-              variants={itemVariants}
-            >
-              The <motion.span 
-                className="gradient-text"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  delay: 0.2, 
-                  duration: 0.8, 
-                  type: "spring", 
-                  stiffness: 100 
-                }}
-                viewport={{ once: true }}
-              >
-                Personal
-              </motion.span> Touch
-            </motion.h2>
-            <motion.p 
-              className="text-muted-foreground max-w-2xl mx-auto"
-              variants={itemVariants}
-            >
-              Beyond coaching, here's a glimpse into who I am and what I value.
-            </motion.p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            {/* Image */}
-            <motion.div 
-              className="md:order-2"
-              variants={imageVariants}
-              whileHover="hover"
-            >
-              <motion.div className="relative">
-                <motion.div 
-                  className="absolute inset-0 bg-gold/20 rounded-3xl transform rotate-3"
-                  animate={{ 
-                    rotate: [3, 2, 4, 3],
-                    scale: [1, 1.02, 0.98, 1] 
-                  }}
-                  transition={{ 
-                    duration: 8, 
-                    repeat: Infinity, 
-                    repeatType: "reverse" 
-                  }}
-                />
-                <motion.img 
-                  src="/lovable-uploads/ac02951f-79a7-4a33-ae14-7e22133f5d82.png" 
-                  alt="Octavia Pais Personal" 
-                  className="relative w-full rounded-3xl shadow-2xl"
-                  whileHover={{ scale: 1.03 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                />
-              </motion.div>
-            </motion.div>
-
-            {/* Text Content */}
-            <motion.div 
-              className="md:order-1 space-y-6"
-              variants={containerVariants}
-            >
-              <motion.h3 
-                className="font-playfair text-xl font-bold text-gold mb-4"
-                variants={itemVariants}
-              >
-                When I'm Not Coaching
-              </motion.h3>
+        {/* Bokeh Particles */}
+        <div className="absolute inset-0 cinematic-bokeh-particles" />
+        
+        <div className="relative z-10 container mx-auto px-4 py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-[80vh]">
+            {/* Left: Content */}
+            <div className="space-y-8 lg:pr-12">
+              <div className={`cinematic-text-reveal ${isHeroVisible ? 'animate' : ''}`}>
+                <h1 className="font-playfair text-6xl md:text-7xl lg:text-8xl font-bold leading-none tracking-tight">
+                  <span className="cinematic-gradient-text block">My</span>
+                  <span className="cinematic-gradient-text-animated block mt-2">Story</span>
+                </h1>
+              </div>
               
-              <motion.div 
-                className="grid grid-cols-2 gap-3"
-                variants={containerVariants}
-              >
-                {[
-                  { icon: '📚', activity: 'Reading' },
-                  { icon: '🌱', activity: 'Gardening' },
-                  { icon: '🏔️', activity: 'Adventure' },
-                  { icon: '🍳', activity: 'Cooking' }
-                ].map((hobby, index) => (
-                  <motion.div 
-                    key={hobby.activity}
-                    className="bg-card/50 border-gold/20 rounded-lg p-4 text-center card-elegant"
-                    custom={index}
-                    variants={listItemVariants}
-                    whileHover="hover"
-                  >
-                    <motion.div 
-                      className="text-xl mb-2"
-                      animate={{ 
-                        scale: [1, 1.2, 1],
-                        rotate: [0, 5, 0] 
-                      }}
-                      transition={{ 
-                        duration: 2, 
-                        delay: index * 0.3,
-                        repeat: Infinity, 
-                        repeatDelay: 5
-                      }}
-                    >
-                      {hobby.icon}
-                    </motion.div>
-                    <motion.div className="text-sm text-muted-foreground">{hobby.activity}</motion.div>
-                  </motion.div>
-                ))}
-              </motion.div>
+              <div className={`cinematic-text-reveal delay-300 ${isHeroVisible ? 'animate' : ''}`}>
+                <p className="text-xl md:text-2xl text-gold/90 font-light tracking-wide leading-relaxed">
+                  Growth & Mindset Coach | Public Speaking Strategist
+                </p>
+              </div>
+              
+              <div className={`cinematic-text-reveal delay-500 ${isHeroVisible ? 'animate' : ''}`}>
+                <p className="text-lg text-gray-300 leading-relaxed max-w-xl">
+                  From the outside, everything looked perfect. A successful career in banking. 
+                  International experience. A respected teaching role in Bangalore.
+                </p>
+              </div>
+              
+              <div className={`cinematic-text-reveal delay-700 ${isHeroVisible ? 'animate' : ''}`}>
+                <CinematicButton 
+                  className="cinematic-hero-cta"
+                  urgencyText="Limited spots available this month"
+                >
+                  Begin Your Transformation
+                  <ArrowRight className="ml-2" size={20} />
+                </CinematicButton>
+              </div>
+            </div>
 
-              <motion.div 
-                className="bg-card/30 rounded-2xl p-6 border border-gold/20"
-                variants={cardVariants}
-                whileHover="hover"
-              >
-                <motion.p 
-                  className="text-base leading-relaxed text-muted-foreground italic"
-                  variants={itemVariants}
-                >
-                  "When you arise in the morning, think of what a precious privilege it is to be alive - 
-                  to breathe, to think, to enjoy, to love."
-                </motion.p>
-                <motion.p 
-                  className="text-gold font-medium mt-4"
-                  variants={itemVariants}
-                >
-                  — A quote that guides my life and work
-                </motion.p>
-              </motion.div>
-            </motion.div>
+            {/* Right: Cinematic Portrait */}
+            <div className={`cinematic-image-reveal ${isHeroVisible ? 'animate' : ''}`}>
+              <div className="relative max-w-lg mx-auto">
+                {/* Image Frame */}
+                <div className="cinematic-image-frame">
+                  <img 
+                    src="/octthe.png"
+                    alt="Professional cinematic portrait, soft spotlight lighting, dark background with subtle grain, high-resolution vertical frame, elegant pose - Niclas Moser on Unsplash"
+                    className="w-full h-auto rounded-2xl cinematic-image-glow"
+                    style={{ width: '100%', height: 'auto' }}
+                  />
+                  
+                  {/* Golden Frame Border */}
+                  <div className="cinematic-golden-frame" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </motion.section>
+      </section>
+
+      {/* Cinematic Quote Section */}
+      <section className="py-32 relative">
+        <div className="container mx-auto px-4">
+          <CinematicQuote>
+            "But deep down, I kept wondering: 'Is this it?'"
+          </CinematicQuote>
+        </div>
+      </section>
+
+      {/* Storytelling Flow */}
+      <section className="py-20 relative">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto space-y-12">
+            <div className="cinematic-story-block">
+              <p className="text-xl text-gray-300 leading-relaxed text-center">
+                Maybe you've asked yourself the same question. That quiet nudge... the sense that you're made for more—but unsure what "more" looks like or how to get there.
+              </p>
+            </div>
+            
+            <div className="cinematic-story-block">
+              <p className="text-xl text-gray-300 leading-relaxed text-center">
+                For me, that nudge became a wake-up call. After over 12 years in corporate roles and nearly a decade teaching in international schools, I stepped away from certainty—and into purpose.
+              </p>
+            </div>
+            
+            <CinematicQuote>
+              I realized my true gift wasn't in closing deals or delivering lessons. It was in helping people rewrite the stories they were telling themselves.
+            </CinematicQuote>
+          </div>
+        </div>
+      </section>
+
+      {/* What I Do Today - Split Layout */}
+      <section className="py-32 bg-gradient-to-b from-black to-gray-900">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-8">
+              <h2 className="font-playfair text-5xl md:text-6xl font-bold cinematic-gradient-text">
+                What I Do Today
+              </h2>
+              <div className="space-y-6 text-lg text-gray-300 leading-relaxed">
+                <p>
+                  I help professionals—just like you—get unstuck and stand up for the life they actually want.
+                </p>
+                <p>
+                  Whether you're 28 and wrestling with imposter syndrome… Or 48 and craving a life with more purpose than pressure—I'm here to guide you from anxious to aligned, and from quiet to confident.
+                </p>
+                <div className="cinematic-highlight-box">
+                  <p className="text-xl font-semibold text-gold">
+                    You don't have to keep playing small.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="cinematic-secondary-image">
+              <img 
+                src="/octh2.png"
+                alt="Professional cinematic portrait, soft spotlight lighting, dark background with subtle grain, high-resolution vertical frame, elegant pose - Valentin Lacoste on Unsplash"
+                className="w-full h-auto rounded-2xl"
+                style={{ width: '100%', height: 'auto' }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Fun Facts - Premium Interaction Cards */}
+      <section className="py-32 relative">
+        <div className="container mx-auto px-4">
+          <h2 className="font-playfair text-4xl md:text-5xl font-bold text-center mb-20 cinematic-gradient-text">
+            The Personal Touch
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <CinematicCard
+              icon={<Globe size={48} />}
+              title="Global Perspective"
+              description="Born and raised in the UAE, lived in Mangalore, and now in Bangalore — each place shaped how I see the world and approach transformation."
+            />
+            
+            <CinematicCard
+              icon={<Heart size={48} />}
+              title="Aligned Hustle"
+              description="Deeply grounded in what I call 'aligned hustle' — where faith meets focused action, creating sustainable change from the inside out."
+            />
+            
+            <CinematicCard
+              icon={<Sparkles size={48} />}
+              title="Transformation Joy"
+              description="I light up when I see someone go from 'I don't think I can' to 'Just watch me.' That moment of breakthrough is pure magic."
+            />
+          </div>
+          
+          {/* Connecting Lines */}
+          <div className="cinematic-connection-lines" />
+        </div>
+      </section>
+
+      {/* Certifications & Training Section */}
+      <section className="py-32 relative certifications-section">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            {/* Section Header */}
+            <div className="text-center mb-16">
+              <h2 className="font-playfair text-4xl md:text-5xl font-bold cinematic-gradient-text mb-6 certification-title-shimmer">
+                Certifications & Training
+              </h2>
+              
+              {/* Horizontal Gold Line */}
+              <div className="certification-separator mx-auto mb-8" />
+              
+              <p className="text-lg text-gray-400 font-light italic max-w-3xl mx-auto leading-relaxed">
+                A strong foundation in education, communication, and personal transformation — built through academic study and hands-on experience.
+              </p>
+            </div>
+
+            {/* Certifications Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              <div className="space-y-2">
+                <CertificationItem 
+                  title="Certified Life Coach – RR Training Systems"
+                  index={0}
+                />
+                <CertificationItem 
+                  title="Advanced Life Coaching Certificate – Joeel & Natalie Rivera (Beginner to Advanced)"
+                  index={1}
+                />
+                <CertificationItem 
+                  title="NLP Practitioner Certification – Kain Ramsay (Accredited Program)"
+                  index={2}
+                />
+                <CertificationItem 
+                  title="Train the Trainer – Canfield Training Group (Jack Canfield Methodology)"
+                  index={3}
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <CertificationItem 
+                  title="Masters in English Literature – Bangalore University"
+                  index={4}
+                />
+                <CertificationItem 
+                  title="Bachelor of Education (B.Ed.) – Bangalore University"
+                  index={5}
+                />
+                <CertificationItem 
+                  title="Bachelor of Business Management (BBM) – Mangalore University"
+                  index={6}
+                />
+                <CertificationItem 
+                  title="CIDTL (Cambridge International Diploma for Teachers and Learners) – Indus International School, Bangalore"
+                  index={7}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mid-Page CTA */}
+      <section className="py-20 bg-gradient-to-r from-gold/10 via-gold/5 to-transparent">
+        <div className="container mx-auto px-4 text-center">
+          <CinematicQuote>
+            Ready to rewrite your story?
+          </CinematicQuote>
+          <CinematicButton 
+            className="mt-8"
+            urgencyText="Only 3 spots left this month"
+          >
+            Book Your Clarity Call
+          </CinematicButton>
+        </div>
+      </section>
+
+      {/* Footer CTA Banner */}
+      <section className="py-20 bg-gradient-to-r from-gold to-gold-light">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="font-playfair text-4xl md:text-5xl font-bold text-black mb-6">
+            Ready to Begin Your Transformation?
+          </h2>
+          <p className="text-xl text-black/80 mb-8 max-w-2xl mx-auto">
+            If you're feeling the pull toward something deeper, more empowered, and more you — that's not random. That's alignment knocking.
+          </p>
+          <CinematicButton className="bg-black text-gold hover:bg-black/90">
+            Book a Free Clarity Call
+          </CinematicButton>
+        </div>
+      </section>
     </div>
   );
 };

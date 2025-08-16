@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, Star, Zap } from "lucide-react";
+import { CheckCircle, Star, Zap, ArrowRight } from "lucide-react";
+import PremiumButton from "@/components/PremiumButton";
+// Remove these imports since we'll use direct divs with proper styling
 
 const programData = [
   {
@@ -79,56 +81,92 @@ const ProgramCard = ({ program }) => {
     onscreen: {
       y: 0,
       opacity: 1,
-      transition: { type: "spring", stiffness: 50, damping: 20, duration: 0.8 },
+      transition: { type: "spring" as const, stiffness: 50, damping: 20, duration: 0.8 },
     },
   };
 
   return (
     <motion.div
       variants={cardVariants}
-      className="bg-[#1a1a2e] rounded-2xl overflow-hidden shadow-2xl shadow-black/30 flex flex-col group relative border border-white/10"
+      whileHover={{ y: -8, transition: { duration: 0.3 } }}
+      className="bg-gradient-to-br from-navy-light/80 to-navy/80 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-gold/20 flex flex-col group relative border border-gold/20 hover:border-gold/40 transition-all duration-300"
     >
-      <div className="relative">
-        <img src={program.image} alt={program.title} className="w-full h-56 object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20"></div>
-        <div className="absolute top-2 right-2 bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full shadow-lg">{program.tag}</div>
-        <div className="absolute bottom-0 left-0 p-4">
-          <h3 className="text-2xl font-bold text-yellow-400 flex items-center gap-2"><Zap size={20} /> {program.title}</h3>
-          <p className="text-sm italic text-gray-300">{program.tagline}</p>
+      {/* Premium Image Section */}
+      <div className="relative overflow-hidden">
+        <motion.img 
+          src={program.image} 
+          alt={`${program.title} - Premium coaching program featuring confident professionals`}
+          className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/30 to-transparent" />
+        
+        {/* Premium Glassmorphism Tag */}
+        <div className="absolute top-4 right-4 bg-gold/20 backdrop-blur-md border border-gold/30 text-gold text-xs font-bold px-3 py-2 rounded-full shadow-lg">
+          {program.tag}
+        </div>
+        
+        {/* Program Header */}
+        <div className="absolute bottom-0 left-0 p-6">
+          <h3 className="font-heading text-2xl md:text-3xl font-bold text-gold mb-2 flex items-center gap-2">
+            <Zap size={24} className="text-gold-light" /> 
+            {program.title}
+          </h3>
+          <p className="text-sm text-gray-200 font-medium">{program.tagline}</p>
         </div>
       </div>
 
+      {/* Premium Content Section */}
       <div className="p-6 flex-grow flex flex-col">
-        <p className="text-gray-300 mb-4 text-sm flex-grow">{program.description}</p>
+        <p className="text-gray-200 mb-6 text-base leading-relaxed">{program.description}</p>
         
-        <div className="mb-6">
-          <h4 className="font-bold text-white mb-3">You'll Get:</h4>
-          <ul className="space-y-3">
+        {/* Benefits Section */}
+        <div className="mb-8">
+          <h4 className="font-heading font-bold text-gold mb-4 text-lg">You'll Get:</h4>
+          <ul className="space-y-4">
             {program.benefits.map((benefit, index) => (
-              <motion.li key={index} className="flex items-start gap-3 transition-transform duration-300 group-hover:translate-x-1">
-                <benefit.icon className="text-yellow-400 mt-1 flex-shrink-0" size={18} />
+              <motion.li 
+                key={index} 
+                className="flex items-start gap-3 transition-all duration-300 group-hover:translate-x-1"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <CheckCircle className="text-gold mt-1 flex-shrink-0" size={20} />
                 <div>
-                  <span className="font-semibold text-white">{benefit.text}</span>
-                  <span className="text-gray-400 block text-xs"> - {benefit.detail}</span>
+                  <span className="font-semibold text-white text-base">{benefit.text}</span>
+                  <span className="text-gray-300 block text-sm mt-1">{benefit.detail}</span>
                 </div>
               </motion.li>
             ))}
           </ul>
         </div>
 
+        {/* Premium Pricing & CTA Section */}
         <div className="mt-auto">
-            <div className="flex items-baseline justify-center gap-2 mb-4">
-                <span className="text-4xl font-bold text-yellow-400">₹{program.price}</span>
-                <span className="text-xl text-gray-500 line-through">₹{program.oldPrice}</span>
+          <div className="bg-navy/60 backdrop-blur-sm rounded-xl p-4 mb-6 border border-gold/20">
+            <div className="flex items-baseline justify-center gap-3 mb-2">
+              <span className="text-4xl font-bold text-gold">₹{program.price}</span>
+              <span className="text-xl text-gray-400 line-through">₹{program.oldPrice}</span>
             </div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <a href="https://calendly.com/octaviathelifecoach/30min" target="_blank" rel="noopener noreferrer">
-                <Button className="w-full bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-bold text-lg py-6 rounded-xl shadow-lg hover:shadow-yellow-400/30 transition-shadow duration-300 border-2 border-transparent hover:border-yellow-300">
-                  {program.ctaText}
-                </Button>
-              </a>
-            </motion.div>
-            <p className="text-center text-gray-500 text-xs mt-3">{program.trustSignal}</p>
+            <div className="flex justify-center items-center gap-1 mb-2">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-4 h-4 fill-gold text-gold" />
+              ))}
+              <span className="text-sm text-gray-300 ml-2">4.9/5 (95+ reviews)</span>
+            </div>
+          </div>
+          
+          <PremiumButton 
+            variant="cta" 
+            size="lg" 
+            className="w-full mb-3"
+            onClick={() => window.open("https://calendly.com/octaviathelifecoach/30min", "_blank")}
+          >
+            {program.ctaText}
+            <ArrowRight className="w-5 h-5 ml-2" />
+          </PremiumButton>
+          
+          <p className="text-center text-gray-400 text-sm">{program.trustSignal}</p>
         </div>
       </div>
     </motion.div>
@@ -145,49 +183,102 @@ const Programs = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0d0d1a] text-white py-24 px-4 sm:px-6 lg:px-8">
-      <motion.div
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, type: "spring" }}
-        className="text-center mb-16"
-      >
-        <h1 className="text-5xl md:text-6xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-amber-500">
-          Our Transformative Programs
-        </h1>
-        <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-          Unlock your next level of success, confidence, and impact.
-        </p>
-      </motion.div>
+    <div className="min-h-screen bg-navy text-white">
+      {/* Premium Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-navy via-navy-light to-navy py-24">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-20"
+          style={{
+            backgroundImage: `url('/DSC_0855.JPG')`,
+            backgroundAttachment: 'fixed'
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-navy/80 via-navy/60 to-navy/90" />
+        
+        <div className="relative z-10 py-32 text-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <h1 className="font-heading text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gold via-gold-light to-gold bg-clip-text text-transparent">
+              Transformative Programs
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto mb-8 leading-relaxed">
+              Elite coaching designed for real-world results. Clear frameworks. Measurable impact.
+            </p>
+            <PremiumButton 
+              variant="cta" 
+              size="lg" 
+              className="shadow-xl hover:shadow-2xl"
+              onClick={() => window.open("https://calendly.com/octaviathelifecoach/30min", "_blank")}
+            >
+              Book Your Free Clarity Call
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </PremiumButton>
+          </motion.div>
+        </div>
+      </section>
 
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 max-w-6xl mx-auto"
-      >
-        {programData.map((program) => (
-          <ProgramCard key={program.id} program={program} />
-        ))}
-      </motion.div>
+      {/* Premium Program Cards Grid */}
+      <section className="bg-navy-light/30 py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12"
+          >
+            {programData.map((program) => (
+              <ProgramCard key={program.id} program={program} />
+            ))}
+          </motion.div>
+        </div>
+      </section>
 
-      <motion.div 
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, duration: 0.7, type: "spring" }}
-        className="text-center mt-20 bg-black/20 border border-yellow-400/20 rounded-2xl p-8 max-w-4xl mx-auto shadow-lg"
-      >
-        <h2 className="text-3xl font-bold text-white mb-4">Ready to Start Your Transformation?</h2>
-        <p className="text-gray-300 mb-6">Let's discuss your goals and find the perfect path forward. Book a complimentary consultation call today.</p>
-        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <a href="https://calendly.com/octaviathelifecoach/30min" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="bg-gradient-to-r from-gray-700 to-gray-800 text-white font-bold text-lg py-7 px-10 rounded-xl shadow-lg hover:shadow-white/10 transition-shadow duration-300 border-2 border-gray-600 hover:border-gray-400">
-                    Book a Free Consultation
-                </Button>
-            </a>
-        </motion.div>
-      </motion.div>
-
+      {/* Mid-Page CTA Banner */}
+      <section className="relative overflow-hidden py-24">
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url('/DSC_0697.JPG')`,
+            backgroundAttachment: 'fixed'
+          }}
+        />
+        <div className="absolute inset-0 bg-navy/85" />
+        
+        <div className="relative z-10 text-center py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="font-heading text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-gold-light to-gold bg-clip-text text-transparent">
+              Ready to Start Your Transformation?
+            </h2>
+            <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+              Let's discuss your goals and find the perfect path forward. Book a complimentary consultation call today.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <PremiumButton 
+                variant="cta" 
+                size="lg"
+                onClick={() => window.open("https://calendly.com/octaviathelifecoach/30min", "_blank")}
+              >
+                Book a Free Consultation
+              </PremiumButton>
+              <PremiumButton 
+                variant="outline" 
+                size="lg"
+                onClick={() => document.getElementById('programs')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                See Program Details
+              </PremiumButton>
+            </div>
+          </motion.div>
+        </div>
+      </section>
     </div>
   );
 };

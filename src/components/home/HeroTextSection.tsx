@@ -54,7 +54,7 @@ const HeroTextSection = () => {
       {/* Premium CTA Buttons - Updated with click handlers */}
       <div className="flex flex-col gap-4 sm:gap-6 justify-center items-center mb-12 animate-fade-in-up" style={{ animationDelay: '0.9s' }}>
         <PremiumButton 
-          variant="default" 
+          variant="primary" 
           size="lg" 
           className="bg-white text-black hover:bg-gray-200 font-bold px-8 sm:px-10 py-4 sm:py-5 text-lg sm:text-xl rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1"
           onClick={() => handleButtonClick("Book Free Clarity Call")}

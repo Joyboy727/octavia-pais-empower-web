@@ -20,16 +20,9 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      "react/jsx-runtime": "react/jsx-runtime.js",
-      "react/jsx-dev-runtime": "react/jsx-dev-runtime.js"
     },
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react/jsx-runtime']
+    include: ['react', 'react-dom']
   },
-  build: {
-    rollupOptions: {
-      external: [],
-    }
-  }
 }));

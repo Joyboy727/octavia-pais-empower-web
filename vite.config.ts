@@ -20,11 +20,16 @@ export default defineConfig(({ mode }) => ({
     },
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react/jsx-runtime']
+    exclude: ['react/jsx-runtime', 'react/jsx-dev-runtime']
   },
   build: {
     rollupOptions: {
-      external: []
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          ui: ['@radix-ui/react-accordion', '@radix-ui/react-dialog']
+        }
+      }
     }
   }
 }));

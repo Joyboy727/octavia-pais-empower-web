@@ -50,12 +50,8 @@ const Navbar = () => {
     }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
-          <Link to="/" onClick={handleNavClick} className="flex items-center space-x-2 sm:space-x-3 group">
-            <div>
-              <h1 className="font-playfair font-bold text-lg sm:text-xl text-gold gradient-text">
-                Octavia Pais
-              </h1>
-            </div>
+          <Link to="/" onClick={handleNavClick} className="flex items-center">
+            <img src="/octavialogo.png" alt="Octavia Pais Logo" className="h-12 sm:h-16" />
           </Link>
 
           {/* Desktop Navigation */}

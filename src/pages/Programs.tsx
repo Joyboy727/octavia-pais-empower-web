@@ -35,7 +35,7 @@ const programData = [
     price: "15,000",
     oldPrice: "22,500",
     ctaText: "🔥 Build Momentum Now",
-    image: "/DSC_0736.JPG",
+    image: "/bgr.jpg",
     tag: "Early Bird Offer!",
     trustSignal: "✔️ 92% completion rate | ⭐ Featured in Forbes",
   },
@@ -201,10 +201,10 @@ const Programs = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <h1 className="font-heading text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gold via-gold-light to-gold bg-clip-text text-transparent">
+            <h1 className="font-heading text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gold via-gold-light to-gold bg-clip-text text-transparent font-playfair">
               Transformative Programs
             </h1>
-            <p className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto mb-8 leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto mb-8 leading-relaxed font-inter">
               Elite coaching designed for real-world results. Clear frameworks. Measurable impact.
             </p>
             <PremiumButton 
@@ -254,10 +254,10 @@ const Programs = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="font-heading text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-gold-light to-gold bg-clip-text text-transparent">
+            <h2 className="font-heading text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white via-gold-light to-gold bg-clip-text text-transparent font-playfair">
               Ready to Start Your Transformation?
             </h2>
-            <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto font-inter">
               Let's discuss your goals and find the perfect path forward. Book a complimentary consultation call today.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

@@ -4,7 +4,7 @@ import SocialMediaIcons from "@/components/SocialMediaIcons";
 
 const CTASection = () => {
   const handleButtonClick = (buttonText: string) => {
-    const bookingButtons = ["Join The Bootcamp", "Apply Now", "Book Your Spot", "Book Free Clarity Call", "Start Your Transformation", "Send Message"];
+    const bookingButtons = ["Join The Bootcamp", "Apply Now", "Book Your Spot", "Start Your Transformation", "Send Message"];
     const callButtons = ["Call Now", "Call Now (desktop)", "Call Now (mobile)", "Call Octavia Now"];
     
     if (bookingButtons.includes(buttonText)) {
@@ -59,7 +59,7 @@ const CTASection = () => {
                 withGlow 
                 withShimmer
                 className="font-bold px-6 sm:px-10 py-4 sm:py-5 text-lg sm:text-xl w-full sm:w-auto"
-                onClick={() => handleButtonClick("Book Free Clarity Call")}
+                onClick={() => window.open("https://calendly.com/octaviathelifecoach/30min", "_blank")}
               >
                 Book Free Clarity Call
               </PremiumButton>

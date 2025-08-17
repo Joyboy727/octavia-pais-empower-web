@@ -41,7 +41,7 @@ const Success = () => {
     {
       name: "Ananya Sharma",
       title: "From Student to Leader",
-      image: "https://images.unsplash.com/photo-1573496528298-f0e9d3c7ce55?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTAwNDR8MHwxfHNlYXJjaHw2fHxwcm9mZXNzaW9uYWwlMjB3b21hbiUyMG9mZmljZSUyMGJ1c2luZXNzJTIwYXR0aXJlJTIwbW9kZXJuJTIwd29ya3NwYWNlfGVufDB8MHx8fDE3NTUyNzkwMTZ8MA&ixlib=rb-4.1.0&q=85",
+      image: "/ananya.jpg",
       attribution: "Christina @ wocintechchat.com on Unsplash",
       story: "Struggled with self-doubt and public speaking anxiety that held her back from leadership opportunities",
       transformation: "Now leads presentations confidently, mentors other students, and secured a leadership role in her organization",
@@ -67,7 +67,7 @@ const Success = () => {
     {
       name: "Priya Mehta",
       title: "Mindset Revolution",
-      image: "https://images.unsplash.com/photo-1696453424814-72e41b08880d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTAwNDR8MHwxfHNlYXJjaHwyfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdCUyMGRpdmVyc2UlMjBwcm9mZXNzaW9uYWwlMjBob21lJTIwb2ZmaWNlJTIwY29uZmlkZW50JTIwZXhwcmVzc2lvbnxlbnwwfDF8fHwxNzU1Mjc5MDE3fDA&ixlib=rb-4.1.0&q=85",
+      image: "/priya.jpg",
       attribution: "EFFYDESK on Unsplash",
       story: "Battled with imposter syndrome and fear of failure that prevented her from taking risks or pursuing her dreams",
       transformation: "Started her own business, became a motivational speaker, and now helps other women overcome similar challenges",
@@ -203,7 +203,7 @@ const Success = () => {
                 
                 <div className="relative overflow-hidden rounded-3xl shadow-2xl cinematic-image-frame">
                   <img 
-                    src="https://images.unsplash.com/photo-1573496528298-f0e9d3c7ce55?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTAwNDR8MHwxfHNlYXJjaHw2fHxwcm9mZXNzaW9uYWwlMjB3b21hbiUyMG9mZmljZSUyMGJ1c2luZXNzJTIwYXR0aXJlJTIwbW9kZXJuJTIwd29ya3NwYWNlfGVufDB8MHx8fDE3NTUyNzkwMTZ8MA&ixlib=rb-4.1.0&q=85"
+                    src="/priya.jpg"
                     alt="Professional woman in modern office - Christina @ wocintechchat.com on Unsplash"
                     className="w-full h-[600px] object-cover transition-transform duration-700 hover:scale-105"
                     style={{ width: '100%', height: '600px' }}

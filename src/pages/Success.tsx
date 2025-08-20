@@ -113,7 +113,7 @@ const Success = () => {
     },
     {
       quote: "Her approach is both challenging and supportive. Exactly what I needed to break through my limitations.",
-      name: "David Kumar",
+      name: "David D'Souza",
       role: "Entrepreneur",
       image: "https://images.unsplash.com/photo-1738750908048-14200459c3c9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTAwNDR8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdCUyMGJ1c2luZXNzJTIwcGVyc29uJTIwY29uZmlkZW50JTIwZXhwcmVzc2lvbiUyMG9mZmljZSUyMGJhY2tncm91bmR8ZW58MHwxfHx8MTc1NTI3OTAxNnww&ixlib=rb-4.1.0&q=85",
       attribution: "Mudia Mowoe on Unsplash"
@@ -196,34 +196,7 @@ const Success = () => {
               </div>
             </div>
 
-            {/* Hero Image */}
-            <div className={`relative transition-all duration-1200 ease-out delay-300 premium-float ${isVisible ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-20 scale-95'}`}>
-              <div className="relative">
-                {/* Golden Frame Effect */}
-                <div className="absolute -inset-4 bg-gradient-to-r from-gold via-gold-light to-gold rounded-3xl opacity-20 blur-lg"></div>
-                <div className="absolute -inset-2 bg-gradient-to-r from-gold/50 to-transparent rounded-3xl"></div>
-                
-                <div className="relative overflow-hidden rounded-3xl shadow-2xl cinematic-image-frame">
-                  <img 
-                    src="/DSC_1019.JPG"
-                    alt="Professional woman in modern office - Christina @ wocintechchat.com on Unsplash"
-                    className="w-full h-[600px] object-cover transition-transform duration-700 hover:scale-105"
-                    style={{ width: '100%', height: '600px' }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/50 to-transparent"></div>
-                </div>
 
-                {/* Floating Stats */}
-                <div className="absolute -bottom-6 -left-6 bg-card/95 backdrop-blur-sm rounded-2xl p-4 shadow-xl border border-gold/20">
-                  <div className="text-2xl font-bold text-gold">200+</div>
-                  <div className="text-sm text-muted-foreground">Lives Transformed</div>
-                </div>
-                <div className="absolute -top-6 -right-6 bg-gold/95 backdrop-blur-sm rounded-2xl p-4 shadow-xl">
-                  <div className="text-2xl font-bold text-navy">95%</div>
-                  <div className="text-sm text-navy-dark">Success Rate</div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>

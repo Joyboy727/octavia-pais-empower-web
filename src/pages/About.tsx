@@ -53,18 +53,7 @@ const About = () => {
             {/* Right: Cinematic Portrait */}
             <div className={`cinematic-image-reveal ${isHeroVisible ? 'animate' : ''}`}>
               <div className="relative max-w-lg mx-auto">
-                {/* Image Frame */}
-                <div className="cinematic-image-frame">
-                  <img 
-                    src="/DSC_0790.JPG"
-                    alt="Professional cinematic portrait, soft spotlight lighting, dark background with subtle grain, high-resolution vertical frame, elegant pose - Niclas Moser on Unsplash"
-                    className="w-full h-auto rounded-2xl cinematic-image-glow"
-                    style={{ width: '100%', height: 'auto' }}
-                  />
-                  
-                  {/* Golden Frame Border */}
-                  <div className="cinematic-golden-frame" />
-                </div>
+                {/* Empty container - image removed */}
               </div>
             </div>
           </div>
@@ -233,8 +222,19 @@ const About = () => {
       </section>
 
       {/* Mid-Page CTA */}
-      <section className="py-20 bg-gradient-to-r from-gold/10 via-gold/5 to-transparent">
-        <div className="container mx-auto px-4 text-center">
+      <section className="py-20 bg-gradient-to-r from-gold/10 via-gold/5 to-transparent relative overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+          style={{ backgroundImage: "url('/DSC_0790.JPG')" }}
+          role="img"
+          aria-label="Background pattern"
+        />
+        
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-gold/10 via-gold/5 to-transparent" />
+        
+        <div className="relative z-10 container mx-auto px-4 text-center">
           <CinematicQuote>
             Ready to rewrite your story?
           </CinematicQuote>

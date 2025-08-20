@@ -180,6 +180,7 @@ const Success = () => {
                 <Button 
                   size="lg" 
                   className="bg-gold hover:bg-gold/90 text-navy font-semibold px-8 py-4 rounded-full premium-button-luxury expert-hover"
+                  onClick={() => window.open("https://calendly.com/octaviathelifecoach/30min", "_blank")}
                 >
                   Start Your Journey
                   <ArrowRight className="w-5 h-5 ml-2" />
@@ -188,6 +189,7 @@ const Success = () => {
                   variant="outline" 
                   size="lg"
                   className="border-muted text-muted-foreground hover:bg-muted px-8 py-4 rounded-full transition-all duration-400 hover:scale-105 hover:border-gold/30 expert-hover"
+                  onClick={() => window.location.href = '/programs'}
                 >
                   View Programs
                 </Button>
@@ -203,7 +205,7 @@ const Success = () => {
                 
                 <div className="relative overflow-hidden rounded-3xl shadow-2xl cinematic-image-frame">
                   <img 
-                    src="/priya.jpg"
+                    src="/DSC_1019.JPG"
                     alt="Professional woman in modern office - Christina @ wocintechchat.com on Unsplash"
                     className="w-full h-[600px] object-cover transition-transform duration-700 hover:scale-105"
                     style={{ width: '100%', height: '600px' }}
@@ -338,8 +340,8 @@ const Success = () => {
                     <img 
                       src={story.image}
                       alt={`${story.name} - ${story.attribution}`}
-                      className="w-full h-96 object-cover rounded-3xl shadow-2xl cinematic-image-glow premium-image-hover"
-                      style={{ width: '100%', height: '384px' }}
+                     className="w-full h-64 object-cover rounded-3xl shadow-2xl cinematic-image-glow premium-image-hover"
+                      style={{ width: '100%', height: '256px' }}
                     />
                     <div className="absolute top-4 right-4 bg-gold text-navy px-3 py-1 rounded-full text-sm font-semibold">
                       {story.timeframe}

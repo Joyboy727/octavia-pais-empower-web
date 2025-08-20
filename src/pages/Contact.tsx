@@ -242,56 +242,76 @@ const Contact = () => {
           transition={{ duration: 1.5, ease: "easeOut" }}
         />
         
-        <div className="relative z-10 container mx-auto px-4 text-center">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.h1 
-              className="font-playfair text-5xl md:text-7xl font-bold mb-8"
-              variants={itemVariants}
+        <div className="relative z-10 container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Content */}
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
             >
-              <motion.span 
-                className="gradient-text"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  type: "spring", 
-                  stiffness: 100, 
-                  damping: 12,
-                  delay: 0.2 
-                }}
+              <motion.h1 
+                className="font-playfair text-5xl md:text-7xl font-bold mb-8"
+                variants={itemVariants}
               >
-                Ready to Start?
-              </motion.span>
-              <br />
-              <motion.span 
-                className="text-white"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  type: "spring", 
-                  stiffness: 100, 
-                  damping: 12,
-                  delay: 0.4 
-                }}
+                <motion.span 
+                  className="gradient-text"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ 
+                    type: "spring", 
+                    stiffness: 100, 
+                    damping: 12,
+                    delay: 0.2 
+                  }}
+                >
+                  Ready to Start?
+                </motion.span>
+                <br />
+                <motion.span 
+                  className="text-white"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ 
+                    type: "spring", 
+                    stiffness: 100, 
+                    damping: 12,
+                    delay: 0.4 
+                  }}
+                >
+                  Let's Talk.
+                </motion.span>
+              </motion.h1>
+              <motion.p 
+                className="text-xl md:text-2xl text-muted-foreground max-w-3xl"
+                variants={itemVariants}
+                transition={{ delay: 0.6 }}
               >
-                Let's Talk.
-              </motion.span>
-            </motion.h1>
-            <motion.p 
-              className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto"
-              variants={itemVariants}
-              transition={{ delay: 0.6 }}
+                Your transformation journey begins with a conversation. 
+                Let's discuss how I can help you break through and reach your potential.
+              </motion.p>
+            </motion.div>
+            
+            {/* Image */}
+            <motion.div 
+              className="relative"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, delay: 0.5 }}
             >
-              Your transformation journey begins with a conversation. 
-              Let's discuss how I can help you break through and reach your potential.
-            </motion.p>
-          </motion.div>
+              <div className="relative overflow-hidden rounded-3xl">
+                <img 
+                  src="/DSC_0970.JPG"
+                  alt="Octavia Pais - Professional Contact"
+                  className="w-full h-96 object-cover rounded-3xl shadow-2xl"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-3xl"></div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </motion.section>
-
+      
       {/* Contact Methods */}
       <motion.section 
         ref={methodsRef}
@@ -636,6 +656,48 @@ const Contact = () => {
                 </Card>
               </motion.div>
             </motion.div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Additional Images Section */}
+      <motion.section 
+        className="py-16 bg-black/20"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="container mx-auto px-4">
+          <motion.h3 
+            className="font-playfair text-3xl font-bold text-center mb-12 gradient-text"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            Connect With Confidence
+          </motion.h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {["/lovable-uploads/9209b4c3-05d0-445e-9f8b-a4e0c5223a55.png", 
+              "/lovable-uploads/2d18e1ff-d45f-4703-8b10-a717eafe7e54.png", 
+              "/lovable-uploads/f6d5f540-86a6-40e7-99d8-b4f7ed405c38.png"].map((image, index) => (
+              <motion.div
+                key={index}
+                className="relative overflow-hidden rounded-2xl"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
+                whileHover={{ scale: 1.05 }}
+              >
+                <img 
+                  src={image}
+                  alt={`Octavia Pais - Professional Image ${index + 1}`}
+                  className="w-full h-64 object-cover rounded-2xl shadow-lg"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-2xl"></div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </motion.section>

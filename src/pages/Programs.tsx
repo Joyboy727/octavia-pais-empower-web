@@ -207,15 +207,6 @@ const Programs = () => {
             <p className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto mb-8 leading-relaxed font-inter">
               Elite coaching designed for real-world results. Clear frameworks. Measurable impact.
             </p>
-            <PremiumButton 
-              variant="cta" 
-              size="lg" 
-              className="shadow-xl hover:shadow-2xl"
-              onClick={() => window.open("https://calendly.com/octaviathelifecoach/30min", "_blank")}
-            >
-              Book Your Free Clarity Call
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </PremiumButton>
           </motion.div>
         </div>
       </section>
@@ -267,13 +258,6 @@ const Programs = () => {
                 onClick={() => window.open("https://calendly.com/octaviathelifecoach/30min", "_blank")}
               >
                 Book a Free Consultation
-              </PremiumButton>
-              <PremiumButton 
-                variant="outline" 
-                size="lg"
-                onClick={() => document.getElementById('programs')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                See Program Details
               </PremiumButton>
             </div>
           </motion.div>

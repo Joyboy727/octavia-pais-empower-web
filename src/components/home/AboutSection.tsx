@@ -10,7 +10,7 @@ const AboutSection = () => {
           <div className="animate-on-scroll">
             <div className="relative w-full lg:w-[115%] mx-auto rounded-3xl overflow-hidden">
               <img 
-                src="/20240213_195733[1].jpg"
+                src="/DSC_0847.JPG"
                 alt="Octavia Pais - Life & Public Speaking Coach"
                 className="w-full h-full object-cover rounded-3xl shadow-2xl transition-all duration-300 hover:scale-105"
                 loading="lazy"
@@ -21,7 +21,7 @@ const AboutSection = () => {
           {/* About Text - Clean and Professional */}
           <div className="animate-on-scroll">
             <h2 className="font-serif text-5xl md:text-6xl font-extrabold mb-8 text-gold tracking-wide leading-tight">
-              Meet Octavia Pais
+              MEET OCTAVIA PAIS
             </h2>
             
             <div className="space-y-8">
@@ -66,17 +66,6 @@ const AboutSection = () => {
               </div>
             </div>
 
-            {/* Call to Action Button */}
-            <div className="mt-12 text-center">
-              <button 
-                className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-lg font-bold text-navy rounded-full group bg-gradient-to-br from-gold to-gold-dark group-hover:from-gold group-hover:to-gold-dark hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-gold-light dark:focus:ring-gold-dark transform transition-all duration-300 hover:scale-105"
-                onClick={() => window.open("https://calendly.com/octaviathelifecoach/30min", "_blank")}
-              >
-                <span className="relative px-8 py-4 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-full group-hover:bg-opacity-0">
-                  Book a Free Clarity Call
-                </span>
-              </button>
-            </div>
           </div>
         </div>
       </div>

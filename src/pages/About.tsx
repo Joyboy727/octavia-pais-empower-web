@@ -48,15 +48,6 @@ const About = () => {
                 </p>
               </div>
               
-              <div className={`cinematic-text-reveal delay-700 ${isHeroVisible ? 'animate' : ''}`}>
-                <CinematicButton 
-                  className="cinematic-hero-cta"
-                  urgencyText="Limited spots available this month"
-                >
-                  Begin Your Transformation
-                  <ArrowRight className="ml-2" size={20} />
-                </CinematicButton>
-              </div>
             </div>
 
             {/* Right: Cinematic Portrait */}
@@ -65,7 +56,7 @@ const About = () => {
                 {/* Image Frame */}
                 <div className="cinematic-image-frame">
                   <img 
-                    src="/octthe.png"
+                    src="/DSC_0790.JPG"
                     alt="Professional cinematic portrait, soft spotlight lighting, dark background with subtle grain, high-resolution vertical frame, elegant pose - Niclas Moser on Unsplash"
                     className="w-full h-auto rounded-2xl cinematic-image-glow"
                     style={{ width: '100%', height: 'auto' }}
@@ -137,7 +128,7 @@ const About = () => {
             
             <div className="cinematic-secondary-image">
               <img 
-                src="/octh2.png"
+                src="/DSC_0808.JPG"
                 alt="Professional cinematic portrait, soft spotlight lighting, dark background with subtle grain, high-resolution vertical frame, elegant pose - Valentin Lacoste on Unsplash"
                 className="w-full h-auto rounded-2xl"
                 style={{ width: '100%', height: 'auto' }}

@@ -16,16 +16,16 @@ const BenefitsSection = () => {
       transformationLevel: "Core Mindset Reset"
     },
     {
-      title: "Communication Confidence",
-      description: "Say what you mean. Be heard. Feel proud.",
-      icon: "💬",
-      gradient: "from-blue-500/20 to-blue-700/20",
+      title: "Growth Mindset Mastery",
+      description: "Embrace challenges. Learn with resilience. Expand your possibilities.",
+      icon: "🌱",
+      gradient: "from-green-500/20 to-green-700/20",
       features: [
-        "Speak with calm, clear confidence",
-        "Share your message with purpose",
-        "Develop your authentic communication style"
+        "See setbacks as stepping stones to success",
+        "Cultivate curiosity and lifelong learning",
+        "Transform obstacles into opportunities for growth"
       ],
-      transformationLevel: "Authentic Expression Upgrade"
+      transformationLevel: "Limitless Possibility Reset"
     },
     {
       title: "Unshakeable Confidence",

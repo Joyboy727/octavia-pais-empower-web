@@ -165,9 +165,11 @@ const BenefitsSection = () => {
             </div>
 
             {/* Call-to-Action Button */}
-            <button className="relative inline-flex items-center justify-center px-10 py-4 text-lg font-bold text-navy-dark rounded-full shadow-lg
-                               bg-gradient-to-r from-[#FFD700] to-[#FFC000] hover:from-[#FFC000] hover:to-[#FFD700]
-                               transform transition-all duration-300 hover:scale-105 hover:shadow-xl group">
+            <button 
+              onClick={() => window.open('https://calendly.com/octaviathelifecoach/30min', '_blank')}
+              className="relative inline-flex items-center justify-center px-10 py-4 text-lg font-bold text-navy-dark rounded-full shadow-lg
+                         bg-gradient-to-r from-[#FFD700] to-[#FFC000] hover:from-[#FFC000] hover:to-[#FFD700]
+                         transform transition-all duration-300 hover:scale-105 hover:shadow-xl group cursor-pointer">
               <span className="mr-3 text-2xl">→</span> Book Your Free Clarity Call Today
             </button>
           </div>

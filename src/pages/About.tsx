@@ -241,26 +241,14 @@ const About = () => {
           <CinematicButton 
             className="mt-8"
             urgencyText="Only 3 spots left this month"
+            onClick={() => window.open('https://calendly.com/octaviathelifecoach/30min', '_blank')}
           >
             Book Your Clarity Call
           </CinematicButton>
         </div>
       </section>
 
-      {/* Footer CTA Banner */}
-      <section className="py-20 bg-gradient-to-r from-gold to-gold-light">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="font-playfair text-4xl md:text-5xl font-bold text-black mb-6">
-            Ready to Begin Your Transformation?
-          </h2>
-          <p className="text-xl text-black/80 mb-8 max-w-2xl mx-auto">
-            If you're feeling the pull toward something deeper, more empowered, and more you — that's not random. That's alignment knocking.
-          </p>
-          <CinematicButton className="bg-black text-gold hover:bg-black/90">
-            Book a Free Clarity Call
-          </CinematicButton>
-        </div>
-      </section>
+      
     </div>
   );
 };

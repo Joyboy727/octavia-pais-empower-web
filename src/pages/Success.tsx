@@ -182,16 +182,16 @@ const Success = () => {
                   className="bg-gold hover:bg-gold/90 text-navy font-semibold px-8 py-4 rounded-full premium-button-luxury expert-hover"
                   onClick={() => window.open("https://calendly.com/octaviathelifecoach/30min", "_blank")}
                 >
-                  Start Your Journey
+                  Start Your Transformation
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
                 <Button 
                   variant="outline" 
                   size="lg"
                   className="border-muted text-muted-foreground hover:bg-muted px-8 py-4 rounded-full transition-all duration-400 hover:scale-105 hover:border-gold/30 expert-hover"
-                  onClick={() => window.location.href = '/programs'}
+                  onClick={() => window.open("https://calendly.com/octaviathelifecoach/30min", "_blank")}
                 >
-                  View Programs
+                  Schedule a Call
                 </Button>
               </div>
             </div>
@@ -340,8 +340,8 @@ const Success = () => {
                     <img 
                       src={story.image}
                       alt={`${story.name} - ${story.attribution}`}
-                     className="w-full h-64 object-cover rounded-3xl shadow-2xl cinematic-image-glow premium-image-hover"
-                      style={{ width: '100%', height: '256px' }}
+                     className="w-full h-100 object-cover rounded-3xl shadow-2xl cinematic-image-glow premium-image-hover"
+                      style={{ width: '100%', height: '400px' }}
                     />
                     <div className="absolute top-4 right-4 bg-gold text-navy px-3 py-1 rounded-full text-sm font-semibold">
                       {story.timeframe}
@@ -465,6 +465,7 @@ const Success = () => {
               <Button 
                 size="lg" 
                 className="bg-gold hover:bg-gold/90 text-navy font-semibold px-8 py-4 rounded-full premium-button-luxury expert-hover"
+                onClick={() => window.open('https://calendly.com/octaviathelifecoach/30min', '_blank')}
               >
                 Start Your Transformation
                 <ChevronRight className="w-5 h-5 ml-2" />
@@ -473,6 +474,7 @@ const Success = () => {
                 variant="outline" 
                 size="lg"
                 className="border-muted text-muted-foreground hover:bg-muted px-8 py-4 rounded-full transition-all duration-400 hover:scale-105 hover:border-gold/30 expert-hover"
+                onClick={() => window.open('https://calendly.com/octaviathelifecoach/30min', '_blank')}
               >
                 Schedule a Call
               </Button>

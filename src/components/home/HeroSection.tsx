@@ -20,9 +20,6 @@ const HeroSection = () => {
         <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto font-light">
           Empowering leaders to achieve extraordinary results and lasting impact.
         </p>
-        <a href="https://calendly.com/octaviathelifecoach/30min" target="_blank" rel="noopener noreferrer" className="bg-gradient-to-r from-gold-500 to-gold-700 text-navy font-bold py-3 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ease-in-out">
-          Book Your Clarity Call
-        </a>
       </div>
     </section>
   );

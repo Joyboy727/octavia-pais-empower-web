@@ -5,9 +5,9 @@ const AboutSection = () => {
   return (
     <section className="pt-48 pb-28 relative overflow-hidden bg-gradient-to-br from-navy/95 to-navy-light/95">
       <div className="relative z-10 container mx-auto px-4 mobile-padding">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 lg:gap-32 items-center">
           {/* Octavia's Image - Larger and More Prominent */}
-          <div className="animate-on-scroll">
+          <div className="animate-on-scroll px-4 lg:px-0">
             <div className="relative w-full lg:w-[115%] mx-auto rounded-3xl overflow-hidden">
               <img 
                 src="/DSC_0847.JPG"
@@ -19,10 +19,11 @@ const AboutSection = () => {
           </div>
 
           {/* About Text - Clean and Professional */}
-          <div className="animate-on-scroll">
-            <h2 className="font-serif text-5xl md:text-6xl font-extrabold mb-8 text-gold tracking-wide leading-tight">
+          <div className="animate-on-scroll px-4 lg:px-0">
+            <h2 className="font-serif text-4xl md:text-5xl font-extrabold mb-2 text-gold tracking-wide leading-tight">
               MEET OCTAVIA PAIS
             </h2>
+            <p className="text-white text-xl mb-8 font-light">Life & Public Speaking Coach transforming ambitious individuals into confident communicators.</p>
             
             <div className="space-y-8">
               <div className="relative p-10 rounded-xl border border-gold/20 bg-navy-light/30 backdrop-blur-sm">

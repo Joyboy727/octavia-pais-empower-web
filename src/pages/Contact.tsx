@@ -303,7 +303,7 @@ const Contact = () => {
                 <img 
                   src="/DSC_0970.JPG"
                   alt="Octavia Pais - Professional Contact"
-                  className="w-full h-96 object-cover rounded-3xl shadow-2xl"
+                  className="w-full h-[700px] object-cover rounded-3xl shadow-2xl"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent rounded-3xl"></div>
               </div>
@@ -693,7 +693,7 @@ const Contact = () => {
                 <img 
                   src={image}
                   alt={`Octavia Pais - Professional Image ${index + 1}`}
-                  className="w-full h-64 object-cover rounded-2xl shadow-lg"
+                  className="w-full h-80 object-cover rounded-2xl shadow-lg"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-2xl"></div>
               </motion.div>

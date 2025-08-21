@@ -455,6 +455,167 @@ const Success = () => {
           </div>
         </div>
       </section>
+
+      {/* Photo Gallery Review Section */}
+      <section className="py-24 bg-gradient-to-b from-navy-light to-navy relative overflow-hidden">
+        <div className="absolute inset-0 premium-mesh-gradient opacity-30"></div>
+        
+        <div className="container mx-auto px-6 relative z-10">
+          {/* Section Header */}
+          <div className="text-center mb-16 animate-on-scroll">
+            <h2 className="text-5xl lg:text-6xl font-bold text-foreground mb-4 font-playfair">
+              Transform Your Life Like They Did
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Real transformations from real people who trusted Octavia. Each photo tells a story of breakthrough, growth, and limitless potential.
+            </p>
+            <div className="mt-6 inline-flex items-center gap-2 bg-gold/10 text-gold px-4 py-2 rounded-full text-sm font-medium">
+              <Star className="w-4 h-4" />
+              <span>500+ Success Stories • Updated Weekly</span>
+            </div>
+          </div>
+
+          {/* Photo Gallery Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            {[
+              {
+                src: "/pic1.jpg",
+                alt: "Career transformation - from shy employee to confident leader",
+                category: "Career Advancement",
+                badge: "6 Month Transformation"
+              },
+              {
+                src: "/pic2.jpg",
+                alt: "Public speaking breakthrough - client presenting on stage",
+                category: "Confidence Boost",
+                badge: "First Keynote Speech"
+              },
+              {
+                src: "/pic3.jpg",
+                alt: "Personal milestone celebration - graduation ceremony",
+                category: "Achievement",
+                badge: "Dream Realized"
+              },
+              {
+                src: "/pic4.jpg",
+                alt: "Lifestyle transformation - healthy and confident",
+                category: "Personal Growth",
+                badge: "Complete Makeover"
+              },
+              {
+                src: "/pic5.jpg",
+                alt: "Entrepreneur success - launching own business",
+                category: "Entrepreneurship",
+                badge: "Business Launch"
+              },
+              {
+                src: "/pic6.jpg",
+                alt: "Relationship breakthrough - renewed confidence in social settings",
+                category: "Relationships",
+                badge: "New Beginnings"
+              },
+              {
+                src: "/pic7.jpg",
+                alt: "Speaking engagement success - professional presentation",
+                category: "Professional Growth",
+                badge: "Industry Recognition"
+              },
+              {
+                src: "/pic8.jpg",
+                alt: "Vision board realization - goals achieved and celebrated",
+                category: "Goal Achievement",
+                badge: "Vision Realized"
+              }
+            ].map((photo, index) => (
+              <div
+                key={index}
+                className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer animate-on-scroll"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                {/* Image Container */}
+                <div className="relative aspect-[4/5] overflow-hidden">
+                  <img
+                    src={photo.src}
+                    alt={photo.alt}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                  
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-gold/80 opacity-0 group-hover:opacity-80 transition-opacity duration-300 flex items-center justify-center">
+                    <CheckCircle className="w-12 h-12 text-white transform scale-0 group-hover:scale-100 transition-transform duration-300 delay-100" />
+                  </div>
+                  
+                  {/* Category Badge */}
+                  <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm text-navy text-xs font-bold px-3 py-1.5 rounded-full opacity-90 group-hover:opacity-0 transition-opacity duration-300">
+                    {photo.category}
+                  </div>
+                  
+                  {/* Achievement Badge */}
+                  <div className="absolute bottom-3 left-3 right-3 bg-gradient-to-r from-gold to-gold-light text-navy text-xs font-bold px-3 py-1.5 rounded-full transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    {photo.badge}
+                  </div>
+                </div>
+                
+                {/* Hover Glow Effect */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                     style={{ boxShadow: '0 0 30px rgba(212, 175, 55, 0.5)' }}>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA Section */}
+          <div className="text-center animate-on-scroll" style={{ animationDelay: '0.8s' }}>
+            <div className="bg-gradient-to-r from-gold/10 to-gold/5 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-gold/20">
+              <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-4 font-playfair">
+                Your Success Story Starts Here
+              </h3>
+              <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+                Join hundreds of individuals who've transformed their lives. Your breakthrough is just one decision away.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Button
+                  size="lg"
+                  className="bg-gold hover:bg-gold/90 text-navy font-bold px-8 py-4 rounded-full text-lg premium-button-luxury expert-hover"
+                  onClick={() => window.open('https://calendly.com/octaviathelifecoach/30min', '_blank')}
+                >
+                  Start Your Transformation Journey
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Button>
+                
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="border-gold/30 text-gold hover:bg-gold/10 px-8 py-4 rounded-full text-lg transition-all duration-300 hover:scale-105"
+                  onClick={() => window.open('https://calendly.com/octaviathelifecoach/30min', '_blank')}
+                >
+                  View More Stories
+                </Button>
+              </div>
+              
+              <div className="mt-6 flex justify-center gap-8 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <Users className="w-4 h-4 text-gold" />
+                  <span>500+ Transformations</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Award className="w-4 h-4 text-gold" />
+                  <span>16+ Years Experience</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Star className="w-4 h-4 text-gold" />
+                  <span>95% Success Rate</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
